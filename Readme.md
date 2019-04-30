@@ -1,7 +1,7 @@
 # Личный проект «Что посмотреть» [![Build status][travis-image]][travis-url]
 
 * Студент: [Максим Хоптяр](https://up.htmlacademy.ru/react/1/user/24624).
-* Наставник: `Неизвестно`.
+* Наставник: [Ваdick](https://htmlacademy.ru/profile/dynamitek).
 
 ---
 
