@@ -93,8 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-const bodyElement = document.querySelector(`body`);
-bodyElement.textContent = `Hello, world!`;
+
 
 /***/ })
 
