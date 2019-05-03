@@ -1,6 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const MainScreen = () => {
+const MainScreen = (props) => {
+  const {onClick} = props;
+
   return <React.Fragment>
     <div className="visually-hidden">
       <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
@@ -356,7 +359,7 @@ const MainScreen = () => {
         </div>
 
         <div className="catalog__more">
-          <button className="catalog__button" type="button">Show more</button>
+          <button onClick={onClick} className="catalog__button" type="button">Show more</button>
         </div>
       </section>
 
@@ -375,6 +378,10 @@ const MainScreen = () => {
       </footer>
     </div>
   </React.Fragment>;
+};
+
+MainScreen.propTypes = {
+  onClick: PropTypes.func
 };
 
 export default MainScreen;
