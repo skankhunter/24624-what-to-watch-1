@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const MainScreen = (props) => {
+  const {filmsList} = props;
+
   return <React.Fragment>
     <div className="visually-hidden">
       <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
@@ -150,7 +152,7 @@ const MainScreen = (props) => {
         </ul>
 
         <div className="catalog__movies-list">
-          {props.filmsList.map((item, index) =>
+          {filmsList.map((item, index) =>
             <article key={index} className="small-movie-card catalog__movies-card">
               <button className="small-movie-card__play-btn" type="button">Play</button>
               <div className="small-movie-card__image">
