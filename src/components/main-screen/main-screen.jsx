@@ -188,6 +188,7 @@ const MainScreen = (props) => {
   </React.Fragment>;
 };
 
+
 MainScreen.propTypes = {
   filmsList: PropTypes.array,
   onClick: PropTypes.func
