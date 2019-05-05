@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const MainScreen = (props) => {
-  const {filmsList} = props;
+  const {onClick, filmsList} = props;
 
   return <React.Fragment>
     <div className="visually-hidden">
@@ -167,7 +167,7 @@ const MainScreen = (props) => {
         </div>
 
         <div className="catalog__more">
-          <button className="catalog__button" type="button">Show more</button>
+          <button className="catalog__button" type="button" onClick={onClick}>Show more</button>
         </div>
       </section>
 

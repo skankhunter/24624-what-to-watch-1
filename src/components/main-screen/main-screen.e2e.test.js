@@ -6,8 +6,10 @@ import MainScreen from './main-screen.jsx';
 Enzyme.configure({adapter: new Adapter()});
 
 it(`Simulating button click`, () => {
+  const filmsList = [`Fantastic Beasts`, `Bohemian Rhapsody`, `Macbeth`];
   const clickHandler = jest.fn();
   const welcomeScreen = shallow(<MainScreen
+    filmsList = {filmsList}
     onClick = {clickHandler}
   />);
 
