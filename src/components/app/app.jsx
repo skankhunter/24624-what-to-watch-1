@@ -1,17 +1,22 @@
 import React from 'react';
 import MainScreen from '../main-screen/main-screen.jsx';
+import PropTypes from "prop-types";
 
-const App = () => {
-  const filmsList = [`Fantastic Beasts`, `Bohemian Rhapsody`, `Macbeth`];
+const App = (props) => {
+  const {films, genres} = props;
 
-  const emptyClick = (evt) => {
-    evt.preventDefault();
-  };
+  const emptyClick = () => {};
 
   return <MainScreen
-    filmsList = {filmsList}
-    onClick = {emptyClick}
+    films={films}
+    genres={genres}
+    onClick={emptyClick}
   />;
+};
+
+App.propTypes = {
+  films: PropTypes.array.isRequired,
+  genres: PropTypes.array.isRequired
 };
 
 export default App;
