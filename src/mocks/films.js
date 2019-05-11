@@ -1,4 +1,4 @@
-export default [
+const films = [
   {
     genre: [`Dramas`, `Comedies`],
     title: `The Grand Budapest Hotel`,
@@ -35,3 +35,5 @@ export default [
     year: 2016
   },
 ];
+
+export default films;

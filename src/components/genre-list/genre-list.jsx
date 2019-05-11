@@ -4,9 +4,13 @@ import PropTypes from 'prop-types';
 const GenreList = (props) => {
   const {genre} = props;
 
-  return <li className="catalog__genres-item">
-    <a href="#" className="catalog__genres-link">{genre}</a>
-  </li>;
+  return (
+    <li className="catalog__genres-item">
+      <a href="#" className="catalog__genres-link">
+        {genre}
+      </a>
+    </li>
+  );
 };
 
 GenreList.propTypes = {

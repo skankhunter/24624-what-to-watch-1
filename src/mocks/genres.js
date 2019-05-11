@@ -1,4 +1,4 @@
-export default [
+const genres = [
   `Comedies`,
   `Crime`,
   `Documentary`,
@@ -9,3 +9,5 @@ export default [
   `Sci-Fi`,
   `Thrillers`
 ];
+
+export default genres;
