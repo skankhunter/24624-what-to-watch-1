@@ -1,12 +1,15 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import MainScreen from './main-screen';
+import films from "../../mocks/films";
+import genres from "../../mocks/genres";
 
 it(`MainScreen correctly renders after relaunch`, () => {
-  const filmsList = [`Fantastic Beasts`, `Bohemian Rhapsody`, `Macbeth`];
   const tree = renderer
     .create(<MainScreen
-      filmsList = {filmsList}
+      films={films}
+      genres={genres}
+      onClick={jest.fn()}
     />)
     .toJSON();
   expect(tree).toMatchSnapshot();
