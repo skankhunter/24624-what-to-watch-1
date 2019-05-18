@@ -13,7 +13,7 @@ class MainScreen extends PureComponent {
         genre: [],
         title: ``,
         desc: ``,
-        picture: ``,
+        poster: ``,
         year: null
       }
     };
@@ -156,7 +156,6 @@ class MainScreen extends PureComponent {
 
             <FilmsList
               films={films}
-              onEnter={this._handleClick}
               onClick={onClick}
             />
 
@@ -190,7 +189,7 @@ MainScreen.propTypes = {
     genre: PropTypes.array.isRequired,
     title: PropTypes.string.isRequired,
     desc: PropTypes.string,
-    picture: PropTypes.string.isRequired,
+    poster: PropTypes.string.isRequired,
     year: PropTypes.number
   })).isRequired,
   genres: PropTypes.array.isRequired,

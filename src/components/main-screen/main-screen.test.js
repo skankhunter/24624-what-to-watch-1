@@ -10,7 +10,12 @@ it(`MainScreen correctly renders after relaunch`, () => {
       films={films}
       genres={genres}
       onClick={jest.fn()}
-    />)
+    />,
+    {
+      createNodeMock: () => {
+        return {};
+      }
+    })
     .toJSON();
   expect(tree).toMatchSnapshot();
 });

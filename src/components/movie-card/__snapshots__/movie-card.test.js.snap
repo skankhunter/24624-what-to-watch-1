@@ -4,23 +4,12 @@ exports[`MovieCard component Card renders correctly 1`] = `
 <article
   className="small-movie-card catalog__movies-card"
   onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
 >
-  <button
-    className="small-movie-card__play-btn"
-    onClick={[Function]}
-    type="button"
-  >
-    Play
-  </button>
   <div
     className="small-movie-card__image"
   >
-    <img
-      alt="Avengers"
-      height="175"
-      src="img/picture.jpg"
-      width="280"
-    />
+    <video />
   </div>
   <h3
     className="small-movie-card__title"
@@ -28,9 +17,9 @@ exports[`MovieCard component Card renders correctly 1`] = `
     <a
       className="small-movie-card__link"
       href="movie-page.html"
-      onClick={[Function]}
+      onClick={[MockFunction]}
     >
-      Avengers
+      The Grand Budapest Hotel
     </a>
   </h3>
 </article>

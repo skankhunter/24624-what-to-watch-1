@@ -7,23 +7,12 @@ exports[`The application is displayed correctly. FilmsList screen correctly rend
   <article
     className="small-movie-card catalog__movies-card"
     onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
-    <button
-      className="small-movie-card__play-btn"
-      onClick={[Function]}
-      type="button"
-    >
-      Play
-    </button>
     <div
       className="small-movie-card__image"
     >
-      <img
-        alt="The Grand Budapest Hotel"
-        height="175"
-        src="img/the-grand-budapest-hotel-poster.jpg"
-        width="280"
-      />
+      <video />
     </div>
     <h3
       className="small-movie-card__title"
@@ -31,7 +20,7 @@ exports[`The application is displayed correctly. FilmsList screen correctly rend
       <a
         className="small-movie-card__link"
         href="movie-page.html"
-        onClick={[Function]}
+        onClick={[MockFunction]}
       >
         The Grand Budapest Hotel
       </a>
@@ -40,23 +29,12 @@ exports[`The application is displayed correctly. FilmsList screen correctly rend
   <article
     className="small-movie-card catalog__movies-card"
     onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
-    <button
-      className="small-movie-card__play-btn"
-      onClick={[Function]}
-      type="button"
-    >
-      Play
-    </button>
     <div
       className="small-movie-card__image"
     >
-      <img
-        alt="Fantastic Beasts: The Crimes of Grindelwald"
-        height="175"
-        src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-        width="280"
-      />
+      <video />
     </div>
     <h3
       className="small-movie-card__title"
@@ -64,7 +42,7 @@ exports[`The application is displayed correctly. FilmsList screen correctly rend
       <a
         className="small-movie-card__link"
         href="movie-page.html"
-        onClick={[Function]}
+        onClick={[MockFunction]}
       >
         Fantastic Beasts: The Crimes of Grindelwald
       </a>
@@ -73,23 +51,12 @@ exports[`The application is displayed correctly. FilmsList screen correctly rend
   <article
     className="small-movie-card catalog__movies-card"
     onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
-    <button
-      className="small-movie-card__play-btn"
-      onClick={[Function]}
-      type="button"
-    >
-      Play
-    </button>
     <div
       className="small-movie-card__image"
     >
-      <img
-        alt="Bohemian Rhapsody"
-        height="175"
-        src="img/bohemian-rhapsody.jpg"
-        width="280"
-      />
+      <video />
     </div>
     <h3
       className="small-movie-card__title"
@@ -97,7 +64,7 @@ exports[`The application is displayed correctly. FilmsList screen correctly rend
       <a
         className="small-movie-card__link"
         href="movie-page.html"
-        onClick={[Function]}
+        onClick={[MockFunction]}
       >
         Bohemian Rhapsody
       </a>
@@ -106,23 +73,12 @@ exports[`The application is displayed correctly. FilmsList screen correctly rend
   <article
     className="small-movie-card catalog__movies-card"
     onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
-    <button
-      className="small-movie-card__play-btn"
-      onClick={[Function]}
-      type="button"
-    >
-      Play
-    </button>
     <div
       className="small-movie-card__image"
     >
-      <img
-        alt="Macbeth"
-        height="175"
-        src="img/macbeth.jpg"
-        width="280"
-      />
+      <video />
     </div>
     <h3
       className="small-movie-card__title"
@@ -130,7 +86,7 @@ exports[`The application is displayed correctly. FilmsList screen correctly rend
       <a
         className="small-movie-card__link"
         href="movie-page.html"
-        onClick={[Function]}
+        onClick={[MockFunction]}
       >
         Macbeth
       </a>
@@ -139,23 +95,12 @@ exports[`The application is displayed correctly. FilmsList screen correctly rend
   <article
     className="small-movie-card catalog__movies-card"
     onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
-    <button
-      className="small-movie-card__play-btn"
-      onClick={[Function]}
-      type="button"
-    >
-      Play
-    </button>
     <div
       className="small-movie-card__image"
     >
-      <img
-        alt="Aviator"
-        height="175"
-        src="img/aviator.jpg"
-        width="280"
-      />
+      <video />
     </div>
     <h3
       className="small-movie-card__title"
@@ -163,7 +108,7 @@ exports[`The application is displayed correctly. FilmsList screen correctly rend
       <a
         className="small-movie-card__link"
         href="movie-page.html"
-        onClick={[Function]}
+        onClick={[MockFunction]}
       >
         Aviator
       </a>

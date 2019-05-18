@@ -1,5 +1,5 @@
 import React from 'react';
-import {configure, mount} from 'enzyme';
+import {configure, mount, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import MovieCard from './movie-card.jsx';
 
@@ -10,52 +10,73 @@ const mock = {
     genre: [`Dramas`, `Thrillers`],
     title: `Aviator`,
     desc: ``,
-    picture: `aviator.jpg`,
+    poster: `aviator.jpg`,
+    src: `www.roflanEbalo.ru`,
     year: 2016
   },
-  onClick: jest.fn(),
-  onEnter: jest.fn()
+  onClick: jest.fn()
 };
 
-describe(`MovieCard component`, () => {
-  it(`reacts correctly to clicking the play button`, () => {
-    const {film, onClick, onEnter} = mock;
+window.HTMLMediaElement.prototype.play = () => {};
+window.HTMLMediaElement.prototype.pause = () => {};
 
-    const filmCard = mount(
+describe(`MovieCard component`, () => {
+  const {film} = mock;
+  const handleClick = jest.fn();
+
+  it(`reacts correctly to clicking the link`, () => {
+    const movieCard = mount(
         <MovieCard
           item={film}
-          onClick={onClick}
-          onEnter={onEnter}
+          onClick={handleClick}
         />
     );
 
-    const button = filmCard.find(`button`);
-    const link = filmCard.find(`a`);
+    const titleLink = movieCard.find(`.small-movie-card__link`);
 
-    link.simulate(`click`, {
-      preventDefault: onClick
-    });
+    titleLink.simulate(`click`, {preventDefault() {}});
 
-    button.simulate(`click`, {
-      preventDefault: onClick
-    });
-
-    expect(onClick).toHaveBeenCalledTimes(2);
+    expect(handleClick).toHaveBeenCalledTimes(1);
   });
 
-  it(`MovieCard resends correctly item`, () => {
-    const {film, onEnter} = mock;
+  it(`When you hover the cursor on the card plays video.`, () => {
+    jest.useFakeTimers();
 
-    const handleClick = jest.fn();
-    const item = mount(<MovieCard
+    const movieCard = shallow(<MovieCard
       item={film}
       onClick={handleClick}
-      onEnter={onEnter}
     />);
 
-    const playButton = item.find(`.small-movie-card__play-btn`);
-    playButton.simulate(`click`);
+    expect(movieCard.state(`isPlaying`)).toEqual(false);
 
-    expect(handleClick).toHaveBeenCalledWith(film);
+    const card = movieCard.find(`.small-movie-card`);
+
+    card.simulate(`mouseenter`);
+
+    jest.advanceTimersByTime(800);
+    movieCard.update();
+
+    expect(movieCard.state(`isPlaying`)).toEqual(true);
+    jest.useRealTimers();
+  });
+
+  it(`When you move the cursor from the card, the video stops.`, () => {
+    const movieCard = mount(
+        <MovieCard
+          item={film}
+          onClick={handleClick}
+        />
+    );
+
+    movieCard.setState({isPlaying: true});
+
+    expect(movieCard.state(`isPlaying`)).toEqual(true);
+
+    const card = movieCard.find(`.small-movie-card`);
+
+    card.simulate(`mouseleave`);
+    movieCard.update();
+
+    expect(movieCard.state(`isPlaying`)).toEqual(false);
   });
 });
