@@ -9,7 +9,11 @@ exports[`MovieCard component Card renders correctly 1`] = `
   <div
     className="small-movie-card__image"
   >
-    <video />
+    <video
+      muted={true}
+      poster="img/the-grand-budapest-hotel-poster.jpg"
+      src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
+    />
   </div>
   <h3
     className="small-movie-card__title"

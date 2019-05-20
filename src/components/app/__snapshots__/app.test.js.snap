@@ -384,7 +384,11 @@ Array [
           <div
             className="small-movie-card__image"
           >
-            <video />
+            <video
+              muted={true}
+              poster="img/the-grand-budapest-hotel-poster.jpg"
+              src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
+            />
           </div>
           <h3
             className="small-movie-card__title"
@@ -406,7 +410,11 @@ Array [
           <div
             className="small-movie-card__image"
           >
-            <video />
+            <video
+              muted={true}
+              poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+              src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
+            />
           </div>
           <h3
             className="small-movie-card__title"
@@ -428,7 +436,11 @@ Array [
           <div
             className="small-movie-card__image"
           >
-            <video />
+            <video
+              muted={true}
+              poster="img/bohemian-rhapsody.jpg"
+              src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
+            />
           </div>
           <h3
             className="small-movie-card__title"
@@ -450,7 +462,11 @@ Array [
           <div
             className="small-movie-card__image"
           >
-            <video />
+            <video
+              muted={true}
+              poster="img/macbeth.jpg"
+              src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
+            />
           </div>
           <h3
             className="small-movie-card__title"
@@ -472,7 +488,11 @@ Array [
           <div
             className="small-movie-card__image"
           >
-            <video />
+            <video
+              muted={true}
+              poster="img/aviator.jpg"
+              src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
+            />
           </div>
           <h3
             className="small-movie-card__title"

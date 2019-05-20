@@ -5,15 +5,13 @@ import MovieCard from '../movie-card/movie-card.jsx';
 import genres from '../../mocks/genres.js';
 
 const FilmsList = ({films, onClick}) => {
-  const itemList = films.map((item, index) => {
-    return (
-      <MovieCard
-        item={item}
-        key={index}
-        onClick={onClick}
-      />
-    );
-  });
+  const itemList = films.map((item, index) =>
+    <MovieCard
+      item={item}
+      key={index}
+      onClick={onClick}
+    />
+  );
 
   return <div className="catalog__movies-list">
     {itemList}

@@ -40,7 +40,7 @@ class MovieCard extends PureComponent {
         <div className="small-movie-card__image">
           <VideoPlayer
             src={src}
-            poster={`img/` + poster}
+            poster={`img/${poster}`}
             muted={true}
             isPlaying={isPlaying}
           />

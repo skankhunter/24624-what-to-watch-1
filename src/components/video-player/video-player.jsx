@@ -14,21 +14,20 @@ class VideoPlayer extends Component {
   }
 
   render() {
+    const {src, poster, muted} = this.props;
+
     return (
       <video
         ref={this._videoRef}
+        src={src}
+        poster={poster}
+        muted={muted}
       />
     );
   }
 
   componentDidMount() {
-    const {src, poster, muted} = this.props;
     const video = this._videoRef.current;
-
-    video.src = src;
-    video.poster = poster;
-    video.muted = muted;
-
     video.onplay = () => {
       this.setState({isPlaying: true});
     };
