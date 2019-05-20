@@ -379,22 +379,15 @@ Array [
         <article
           className="small-movie-card catalog__movies-card"
           onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
-          <button
-            className="small-movie-card__play-btn"
-            onClick={[Function]}
-            type="button"
-          >
-            Play
-          </button>
           <div
             className="small-movie-card__image"
           >
-            <img
-              alt="The Grand Budapest Hotel"
-              height="175"
-              src="img/the-grand-budapest-hotel-poster.jpg"
-              width="280"
+            <video
+              muted={true}
+              poster="img/the-grand-budapest-hotel-poster.jpg"
+              src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
             />
           </div>
           <h3
@@ -412,22 +405,15 @@ Array [
         <article
           className="small-movie-card catalog__movies-card"
           onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
-          <button
-            className="small-movie-card__play-btn"
-            onClick={[Function]}
-            type="button"
-          >
-            Play
-          </button>
           <div
             className="small-movie-card__image"
           >
-            <img
-              alt="Fantastic Beasts: The Crimes of Grindelwald"
-              height="175"
-              src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-              width="280"
+            <video
+              muted={true}
+              poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+              src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
             />
           </div>
           <h3
@@ -445,22 +431,15 @@ Array [
         <article
           className="small-movie-card catalog__movies-card"
           onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
-          <button
-            className="small-movie-card__play-btn"
-            onClick={[Function]}
-            type="button"
-          >
-            Play
-          </button>
           <div
             className="small-movie-card__image"
           >
-            <img
-              alt="Bohemian Rhapsody"
-              height="175"
-              src="img/bohemian-rhapsody.jpg"
-              width="280"
+            <video
+              muted={true}
+              poster="img/bohemian-rhapsody.jpg"
+              src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
             />
           </div>
           <h3
@@ -478,22 +457,15 @@ Array [
         <article
           className="small-movie-card catalog__movies-card"
           onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
-          <button
-            className="small-movie-card__play-btn"
-            onClick={[Function]}
-            type="button"
-          >
-            Play
-          </button>
           <div
             className="small-movie-card__image"
           >
-            <img
-              alt="Macbeth"
-              height="175"
-              src="img/macbeth.jpg"
-              width="280"
+            <video
+              muted={true}
+              poster="img/macbeth.jpg"
+              src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
             />
           </div>
           <h3
@@ -511,22 +483,15 @@ Array [
         <article
           className="small-movie-card catalog__movies-card"
           onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
-          <button
-            className="small-movie-card__play-btn"
-            onClick={[Function]}
-            type="button"
-          >
-            Play
-          </button>
           <div
             className="small-movie-card__image"
           >
-            <img
-              alt="Aviator"
-              height="175"
-              src="img/aviator.jpg"
-              width="280"
+            <video
+              muted={true}
+              poster="img/aviator.jpg"
+              src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
             />
           </div>
           <h3

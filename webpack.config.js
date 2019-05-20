@@ -19,7 +19,7 @@ module.exports = {
         use: {
           loader: `babel-loader`,
         },
-      }
+      },
     ],
   },
   devtool: `source-map`
