@@ -4,12 +4,12 @@ import PropTypes from 'prop-types';
 import MovieCard from '../movie-card/movie-card.jsx';
 import genres from '../../mocks/genres.js';
 
-const FilmsList = ({films, onClick}) => {
+const FilmsList = ({films, onGenreClick}) => {
   const itemList = films.map((item, index) =>
     <MovieCard
       item={item}
       key={index}
-      onClick={onClick}
+      onGenreClick={onGenreClick}
     />
   );
 
@@ -26,7 +26,7 @@ FilmsList.propTypes = {
     poster: PropTypes.string.isRequired,
     year: PropTypes.number
   })).isRequired,
-  onClick: PropTypes.func
+  onGenreClick: PropTypes.func
 };
 
 export default FilmsList;

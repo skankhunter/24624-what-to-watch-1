@@ -28,7 +28,7 @@ class MainScreen extends PureComponent {
   }
 
   render() {
-    const {films, genres, onClick} = this.props;
+    const {films, activeGenre, onGenreClick} = this.props;
 
     return (
       <React.Fragment>
@@ -145,22 +145,15 @@ class MainScreen extends PureComponent {
           <section className="catalog">
             <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-            <ul className="catalog__genres-list">
-              <li className="catalog__genres-item catalog__genres-item--active">
-                <a href="#" className="catalog__genres-link">All genres</a>
-              </li>
-              {genres.map((item, index) =>
-                <GenreList genre={item} key={index}/>
-              )}
-            </ul>
+            <GenreList activeGenre={activeGenre} onGenreClick={onGenreClick} />
 
             <FilmsList
               films={films}
-              onClick={onClick}
+              onGenreClick={onGenreClick}
             />
 
             <div className="catalog__more">
-              <button className="catalog__button" type="button" onClick={onClick}>Show more</button>
+              <button className="catalog__button" type="button" onClick={onGenreClick}>Show more</button>
             </div>
           </section>
 
@@ -183,7 +176,6 @@ class MainScreen extends PureComponent {
   }
 }
 
-
 MainScreen.propTypes = {
   films: PropTypes.arrayOf(PropTypes.shape({
     genre: PropTypes.array.isRequired,
@@ -193,7 +185,8 @@ MainScreen.propTypes = {
     year: PropTypes.number
   })).isRequired,
   genres: PropTypes.array.isRequired,
-  onClick: PropTypes.func.isRequired,
+  onGenreClick: PropTypes.func.isRequired,
+  activeGenre: PropTypes.string.isRequired,
 };
 
 export default MainScreen;

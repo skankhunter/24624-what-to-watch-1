@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MovieCard component Card renders correctly 1`] = `
+exports[`MovieCard: Correctly renders after relaunch 1`] = `
 <article
   className="small-movie-card catalog__movies-card"
   onMouseEnter={[Function]}
@@ -11,7 +11,7 @@ exports[`MovieCard component Card renders correctly 1`] = `
   >
     <video
       muted={true}
-      poster="img/the-grand-budapest-hotel-poster.jpg"
+      poster="img/img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
       src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
     />
   </div>
@@ -23,7 +23,7 @@ exports[`MovieCard component Card renders correctly 1`] = `
       href="movie-page.html"
       onClick={[MockFunction]}
     >
-      The Grand Budapest Hotel
+      John Wick
     </a>
   </h3>
 </article>
