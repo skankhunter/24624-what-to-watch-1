@@ -24,11 +24,12 @@ App.propTypes = {
   onGenreClick: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state, ownProps) =>
-  Object.assign({}, ownProps, {
+const mapStateToProps = (state) => {
+  return {
     activeGenre: state.activeGenre,
     films: state.films
-  });
+  };
+};
 
 const mapDispatchToProps = (dispatch) => ({
   onGenreClick: (newGenre) => {
