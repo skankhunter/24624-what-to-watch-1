@@ -1,5 +1,5 @@
 import React from 'react';
-import {configure, mount, shallow} from 'enzyme';
+import {configure, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import MovieCard from './movie-card.jsx';
 
@@ -25,10 +25,10 @@ describe(`MovieCard component`, () => {
   const handleClick = jest.fn();
 
   it(`reacts correctly to clicking the link`, () => {
-    const movieCard = mount(
+    const movieCard = shallow(
         <MovieCard
           item={film}
-          onClick={handleClick}
+          onGenreClick={handleClick}
         />
     );
 
@@ -61,7 +61,7 @@ describe(`MovieCard component`, () => {
   });
 
   it(`When you move the cursor from the card, the video stops.`, () => {
-    const movieCard = mount(
+    const movieCard = shallow(
         <MovieCard
           item={film}
           onClick={handleClick}

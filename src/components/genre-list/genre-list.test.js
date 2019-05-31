@@ -2,16 +2,22 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import GenreList from './genre-list.jsx';
 
-describe(`The application is displayed correctly.`, () => {
-  it(`GenreList screen correctly renders after launch`, () => {
-    const genre = `Comedies`;
+const mocks = {
+  genre: `All genres`,
+  functionHandler: jest.fn()
+};
 
-    const component = renderer.create(
-        <GenreList
-          genre={genre}
-        />
-    ).toJSON();
+describe(`GenresList:`, () => {
+  it(`Correctly renders after relaunch`, () => {
+    const tree = renderer
+      .create(
+          <GenreList
+            activeGenre={mocks.genre}
+            onGenreClick={mocks.functionHandler}
+          />
+      )
+      .toJSON();
 
-    expect(component).toMatchSnapshot();
+    expect(tree).toMatchSnapshot();
   });
 });
