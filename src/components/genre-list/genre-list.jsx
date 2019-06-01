@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import withActiveItem from "../hocs/withActiveItem/withActiveItem.jsx";
 // Mocks
 import genres from "../../mocks/genres.js";
 
 const GenreList = (props) => {
-  const {activeGenre, onGenreClick} = props;
+  const {activeItem: activeGenre, changeActiveItem: handelGenreClick} = props;
 
   return (
     <ul className="catalog__genres-list">
@@ -19,7 +20,7 @@ const GenreList = (props) => {
             href="#"
             onClick={(evt) => {
               evt.preventDefault();
-              onGenreClick(genre);
+              handelGenreClick(genre);
             }}
             className="catalog__genres-link"
           >
@@ -32,8 +33,8 @@ const GenreList = (props) => {
 };
 
 GenreList.propTypes = {
-  activeGenre: PropTypes.string.isRequired,
-  onGenreClick: PropTypes.func.isRequired
+  activeItem: PropTypes.string.isRequired,
+  changeActiveItem: PropTypes.func.isRequired
 };
 
-export default GenreList;
+export default withActiveItem(GenreList);
