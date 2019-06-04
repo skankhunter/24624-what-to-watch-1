@@ -20,11 +20,11 @@ const FilmsList = ({films, onGenreClick}) => {
 
 FilmsList.propTypes = {
   films: PropTypes.arrayOf(PropTypes.shape({
-    genre: PropTypes.arrayOf(PropTypes.oneOf(genres)),
-    title: PropTypes.string.isRequired,
-    desc: PropTypes.string,
-    poster: PropTypes.string.isRequired,
-    year: PropTypes.number
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    background_image: PropTypes.string.isRequired,
+    preview_video_link: PropTypes.string.isRequired
   })).isRequired,
   onGenreClick: PropTypes.func
 };

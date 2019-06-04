@@ -22,6 +22,8 @@ class VideoPlayer extends Component {
         src={src}
         poster={poster}
         muted={muted}
+        width="280"
+        height="175"
       />
     );
   }

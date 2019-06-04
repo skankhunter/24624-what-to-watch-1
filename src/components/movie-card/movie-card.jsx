@@ -29,7 +29,7 @@ class MovieCard extends PureComponent {
 
   render() {
     const {item, onGenreClick} = this.props;
-    const {title, src, poster} = item;
+    const {name, preview_video_link: video, background_image: poster} = item;
     const {isPlaying} = this.state;
 
     return (
@@ -40,8 +40,8 @@ class MovieCard extends PureComponent {
       >
         <div className="small-movie-card__image">
           <VideoPlayer
-            src={src}
-            poster={`img/${poster}`}
+            src={video}
+            poster={poster}
             muted={true}
             isPlaying={isPlaying}
           />
@@ -52,7 +52,7 @@ class MovieCard extends PureComponent {
             href="movie-page.html"
             onClick={onGenreClick}
           >
-            {title}
+            {name}
           </a>
         </h3>
       </article>
@@ -62,12 +62,11 @@ class MovieCard extends PureComponent {
 
 MovieCard.propTypes = {
   item: PropTypes.shape({
-    genre: PropTypes.arrayOf(PropTypes.oneOf(genres)),
-    title: PropTypes.string.isRequired,
-    desc: PropTypes.string,
-    poster: PropTypes.string.isRequired,
-    src: PropTypes.string.isRequired,
-    year: PropTypes.number
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    background_image: PropTypes.string.isRequired,
+    preview_video_link: PropTypes.string.isRequired
   }).isRequired,
   onGenreClick: PropTypes.func,
 };

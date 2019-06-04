@@ -28,7 +28,7 @@ class MainScreen extends PureComponent {
   }
 
   render() {
-    const {films, activeGenre, onGenreClick} = this.props;
+    const {films, genres, activeGenre, onGenreClick} = this.props;
 
     return (
       <React.Fragment>
@@ -145,7 +145,10 @@ class MainScreen extends PureComponent {
           <section className="catalog">
             <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-            <GenreList activeItem={activeGenre} onGenreClick={onGenreClick} />
+            <GenreList
+              genres={genres}
+              activeItem={activeGenre}
+              onGenreClick={onGenreClick} />
 
             <FilmsList
               films={films}
@@ -178,11 +181,11 @@ class MainScreen extends PureComponent {
 
 MainScreen.propTypes = {
   films: PropTypes.arrayOf(PropTypes.shape({
-    genre: PropTypes.array.isRequired,
-    title: PropTypes.string.isRequired,
-    desc: PropTypes.string,
-    poster: PropTypes.string.isRequired,
-    year: PropTypes.number
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    background_image: PropTypes.string.isRequired,
+    preview_video_link: PropTypes.string.isRequired
   })).isRequired,
   genres: PropTypes.array.isRequired,
   onGenreClick: PropTypes.func.isRequired,
