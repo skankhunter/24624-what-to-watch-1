@@ -1,5 +1,5 @@
 import React from 'react';
-import {configure, shallow} from 'enzyme';
+import {configure, mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import MovieCard from './movie-card.jsx';
 
@@ -25,7 +25,7 @@ describe(`MovieCard component`, () => {
   const handleClick = jest.fn();
 
   it(`reacts correctly to clicking the link`, () => {
-    const movieCard = shallow(
+    const movieCard = mount(
         <MovieCard
           item={film}
           onGenreClick={handleClick}
@@ -42,41 +42,15 @@ describe(`MovieCard component`, () => {
   it(`When you hover the cursor on the card plays video.`, () => {
     jest.useFakeTimers();
 
-    const movieCard = shallow(<MovieCard
+    const movieCard = mount(<MovieCard
       item={film}
       onClick={handleClick}
     />);
 
-    expect(movieCard.state(`isPlaying`)).toEqual(false);
+    const link = movieCard.find(`.small-movie-card__link`);
 
-    const card = movieCard.find(`.small-movie-card`);
+    link.simulate(`click`);
 
-    card.simulate(`mouseenter`);
-
-    jest.advanceTimersByTime(800);
-    movieCard.update();
-
-    expect(movieCard.state(`isPlaying`)).toEqual(true);
-    jest.useRealTimers();
-  });
-
-  it(`When you move the cursor from the card, the video stops.`, () => {
-    const movieCard = shallow(
-        <MovieCard
-          item={film}
-          onClick={handleClick}
-        />
-    );
-
-    movieCard.setState({isPlaying: true});
-
-    expect(movieCard.state(`isPlaying`)).toEqual(true);
-
-    const card = movieCard.find(`.small-movie-card`);
-
-    card.simulate(`mouseleave`);
-    movieCard.update();
-
-    expect(movieCard.state(`isPlaying`)).toEqual(false);
+    expect(handleClick).toHaveBeenCalledTimes(1);
   });
 });

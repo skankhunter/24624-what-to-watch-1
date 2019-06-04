@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import genres from '../../mocks/genres';
+import withVideo from '../hocs/withVideo/withVideo.jsx';
 import VideoPlayer from '../video-player/video-player.jsx';
 
 class MovieCard extends PureComponent {
@@ -71,4 +72,4 @@ MovieCard.propTypes = {
   onGenreClick: PropTypes.func,
 };
 
-export default MovieCard;
+export default withVideo(MovieCard);
