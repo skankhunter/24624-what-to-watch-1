@@ -1,4 +1,4 @@
-import films from "./mocks/films.js";
+import films from './mocks/films.js';
 
 const initialState = {
   activeGenre: `All genres`,

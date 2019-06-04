@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import withActiveItem from "../hocs/withActiveItem/withActiveItem.jsx";
+import withActiveItem from '../hocs/withActiveItem/withActiveItem.jsx';
 // Mocks
 import genres from "../../mocks/genres.js";
 
