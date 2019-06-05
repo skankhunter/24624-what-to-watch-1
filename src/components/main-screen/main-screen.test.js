@@ -1,47 +1,58 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import MainScreen from './main-screen';
-import genres from '../../mocks/genres';
 
 const mocks = {
   films: [
     {
-      id: `1`,
-      title: `John Wick`,
-      genre: [`Crime`],
+      id: 1,
+      name: `John Wick`,
+      genre: `Crime`,
       poster: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-      src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
+      preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
     },
     {
-      id: `2`,
-      title: `Killers Bodyguard`,
-      genre: [`Crime`, `Comedies`],
+      id: 2,
+      name: `Killers Bodyguard`,
+      genre: `Comedies`,
       poster: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-      src: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
+      preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
     },
     {
-      id: `3`,
-      title: `Star Wars`,
-      genre: [`Sci-Fi`],
+      id: 3,
+      name: `Star Wars`,
+      genre: `Sci-Fi`,
       poster: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-      src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
+      preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
     },
     {
-      id: `4`,
-      title: `The Grand Budapest Hotel`,
-      genre: [`Dramas`, `Comedies`],
+      id: 4,
+      name: `The Grand Budapest Hotel`,
+      genre: `Dramas`,
       poster: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-      src: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
+      preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
     },
     {
-      id: `5`,
-      title: `The Cabin in the Woods`,
-      genre: [`Thrillers`],
+      id: 5,
+      name: `The Cabin in the Woods`,
+      genre: `Thrillers`,
       poster: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-      src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
+      preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
     }
   ],
-  genre: `All genres`,
+  genres: [
+    `All genres`,
+    `Comedies`,
+    `Crime`,
+    `Documentary`,
+    `Dramas`,
+    `Horror`,
+    `Kids & Family`,
+    `Romance`,
+    `Sci-Fi`,
+    `Thrillers`
+  ],
+  activeGenre: `All genres`,
   functionHandler: jest.fn()
 };
 
@@ -50,9 +61,9 @@ describe(`Main:`, () => {
     const tree = renderer
       .create(
           <MainScreen
-            genres={genres}
+            genres={mocks.genres}
             films={mocks.films}
-            activeGenre={mocks.genre}
+            activeGenre={mocks.activeGenre}
             onGenreClick={mocks.functionHandler}
           />,
           {

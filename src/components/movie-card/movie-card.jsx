@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import genres from '../../mocks/genres';
+
 import withVideo from '../hocs/withVideo/withVideo.jsx';
 import VideoPlayer from '../video-player/video-player.jsx';
 
@@ -29,7 +29,7 @@ class MovieCard extends PureComponent {
 
   render() {
     const {item, onGenreClick} = this.props;
-    const {title, src, poster} = item;
+    const {name, preview, poster} = item;
     const {isPlaying} = this.state;
 
     return (
@@ -40,8 +40,8 @@ class MovieCard extends PureComponent {
       >
         <div className="small-movie-card__image">
           <VideoPlayer
-            src={src}
-            poster={`img/${poster}`}
+            poster={poster}
+            preview={preview}
             muted={true}
             isPlaying={isPlaying}
           />
@@ -52,7 +52,7 @@ class MovieCard extends PureComponent {
             href="movie-page.html"
             onClick={onGenreClick}
           >
-            {title}
+            {name}
           </a>
         </h3>
       </article>
@@ -62,12 +62,11 @@ class MovieCard extends PureComponent {
 
 MovieCard.propTypes = {
   item: PropTypes.shape({
-    genre: PropTypes.arrayOf(PropTypes.oneOf(genres)),
-    title: PropTypes.string.isRequired,
-    desc: PropTypes.string,
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
     poster: PropTypes.string.isRequired,
-    src: PropTypes.string.isRequired,
-    year: PropTypes.number
+    preview: PropTypes.string.isRequired
   }).isRequired,
   onGenreClick: PropTypes.func,
 };

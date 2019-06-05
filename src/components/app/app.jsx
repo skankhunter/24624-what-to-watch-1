@@ -1,7 +1,15 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {actionChangeGenre, actionChangeFilms} from "../../reducer";
+import {
+  actionChangeGenre,
+  actionChangeFilms,
+  actionShowAllFilms} from "../../reducer/data/data";
+import {
+  getFilms,
+  getGenres,
+  getActiveGenre
+} from "../../reducer/data/selectors";
 
 import MainScreen from '../main-screen/main-screen.jsx';
 
@@ -26,15 +34,20 @@ App.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    activeGenre: state.activeGenre,
-    films: state.films
+    activeGenre: getActiveGenre(state),
+    films: getFilms(state),
+    genres: getGenres(state)
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
   onGenreClick: (newGenre) => {
     dispatch(actionChangeGenre(newGenre));
-    dispatch(actionChangeFilms(newGenre));
+    if (newGenre === `All genres`) {
+      dispatch(actionShowAllFilms());
+    } else {
+      dispatch(actionChangeFilms());
+    }
   }
 });
 

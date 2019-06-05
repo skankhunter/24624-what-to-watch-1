@@ -2,15 +2,22 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 
 import VideoPlayer from './video-player';
-import films from '../../mocks/films';
+
+const mocks = {
+  id: 1,
+  title: `John Wick`,
+  poster: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+  preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+  functionHandler: jest.fn()
+};
 
 describe(`The application is displayed correctly.`, () => {
   it(`VideoPlayer correctly renders after launch`, () => {
-    const {src, poster} = films[0];
+    const {preview, poster} = mocks;
 
     const component = renderer.create(
         <VideoPlayer
-          src={src}
+          preview={preview}
           poster={poster}
           muted={true}
           isPlaying={false}

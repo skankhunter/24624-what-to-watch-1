@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import withActiveItem from '../hocs/withActiveItem/withActiveItem.jsx';
 import MovieCard from '../movie-card/movie-card.jsx';
-import genres from '../../mocks/genres.js';
 
 const FilmsList = ({films, onGenreClick}) => {
   const itemList = films.map((item, index) =>
@@ -20,11 +19,11 @@ const FilmsList = ({films, onGenreClick}) => {
 
 FilmsList.propTypes = {
   films: PropTypes.arrayOf(PropTypes.shape({
-    genre: PropTypes.arrayOf(PropTypes.oneOf(genres)),
-    title: PropTypes.string.isRequired,
-    desc: PropTypes.string,
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
     poster: PropTypes.string.isRequired,
-    year: PropTypes.number
+    preview: PropTypes.string.isRequired
   })).isRequired,
   onGenreClick: PropTypes.func
 };

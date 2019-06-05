@@ -7,12 +7,11 @@ configure({adapter: new Adapter()});
 
 const mock = {
   film: {
-    genre: [`Dramas`, `Thrillers`],
-    title: `Aviator`,
-    desc: ``,
-    poster: `aviator.jpg`,
-    src: `www.roflanEbalo.ru`,
-    year: 2016
+    id: 1,
+    name: `John Wick`,
+    genre: `Action`,
+    poster: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+    preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
   },
   onClick: jest.fn()
 };
