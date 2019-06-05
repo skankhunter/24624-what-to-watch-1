@@ -13,9 +13,11 @@ exports[`The application is displayed correctly. FilmsList screen correctly rend
       className="small-movie-card__image"
     >
       <video
+        height="175"
         muted={true}
         poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
         src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
+        width="280"
       />
     </div>
     <h3
@@ -24,6 +26,7 @@ exports[`The application is displayed correctly. FilmsList screen correctly rend
       <a
         className="small-movie-card__link"
         href="movie-page.html"
+        onClick={[MockFunction]}
       >
         John Wick
       </a>
@@ -38,9 +41,11 @@ exports[`The application is displayed correctly. FilmsList screen correctly rend
       className="small-movie-card__image"
     >
       <video
+        height="175"
         muted={true}
         poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
         src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
+        width="280"
       />
     </div>
     <h3
@@ -49,6 +54,7 @@ exports[`The application is displayed correctly. FilmsList screen correctly rend
       <a
         className="small-movie-card__link"
         href="movie-page.html"
+        onClick={[MockFunction]}
       >
         Killers Bodyguard
       </a>
@@ -63,9 +69,11 @@ exports[`The application is displayed correctly. FilmsList screen correctly rend
       className="small-movie-card__image"
     >
       <video
+        height="175"
         muted={true}
         poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
         src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
+        width="280"
       />
     </div>
     <h3
@@ -74,6 +82,7 @@ exports[`The application is displayed correctly. FilmsList screen correctly rend
       <a
         className="small-movie-card__link"
         href="movie-page.html"
+        onClick={[MockFunction]}
       >
         Star Wars
       </a>
@@ -88,9 +97,11 @@ exports[`The application is displayed correctly. FilmsList screen correctly rend
       className="small-movie-card__image"
     >
       <video
+        height="175"
         muted={true}
         poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
         src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
+        width="280"
       />
     </div>
     <h3
@@ -99,6 +110,7 @@ exports[`The application is displayed correctly. FilmsList screen correctly rend
       <a
         className="small-movie-card__link"
         href="movie-page.html"
+        onClick={[MockFunction]}
       >
         The Grand Budapest Hotel
       </a>
@@ -113,9 +125,11 @@ exports[`The application is displayed correctly. FilmsList screen correctly rend
       className="small-movie-card__image"
     >
       <video
+        height="175"
         muted={true}
         poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
         src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
+        width="280"
       />
     </div>
     <h3
@@ -124,6 +138,7 @@ exports[`The application is displayed correctly. FilmsList screen correctly rend
       <a
         className="small-movie-card__link"
         href="movie-page.html"
+        onClick={[MockFunction]}
       >
         The Cabin in the Woods
       </a>

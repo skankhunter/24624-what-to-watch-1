@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import genres from '../../mocks/genres';
+
 import withVideo from '../hocs/withVideo/withVideo.jsx';
 import VideoPlayer from '../video-player/video-player.jsx';
 
@@ -29,7 +29,7 @@ class MovieCard extends PureComponent {
 
   render() {
     const {item, onGenreClick} = this.props;
-    const {name, preview_video_link: video, background_image: poster} = item;
+    const {name, preview, poster} = item;
     const {isPlaying} = this.state;
 
     return (
@@ -40,8 +40,8 @@ class MovieCard extends PureComponent {
       >
         <div className="small-movie-card__image">
           <VideoPlayer
-            src={video}
             poster={poster}
+            preview={preview}
             muted={true}
             isPlaying={isPlaying}
           />
@@ -65,8 +65,8 @@ MovieCard.propTypes = {
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
-    background_image: PropTypes.string.isRequired,
-    preview_video_link: PropTypes.string.isRequired
+    poster: PropTypes.string.isRequired,
+    preview: PropTypes.string.isRequired
   }).isRequired,
   onGenreClick: PropTypes.func,
 };

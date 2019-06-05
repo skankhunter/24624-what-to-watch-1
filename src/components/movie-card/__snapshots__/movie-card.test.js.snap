@@ -10,9 +10,11 @@ exports[`MovieCard: Correctly renders after relaunch 1`] = `
     className="small-movie-card__image"
   >
     <video
+      height="175"
       muted={true}
-      poster="img/img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+      poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
       src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
+      width="280"
     />
   </div>
   <h3

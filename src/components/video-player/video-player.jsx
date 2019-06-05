@@ -14,12 +14,12 @@ class VideoPlayer extends Component {
   }
 
   render() {
-    const {src, poster, muted} = this.props;
+    const {preview, poster, muted} = this.props;
 
     return (
       <video
         ref={this._videoRef}
-        src={src}
+        src={preview}
         poster={poster}
         muted={muted}
         width="280"
@@ -65,7 +65,7 @@ class VideoPlayer extends Component {
 }
 
 VideoPlayer.propTypes = {
-  src: PropTypes.string.isRequired,
+  preview: PropTypes.string.isRequired,
   poster: PropTypes.string.isRequired,
   muted: PropTypes.bool.isRequired,
   isPlaying: PropTypes.bool.isRequired,

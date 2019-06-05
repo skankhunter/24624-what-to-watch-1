@@ -184,8 +184,8 @@ MainScreen.propTypes = {
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
-    background_image: PropTypes.string.isRequired,
-    preview_video_link: PropTypes.string.isRequired
+    poster: PropTypes.string.isRequired,
+    preview: PropTypes.string.isRequired
   })).isRequired,
   genres: PropTypes.array.isRequired,
   onGenreClick: PropTypes.func.isRequired,

@@ -53,6 +53,18 @@ const Operation = {
   }
 };
 
+const formFilms = (films) => {
+  return films.map((film) => {
+    return {
+      id: film.id,
+      name: film.name,
+      genre: film.genre,
+      poster: film.preview_image,
+      preview: film.preview_video_link
+    };
+  });
+};
+
 const formGenres = (films) => {
   const newGenres = [];
 
@@ -88,9 +100,10 @@ const reducer = (state = initialState, action) => {
       });
 
     case ActionType.LOAD_FILMS:
+      const formedFilms = formFilms(action.payload);
       return Object.assign({}, state, {
-        films: action.payload,
-        loadedFilms: action.payload
+        films: formedFilms,
+        loadedFilms: formedFilms
       });
 
     case ActionType.FORM_GENRES:
@@ -103,9 +116,12 @@ const reducer = (state = initialState, action) => {
 };
 
 export {
+  formFilms,
+  formGenres,
   actionChangeGenre,
   actionChangeFilms,
   actionShowAllFilms,
+  actionFormGenres,
   actionLoadFilms,
   ActionType,
   Operation,
