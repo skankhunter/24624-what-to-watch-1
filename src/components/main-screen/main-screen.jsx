@@ -19,6 +19,8 @@ class MainScreen extends PureComponent {
     };
 
     this._handleClick = this._handleClick.bind(this);
+    this._handelSignInClick = this._handelSignInClick.bind(this);
+    this._formUserBlock = this._formUserBlock.bind(this);
   }
 
   _handleClick(film) {
@@ -27,8 +29,45 @@ class MainScreen extends PureComponent {
     });
   }
 
+  _handelSignInClick(evt) {
+    const {showLogIn} = this.props;
+
+    evt.preventDefault();
+    showLogIn(`login`);
+  }
+
+  _formUserBlock() {
+    const {authorized, userAvatar, userName} = this.props;
+    if (!authorized) {
+      return (
+        <div className="user-block">
+          <a
+            href="sign-in.html"
+            className="user-block__link"
+            onClick={this._handelSignInClick}
+          >
+            Sign in
+          </a>
+        </div>
+      );
+    } else {
+      return (
+        <div className="user-block">
+          <div className="user-block__avatar">
+            <img src={userAvatar} alt={userName} width="63" height="63" />
+          </div>
+        </div>
+      );
+    }
+  }
+
   render() {
-    const {films, genres, activeGenre, onGenreClick} = this.props;
+    const {
+      films,
+      genres,
+      activeGenre,
+      onGenreClick,
+    } = this.props;
 
     return (
       <React.Fragment>
@@ -101,11 +140,7 @@ class MainScreen extends PureComponent {
               </a>
             </div>
 
-            <div className="user-block">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-              </div>
-            </div>
+            {this._formUserBlock()}
           </header>
 
           <div className="movie-card__wrap">
@@ -180,6 +215,10 @@ class MainScreen extends PureComponent {
 }
 
 MainScreen.propTypes = {
+  authorized: PropTypes.bool.isRequired,
+  userAvatar: PropTypes.string,
+  userName: PropTypes.string,
+  showLogIn: PropTypes.func.isRequired,
   films: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
