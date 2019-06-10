@@ -1,6 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import {App} from './app.jsx';
+import {BrowserRouter} from "react-router-dom";
 
 const mocks = {
   films: [
@@ -66,16 +67,16 @@ describe(`App:`, () => {
   it(`Correctly renders after relaunch`, () => {
     const tree = renderer
       .create(
-          <App
-            authorized={false}
-            authorizationRequired={false}
-            films={mocks.films}
-            genres={mocks.genres}
-            activeGenre={mocks.activeGenre}
-            currentUser={mocks.currentUser}
-            onGenreClick={mocks.functionHandler}
-            showLogIn={mocks.functionHandler}
-          />,
+          <BrowserRouter>
+            <App
+              authorized={false}
+              films={mocks.films}
+              genres={mocks.genres}
+              currentUser={mocks.currentUser}
+              activeGenre={mocks.activeGenre}
+              onGenreClick={mocks.functionHandler}
+            />
+          </BrowserRouter>,
           {
             createNodeMock: () => {
               return {};
