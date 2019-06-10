@@ -1,57 +1,48 @@
-import React, {PureComponent} from 'react';
+import React from 'react';
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
+import {Switch, Route} from "react-router-dom";
 import {
   actionChangeGenre,
   actionChangeFilms,
   actionShowAllFilms} from "../../reducer/data/data";
 
-import {actionChangeAuthorizationRequestStatus} from "../../reducer/user/user";
 import MainScreen from '../main-screen/main-screen.jsx';
 import SignIn from "../signIn/signIn.jsx";
+import Favorites from "../favorites/favorites.jsx";
 
+const App = (props) => {
+  const {
+    authorized,
+    films,
+    genres,
+    activeGenre,
+    onGenreClick,
+    currentUser
+  } = props;
 
-class App extends PureComponent {
-  constructor(props) {
-    super(props);
-  }
+  const data = {
+    authorized,
+    films,
+    genres,
+    activeGenre,
+    onGenreClick,
+    userAvatar: `https://es31-server.appspot.com/` + currentUser.userAvatar,
+    userName: currentUser.userName
+  };
 
-  render() {
-    const {
-      authorized,
-      authorizationRequired,
-      films,
-      genres,
-      activeGenre,
-      onGenreClick,
-      currentUser,
-      showLogIn
-    } = this.props;
-
-    const data = {
-      authorized,
-      authorizationRequired,
-      films,
-      genres,
-      activeGenre,
-      onGenreClick,
-      showLogIn,
-      userAvatar: `https://es31-server.appspot.com/` + currentUser.userAvatar,
-      userName: currentUser.userName
-    };
-
-    if (!authorizationRequired) {
-      return <MainScreen {...data} />;
-    } else {
-      return <SignIn />;
-    }
-  }
-}
+  return (
+    <Switch>
+      <Route path="/" exact render={() => <MainScreen {...data} />} />
+      <Route path="/login" render={() => <SignIn />} />
+      <Route path="/favorites" render={() => <Favorites authorized={authorized} />}
+      />
+    </Switch>
+  );
+};
 
 App.propTypes = {
   authorized: PropTypes.bool.isRequired,
-  authorizationRequired: PropTypes.bool.isRequired,
-  showLogIn: PropTypes.func.isRequired,
   films: PropTypes.array.isRequired,
   genres: PropTypes.array.isRequired,
   activeGenre: PropTypes.string.isRequired,
@@ -70,7 +61,6 @@ const mapStateToProps = (state) => {
     films: state.data.films,
     genres: state.data.genres,
     authorized: state.user.authorized,
-    authorizationRequired: state.user.isAuthorizationRequired,
     currentUser: state.user.currentUser
   };
 };
@@ -84,10 +74,6 @@ const mapDispatchToProps = (dispatch) => ({
     } else {
       dispatch(actionChangeFilms());
     }
-  },
-
-  showLogIn: () => {
-    dispatch(actionChangeAuthorizationRequestStatus(true));
   }
 });
 
