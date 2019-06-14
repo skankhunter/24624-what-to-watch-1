@@ -13,6 +13,8 @@ describe(`SignIn:`, () => {
       .create(
           <BrowserRouter>
             <SignIn
+              authorized={false}
+              history={{push: mocks.functionHandler}}
               changeAuthorizationStatus={mocks.functionHandler}
               validateMail={mocks.functionHandler}
               validatePassword={mocks.functionHandler}

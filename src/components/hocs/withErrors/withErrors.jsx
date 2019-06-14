@@ -53,11 +53,11 @@ const withErrors = (WrappedComponent) => {
 
       return (
         <WrappedComponent
+          {...this.props}
           validateMail={this.validateMail}
           validatePassword={this.validatePassword}
           emailError={emailError}
           passwordError={passwordError}
-          {...this.props}
         />
       );
     }

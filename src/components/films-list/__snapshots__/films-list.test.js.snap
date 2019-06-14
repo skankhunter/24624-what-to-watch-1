@@ -25,8 +25,12 @@ exports[`The application is displayed correctly. FilmsList screen correctly rend
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
-        onClick={[MockFunction]}
+        onClick={[Function]}
+        params={
+          Object {
+            "id": 1,
+          }
+        }
       >
         John Wick
       </a>
@@ -53,8 +57,12 @@ exports[`The application is displayed correctly. FilmsList screen correctly rend
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
-        onClick={[MockFunction]}
+        onClick={[Function]}
+        params={
+          Object {
+            "id": 2,
+          }
+        }
       >
         Killers Bodyguard
       </a>
@@ -81,8 +89,12 @@ exports[`The application is displayed correctly. FilmsList screen correctly rend
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
-        onClick={[MockFunction]}
+        onClick={[Function]}
+        params={
+          Object {
+            "id": 3,
+          }
+        }
       >
         Star Wars
       </a>
@@ -109,8 +121,12 @@ exports[`The application is displayed correctly. FilmsList screen correctly rend
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
-        onClick={[MockFunction]}
+        onClick={[Function]}
+        params={
+          Object {
+            "id": 4,
+          }
+        }
       >
         The Grand Budapest Hotel
       </a>
@@ -137,8 +153,12 @@ exports[`The application is displayed correctly. FilmsList screen correctly rend
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
-        onClick={[MockFunction]}
+        onClick={[Function]}
+        params={
+          Object {
+            "id": 5,
+          }
+        }
       >
         The Cabin in the Woods
       </a>

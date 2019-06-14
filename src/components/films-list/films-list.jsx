@@ -3,18 +3,31 @@ import PropTypes from 'prop-types';
 import withActiveItem from '../hocs/withActiveItem/withActiveItem.jsx';
 import MovieCard from '../movie-card/movie-card.jsx';
 
-const FilmsList = ({films, onGenreClick}) => {
-  const itemList = films.map((item, index) =>
-    <MovieCard
-      item={item}
-      key={index}
-      onGenreClick={onGenreClick}
-    />
-  );
+const FilmsList = (props) => {
+  const {
+    films,
+    changeActiveItem: handelActiveCardChange,
+    changeGenre,
+    setActiveFilm
+  } = props;
 
-  return <div className="catalog__movies-list">
-    {itemList}
-  </div>;
+  return (
+    <div className="catalog__movies-list">
+      {films.map((film) => (
+        <MovieCard
+          key={`${film.id}${film.name}`}
+          id={film.id}
+          title={film.name}
+          poster={film.poster}
+          genre={film.genre}
+          preview={film.preview}
+          onCardEnter={handelActiveCardChange}
+          changeGenre={changeGenre}
+          setActiveFilm={setActiveFilm}
+        />
+      ))}
+    </div>
+  );
 };
 
 FilmsList.propTypes = {
@@ -25,7 +38,11 @@ FilmsList.propTypes = {
     poster: PropTypes.string.isRequired,
     preview: PropTypes.string.isRequired
   })).isRequired,
-  onGenreClick: PropTypes.func
+  changeActiveItem: PropTypes.func,
+  changeGenre: PropTypes.func,
+  setActiveFilm: PropTypes.func
 };
+
+export {FilmsList};
 
 export default withActiveItem(FilmsList);

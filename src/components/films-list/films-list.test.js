@@ -1,6 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import FilmsList from './films-list.jsx';
+import {BrowserRouter} from "react-router-dom";
 
 const mocks = {
   films: [
@@ -56,13 +57,12 @@ const mocks = {
 
 describe(`The application is displayed correctly.`, () => {
   it(`FilmsList screen correctly renders after launch`, () => {
-    const handleClick = jest.fn();
-
     const component = renderer.create(
-        <FilmsList
-          films={mocks.films}
-          onGenreClick={handleClick}
-        />,
+        <BrowserRouter>
+          <FilmsList
+            films={mocks.films}
+          />
+        </BrowserRouter>,
         {
           createNodeMock: () => {
             return {};
