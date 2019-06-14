@@ -404,8 +404,12 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
-              onClick={[MockFunction]}
+              onClick={[Function]}
+              params={
+                Object {
+                  "id": 1,
+                }
+              }
             >
               John Wick
             </a>
@@ -432,8 +436,12 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
-              onClick={[MockFunction]}
+              onClick={[Function]}
+              params={
+                Object {
+                  "id": 2,
+                }
+              }
             >
               Killers Bodyguard
             </a>
@@ -460,8 +468,12 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
-              onClick={[MockFunction]}
+              onClick={[Function]}
+              params={
+                Object {
+                  "id": 3,
+                }
+              }
             >
               Star Wars
             </a>
@@ -488,8 +500,12 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
-              onClick={[MockFunction]}
+              onClick={[Function]}
+              params={
+                Object {
+                  "id": 4,
+                }
+              }
             >
               The Grand Budapest Hotel
             </a>
@@ -516,24 +532,17 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
-              onClick={[MockFunction]}
+              onClick={[Function]}
+              params={
+                Object {
+                  "id": 5,
+                }
+              }
             >
               The Cabin in the Woods
             </a>
           </h3>
         </article>
-      </div>
-      <div
-        className="catalog__more"
-      >
-        <button
-          className="catalog__button"
-          onClick={[MockFunction]}
-          type="button"
-        >
-          Show more
-        </button>
       </div>
     </section>
     <footer

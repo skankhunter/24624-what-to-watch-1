@@ -54,6 +54,13 @@ const mocks = {
     `Thrillers`
   ],
   activeGenre: `All genres`,
+  activeFilm: {
+    id: 5,
+    name: `The Cabin in the Woods`,
+    genre: `Thrillers`,
+    poster: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+    preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
+  },
   currentUser: {
     userId: 1,
     userEmail: `ema@ema.ru`,
@@ -73,6 +80,11 @@ describe(`App:`, () => {
               films={mocks.films}
               genres={mocks.genres}
               currentUser={mocks.currentUser}
+              activeFilm={mocks.activeFilm}
+              setActiveFilm={mocks.functionHandler}
+              changeGenre={mocks.functionHandler}
+              onShowMoreClick={mocks.functionHandler}
+              visibleFilms={mocks.films}
               activeGenre={mocks.activeGenre}
               onGenreClick={mocks.functionHandler}
             />

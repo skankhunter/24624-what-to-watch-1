@@ -53,6 +53,7 @@ const mocks = {
     `Sci-Fi`,
     `Thrillers`
   ],
+
   activeGenre: `All genres`,
   functionHandler: jest.fn()
 };
@@ -66,6 +67,10 @@ describe(`Main:`, () => {
               authorized={false}
               userAvatar={`ava`}
               userName={`name`}
+              changeGenre={mocks.functionHandler}
+              onShowMoreClick={mocks.functionHandler}
+              setActiveFilm={mocks.functionHandler}
+              visibleFilms={mocks.films}
               films={mocks.films}
               activeGenre={mocks.activeGenre}
               onGenreClick={mocks.functionHandler}

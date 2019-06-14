@@ -10,7 +10,11 @@ describe(`Favorites:`, () => {
     const tree = renderer
       .create(
           <BrowserRouter>
-            <Favorites authorized={true} />
+            <Favorites
+              authorized={true}
+              userAvatar={`ava`}
+              userName={`Dick`}
+            />
           </BrowserRouter>
       )
       .toJSON();

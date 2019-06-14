@@ -1,55 +1,60 @@
-import React from 'react';
-import {configure, mount} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import MovieCard from './movie-card.jsx';
+// Core
+import React from "react";
+import Enzyme, {mount} from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
 
-configure({adapter: new Adapter()});
+// Component
+import MovieCard from "./movie-card.jsx";
+import {BrowserRouter} from "react-router-dom";
 
-const mock = {
-  film: {
-    id: 1,
-    name: `John Wick`,
-    genre: `Action`,
-    poster: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-    preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
-  },
-  onClick: jest.fn()
+Enzyme.configure({adapter: new Adapter()});
+
+const mockedFilm = {
+  id: 1,
+  title: `John Wick`,
+  genre: `Kek`,
+  poster: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+  preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
 };
 
-window.HTMLMediaElement.prototype.play = () => {};
-window.HTMLMediaElement.prototype.pause = () => {};
+const mocks = Object.assign(mockedFilm, {
+  mouseHandler: jest.fn()
+});
 
-describe(`MovieCard component`, () => {
-  const {film} = mock;
-  const handleClick = jest.fn();
-
-  it(`reacts correctly to clicking the link`, () => {
+describe(`MovieCard:`, () => {
+  it(`Card should run callback on mouse enter`, () => {
     const movieCard = mount(
-        <MovieCard
-          item={film}
-          onGenreClick={handleClick}
-        />
+        <BrowserRouter>
+          <MovieCard
+            id={mocks.id}
+            title={mocks.title}
+            genre={mocks.genre}
+            poster={mocks.poster}
+            preview={mocks.preview}
+            onCardEnter={mocks.mouseHandler}
+          />
+        </BrowserRouter>
     );
 
-    const titleLink = movieCard.find(`.small-movie-card__link`);
-
-    titleLink.simulate(`click`, {preventDefault() {}});
-
-    expect(handleClick).toHaveBeenCalledTimes(1);
+    movieCard.simulate(`mouseenter`);
+    expect(mocks.mouseHandler).toHaveBeenCalledTimes(1);
   });
 
-  it(`When you hover the cursor on the card plays video.`, () => {
-    jest.useFakeTimers();
+  it(`Card should return film index on mouse enter`, () => {
+    const movieCard = mount(
+        <BrowserRouter>
+          <MovieCard
+            id={mocks.id}
+            title={mocks.title}
+            genre={mocks.genre}
+            poster={mocks.poster}
+            preview={mocks.preview}
+            onCardEnter={mocks.mouseHandler}
+          />
+        </BrowserRouter>
+    );
 
-    const movieCard = mount(<MovieCard
-      item={film}
-      onClick={handleClick}
-    />);
-
-    const link = movieCard.find(`.small-movie-card__link`);
-
-    link.simulate(`click`);
-
-    expect(handleClick).toHaveBeenCalledTimes(1);
+    movieCard.simulate(`mouseleave`);
+    expect(mocks.mouseHandler).toHaveBeenCalledWith(mocks.id);
   });
 });
