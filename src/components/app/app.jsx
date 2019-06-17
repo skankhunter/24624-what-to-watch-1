@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Switch, Route} from "react-router-dom";
+import {withRouter} from "react-router";
+import {compose} from "redux";
 import {
   actionChangeGenre,
   actionChangeFilms,
@@ -24,13 +26,17 @@ const App = (props) => {
     activeGenre,
     changeGenre,
     onShowMoreClick,
-    currentUser,
     activeFilm,
     setActiveFilm
   } = props;
 
+  const homeRedirect = () => {
+    setActiveFilm();
+    changeGenre();
+    props.history.push(`/`);
+  };
+
   const mainProps = {
-    authorized,
     films,
     visibleFilms,
     genres,
@@ -39,22 +45,17 @@ const App = (props) => {
     onShowMoreClick,
     activeFilm,
     setActiveFilm,
-    userAvatar: `https://es31-server.appspot.com/` + currentUser.userAvatar,
-    userName: currentUser.userName
   };
 
-  const favoritesProps = {
-    authorized,
-    userAvatar: `https://es31-server.appspot.com/` + currentUser.userAvatar,
-    userName: currentUser.userName
-  };
+  const favoritesProps = {authorized, homeRedirect};
 
   const filmProps = {
     film: activeFilm,
     activeGenre,
     setActiveFilm,
     changeGenre,
-    visibleFilms
+    visibleFilms,
+    homeRedirect
   };
 
   return (
@@ -68,6 +69,7 @@ const App = (props) => {
 };
 
 App.propTypes = {
+  history: PropTypes.object,
   authorized: PropTypes.bool.isRequired,
   films: PropTypes.array.isRequired,
   genres: PropTypes.array.isRequired,
@@ -122,12 +124,17 @@ const mapDispatchToProps = (dispatch) => ({
   },
   setActiveFilm: (filmId = null) => {
     dispatch(actionChangeActiveFilm(filmId));
+    dispatch(actionClearVisibleFilms());
+    dispatch(actionFormVisibleFilms());
   }
 });
 
 export {App};
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+export default compose(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    ),
+    withRouter
 )(App);

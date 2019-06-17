@@ -36,7 +36,6 @@ class MovieCard extends PureComponent {
         <h3 className="small-movie-card__title">
           <a
             className="small-movie-card__link"
-            /* to={`/film/${id}`} */
             onClick={this._handelLinkClick}
             params={{id}}
           >
@@ -51,20 +50,16 @@ class MovieCard extends PureComponent {
     const {changeGenre, setActiveFilm, genre, id} = this.props;
     changeGenre(genre);
     setActiveFilm(id);
-    this.props.history.push(`/film/${id}`, {id});
+    this.props.history.push(`/film/${id}`);
   }
 
   _handelMouseEnter() {
-    const {id, onCardEnter} = this.props;
-
     this.timer = setTimeout(
         function () {
           this._videoRef.current.video.current.play();
         }.bind(this),
         1000
     );
-
-    onCardEnter(id);
   }
 
   _handelMouseLeave() {
@@ -82,7 +77,6 @@ MovieCard.propTypes = {
   preview: PropTypes.string.isRequired,
   changeGenre: PropTypes.func,
   setActiveFilm: PropTypes.func,
-  onCardEnter: PropTypes.func,
   genre: PropTypes.string.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
