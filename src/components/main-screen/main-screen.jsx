@@ -1,13 +1,13 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 
-import {Link} from "react-router-dom";
 import {withRouter} from "react-router";
 import {compose} from "redux";
 
+import UserBlock from "../userBlock/user-block.jsx";
 import GenreList from "../genre-list/genre-list.jsx";
 import FilmsList from "../films-list/films-list.jsx";
-
+import withPlayer from "../hocs/withPlayer/with-player.jsx";
 
 class MainScreen extends PureComponent {
   constructor(props) {
@@ -23,43 +23,17 @@ class MainScreen extends PureComponent {
       }
     };
 
-    this._handleClick = this._handleClick.bind(this);
-    this._formUserBlock = this._formUserBlock.bind(this);
-    this._handelAvatarClick = this._handelAvatarClick.bind(this);
     this._displayShowMore = this._displayShowMore.bind(this);
     this._handelShowMoreClick = this._handelShowMoreClick.bind(this);
+    this._handlePlayClick = this._handlePlayClick.bind(this);
   }
 
-  _handleClick(film) {
-    this.setState({
-      selectedFilm: film
-    });
+  _handlePlayClick() {
+    const {togglePlayer} = this.props;
+
+    togglePlayer();
   }
 
-  _formUserBlock() {
-    const {authorized, userAvatar, userName} = this.props;
-    if (!authorized) {
-      return (
-        <div className="user-block">
-          <Link to="/login" className="user-block__link">
-            Sign in
-          </Link>
-        </div>
-      );
-    } else {
-      return (
-        <div className="user-block">
-          <div className="user-block__avatar" onClick={this._handelAvatarClick}>
-            <img src={userAvatar} alt={userName} width="63" height="63" />
-          </div>
-        </div>
-      );
-    }
-  }
-
-  _handelAvatarClick() {
-    this.props.history.push(`/favorites`);
-  }
   _displayShowMore() {
     const {films, visibleFilms} = this.props;
     if (films.length > visibleFilms.length) {
@@ -89,7 +63,8 @@ class MainScreen extends PureComponent {
       genres,
       activeGenre,
       changeGenre,
-      setActiveFilm
+      setActiveFilm,
+      activeFilm
     } = this.props;
 
     return (
@@ -163,25 +138,30 @@ class MainScreen extends PureComponent {
               </a>
             </div>
 
-            {this._formUserBlock()}
+            <UserBlock />
           </header>
 
           <div className="movie-card__wrap">
             <div className="movie-card__info">
               <div className="movie-card__poster">
-                <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218"
+                <img
+                  src={activeFilm.posterImage}
+                  alt={activeFilm.name}
+                  width="218"
                   height="327"/>
               </div>
 
               <div className="movie-card__desc">
-                <h2 className="movie-card__title">The Grand Budapest Hotel</h2>
+                <h2 className="movie-card__title">{activeFilm.name}</h2>
                 <p className="movie-card__meta">
-                  <span className="movie-card__genre">Drama</span>
-                  <span className="movie-card__year">2014</span>
+                  <span className="movie-card__genre">{activeFilm.genre}</span>
+                  <span className="movie-card__year">
+                    {activeFilm.released}
+                  </span>
                 </p>
 
                 <div className="movie-card__buttons">
-                  <button className="btn btn--play movie-card__button" type="button">
+                  <button className="btn btn--play movie-card__button" type="button" onClick={this._handlePlayClick}>
                     <svg viewBox="0 0 19 19" width="19" height="19">
                       <use xlinkHref="#play-s"></use>
                     </svg>
@@ -237,8 +217,7 @@ class MainScreen extends PureComponent {
 }
 
 MainScreen.propTypes = {
-  authorized: PropTypes.bool.isRequired,
-  userAvatar: PropTypes.string,
+  activeFilm: PropTypes.object.isRequired,
   userName: PropTypes.string,
   films: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
@@ -264,6 +243,10 @@ MainScreen.propTypes = {
     push: PropTypes.func.isRequired
   }).isRequired,
   activeGenre: PropTypes.string.isRequired,
+  togglePlayer: PropTypes.func.isRequired,
 };
 
-export default compose(withRouter)(MainScreen);
+export default compose(
+    withPlayer,
+    withRouter
+)(MainScreen);
