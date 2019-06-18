@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import {withRouter} from "react-router";
 import {compose} from "redux";
 
-import UserBlock from "../userBlock/user-block.jsx";
+import UserBlock from "../user-block/user-block.jsx";
 import GenreList from "../genre-list/genre-list.jsx";
 import FilmsList from "../films-list/films-list.jsx";
-import withPlayer from "../hocs/withPlayer/with-player.jsx";
+import withPlayer from "../hocs/with-player/with-player.jsx";
 
 class MainScreen extends PureComponent {
   constructor(props) {

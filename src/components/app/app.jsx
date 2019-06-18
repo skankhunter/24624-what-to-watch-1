@@ -50,7 +50,7 @@ const App = (props) => {
   const favoritesProps = {authorized, homeRedirect};
 
   const filmProps = {
-    film: activeFilm,
+    activeFilm,
     activeGenre,
     setActiveFilm,
     changeGenre,
