@@ -2,13 +2,15 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {compose} from "redux";
 import {withRouter} from "react-router";
-import {Route, Link} from "react-router-dom";
+import {Route} from "react-router-dom";
 
-import UserBlock from "../userBlock/user-block.jsx";
+import UserBlock from "../user-block/user-block.jsx";
 import FilmsList from "../films-list/films-list.jsx";
 import Overview from "../overview/overview.jsx";
 import Details from "../details/details.jsx";
 import Reviews from "../reviews/reviews.jsx";
+import MovieNavigation from "../movie-navigation/movie-navigation.jsx";
+import withPlayer from "../hocs/with-player/with-player.jsx";
 
 const MAXIMUM_RECOMMENDED_FILMS_NUMBER = 4;
 
@@ -18,6 +20,13 @@ class MoviePage extends PureComponent {
 
     this._handelHomeLinkClick = this._handelHomeLinkClick.bind(this);
     this._formRecommendedBlock = this._formRecommendedBlock.bind(this);
+    this._handlePlayClick = this._handlePlayClick.bind(this);
+  }
+
+  _handlePlayClick() {
+    const {togglePlayer} = this.props;
+
+    togglePlayer();
   }
 
   _handelHomeLinkClick() {
@@ -46,7 +55,7 @@ class MoviePage extends PureComponent {
   }
 
   render() {
-    const {film, visibleFilms, match} = this.props;
+    const {activeFilm, visibleFilms, match} = this.props;
     const recommendedFilms =
       visibleFilms.length > MAXIMUM_RECOMMENDED_FILMS_NUMBER
         ? visibleFilms.slice(0, MAXIMUM_RECOMMENDED_FILMS_NUMBER)
@@ -149,7 +158,10 @@ class MoviePage extends PureComponent {
         <section className="movie-card movie-card--full">
           <div className="movie-card__hero">
             <div className="movie-card__bg">
-              <img src={film.backgroundImage} alt="The Grand Budapest Hotel" />
+              <img
+                src={activeFilm.backgroundImage}
+                alt="The Grand Budapest Hotel"
+              />
             </div>
 
             <h1 className="visually-hidden">WTW</h1>
@@ -168,16 +180,17 @@ class MoviePage extends PureComponent {
 
             <div className="movie-card__wrap">
               <div className="movie-card__desc">
-                <h2 className="movie-card__title">{film.name}</h2>
+                <h2 className="movie-card__title">{activeFilm.name}</h2>
                 <p className="movie-card__meta">
-                  <span className="movie-card__genre">{film.genre}</span>
-                  <span className="movie-card__year">{film.release}</span>
+                  <span className="movie-card__genre">{activeFilm.genre}</span>
+                  <span className="movie-card__year">{activeFilm.release}</span>
                 </p>
 
                 <div className="movie-card__buttons">
                   <button
                     className="btn btn--play movie-card__button"
                     type="button"
+                    onClick={this._handlePlayClick}
                   >
                     <svg viewBox="0 0 19 19" width="19" height="19">
                       <use xlinkHref="#play-s" />
@@ -205,61 +218,34 @@ class MoviePage extends PureComponent {
             <div className="movie-card__info">
               <div className="movie-card__poster movie-card__poster--big">
                 <img
-                  src={film.posterImage}
-                  alt={film.name}
+                  src={activeFilm.posterImage}
+                  alt={activeFilm.name}
                   width="218"
                   height="327"
                 />
               </div>
 
               <div className="movie-card__desc">
-                <nav className="movie-nav movie-card__nav">
-                  <ul className="movie-nav__list">
-                    <li className="movie-nav__item">
-                      <Link
-                        to={`${match.url}/overview`}
-                        className="movie-nav__link"
-                      >
-                        Overview
-                      </Link>
-                    </li>
-                    <li className="movie-nav__item">
-                      <Link
-                        to={`${match.url}/details`}
-                        className="movie-nav__link"
-                      >
-                        Details
-                      </Link>
-                    </li>
-                    <li className="movie-nav__item">
-                      <Link
-                        to={`${match.url}/reviews`}
-                        className="movie-nav__link"
-                      >
-                        Reviews
-                      </Link>
-                    </li>
-                  </ul>
-                </nav>
+                <MovieNavigation activeItem={`overview`} />
 
                 <Route
                   path={match.url}
                   exact
-                  render={() => <Overview film={film} />}
+                  render={() => <Overview activeFilm={activeFilm} />}
                 />
                 <Route
                   path={match.url + `/overview`}
-                  render={() => <Overview film={film} />}
+                  render={() => <Overview activeFilm={activeFilm} />}
                 />
 
                 <Route
                   path={match.url + `/details`}
-                  render={() => <Details film={film} />}
+                  render={() => <Details activeFilm={activeFilm} />}
                 />
 
                 <Route
                   path={match.url + `/Reviews`}
-                  render={() => <Reviews />}
+                  render={() => <Reviews activeFilmId={activeFilm.id} />}
                 />
               </div>
             </div>
@@ -307,4 +293,7 @@ MoviePage.propTypes = {
 
 export {MoviePage};
 
-export default compose(withRouter)(MoviePage);
+export default compose(
+    withPlayer,
+    withRouter
+)(MoviePage);
