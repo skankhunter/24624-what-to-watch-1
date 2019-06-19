@@ -2,7 +2,7 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {compose} from "redux";
 import {withRouter} from "react-router";
-import {Route} from "react-router-dom";
+import {Route, Link} from "react-router-dom";
 
 import UserBlock from "../user-block/user-block.jsx";
 import FilmsList from "../films-list/films-list.jsx";
@@ -218,9 +218,12 @@ class MoviePage extends PureComponent {
                     </svg>
                     <span>My list</span>
                   </button>
-                  <a href="add-review.html" className="btn movie-card__button">
+                  <Link
+                    to={`${match.url}/review`}
+                    className="btn movie-card__button"
+                  >
                     Add review
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -256,7 +259,8 @@ class MoviePage extends PureComponent {
                 />
 
                 <Route
-                  path={match.url + `/Reviews`}
+                  path={`${match.url}/reviews`}
+                  exact
                   render={() => <Reviews activeFilmId={activeFilm.id} />}
                 />
               </div>
@@ -290,6 +294,7 @@ class MoviePage extends PureComponent {
 MoviePage.propTypes = {
   visibleFilms: PropTypes.array.isRequired,
   homeRedirect: PropTypes.func.isRequired,
+  togglePlayer: PropTypes.func.isRequired,
   setActiveFilm: PropTypes.func.isRequired,
   changeGenre: PropTypes.func.isRequired,
   match: PropTypes.object.isRequired,
@@ -300,7 +305,11 @@ MoviePage.propTypes = {
     director: PropTypes.string.isRequired,
     scoresCount: PropTypes.number.isRequired,
     starring: PropTypes.array
-  })
+  }),
+  addFilmToFavorite: PropTypes.func.isRequired,
+  activeFilm: PropTypes.object.isRequired,
+  authorized: PropTypes.bool.isRequired,
+  history: PropTypes.object.isRequired,
 };
 
 export {MoviePage};
