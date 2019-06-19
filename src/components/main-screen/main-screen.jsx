@@ -234,7 +234,7 @@ class MainScreen extends PureComponent {
 
 MainScreen.propTypes = {
   authorized: PropTypes.bool.isRequired,
-  activeFilm: PropTypes.object.isRequired,
+  activeFilm: PropTypes.object,
   userName: PropTypes.string,
   films: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,

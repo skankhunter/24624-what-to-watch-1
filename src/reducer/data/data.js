@@ -12,6 +12,8 @@ const ActionType = {
   CLEAR_VISIBLE_FILMS: `CLEAR_VISIBLE_FILMS`,
   CHANGE_ACTIVE_FILM: `CHANGE_ACTIVE_FILM`,
   LOAD_PROMO_FILM: `LOAD_PROMO_FILM`,
+  ADD_FILM_TO_FAVORITE: `ADD_FILM_TO_FAVORITE`,
+  LOAD_FAVORITE_FILMS: `LOAD_FAVORITE_FILMS`
 };
 
 const initialState = {
@@ -20,7 +22,8 @@ const initialState = {
   loadedFilms: [],
   visibleFilms: [],
   genres: [],
-  activeFilm: {}
+  activeFilm: {},
+  favoriteFilms: []
 };
 
 const actionChangeGenre = (newGenre = `All genres`) => ({
@@ -78,6 +81,19 @@ const actionChangeActiveFilm = (filmId) => {
   return {
     type: ActionType.CHANGE_ACTIVE_FILM,
     payload: filmId
+  };
+};
+
+const actionLoadFavoriteFilms = (loadedFilms) => {
+  return {
+    type: ActionType.LOAD_FAVORITE_FILMS,
+    payload: loadedFilms
+  };
+};
+
+const actionAddFilmToFavorite = () => {
+  return {
+    type: ActionType.ADD_FILM_TO_FAVORITE
   };
 };
 
@@ -140,9 +156,23 @@ const Operation = {
 
   addFilmToFavourite: (filmId, status) => (dispatch, _getState, api) => {
     return api
-      .post(`/favorite/${filmId}/${status}`, {
+      .post(`/favorite/${filmId}/${status ? 0 : 1}`, {
         film_id: filmId,
         status
+      })
+      .then(() => {
+        dispatch(actionAddFilmToFavorite());
+      })
+      .catch((error) => {
+        throw new Error(`Some trouble: ${error}`);
+      });
+  },
+
+  loadFavoriteFilms: () => (dispatch, _getState, api) => {
+    return api
+      .get(`/favorite`)
+      .then((response) => {
+        dispatch(actionLoadFavoriteFilms(response.data));
       })
       .catch((error) => {
         throw new Error(`Some trouble: ${error}`);
@@ -215,6 +245,19 @@ const reducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         films: formedFilms,
         loadedFilms: formedFilms
+      });
+
+    case ActionType.LOAD_FAVORITE_FILMS:
+      return Object.assign({}, state, {
+        favoriteFilms: formFilms(action.payload)
+      });
+
+    case ActionType.ADD_FILM_TO_FAVORITE:
+      const updatedActiveFilm = Object.assign({}, state.activeFilm);
+      updatedActiveFilm.isFavorite = !updatedActiveFilm.isFavorite;
+
+      return Object.assign({}, state, {
+        activeFilm: updatedActiveFilm
       });
 
     case ActionType.FORM_GENRES:
