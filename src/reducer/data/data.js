@@ -1,3 +1,4 @@
+/* eslint camelcase: 0*/
 const MAXIMUM_GENRES_NUMBER = 9;
 const MAXIMUM_FILMS_PER_PACK = 20;
 
@@ -10,6 +11,7 @@ const ActionType = {
   FORM_VISIBLE_FILMS: `FORM_VISIBLE_FILMS`,
   CLEAR_VISIBLE_FILMS: `CLEAR_VISIBLE_FILMS`,
   CHANGE_ACTIVE_FILM: `CHANGE_ACTIVE_FILM`,
+  LOAD_PROMO_FILM: `LOAD_PROMO_FILM`,
 };
 
 const initialState = {
@@ -45,6 +47,13 @@ const actionLoadFilms = (loadedFilms) => {
   };
 };
 
+const actionLoadPromoFilm = (promoFilm) => {
+  return {
+    type: ActionType.LOAD_PROMO_FILM,
+    payload: promoFilm
+  };
+};
+
 const actionFormGenres = (loadedFilms) => {
   return {
     type: ActionType.FORM_GENRES,
@@ -58,37 +67,39 @@ const actionFormVisibleFilms = () => {
   };
 };
 
-const actionClearVisibleFilms = () => {
+const actionClearVisibleFilms = (filmId = null) => {
   return {
-    type: ActionType.CLEAR_VISIBLE_FILMS
+    type: ActionType.FORM_VISIBLE_FILMS,
+    payload: filmId
   };
 };
 
-const actionChangeActiveFilm = (newFilmId = null) => {
+const actionChangeActiveFilm = (filmId) => {
   return {
     type: ActionType.CHANGE_ACTIVE_FILM,
-    payload: newFilmId
+    payload: filmId
   };
 };
 
-const updateVisibleFilms = (allFilms, currentVisibleFilms) => {
+const updateVisibleFilms = (films, currentVisibleFilms, filmId) => {
   let visibleFilms = currentVisibleFilms.slice();
+  let filmsPack = films.filter((film) => film.id !== filmId);
 
-  if (visibleFilms.length < allFilms.length) {
+  if (visibleFilms.length < filmsPack.length) {
     if (!visibleFilms.length) {
-      if (allFilms.length > MAXIMUM_FILMS_PER_PACK) {
-        visibleFilms = allFilms.slice(0, MAXIMUM_FILMS_PER_PACK);
+      if (filmsPack.length > MAXIMUM_FILMS_PER_PACK) {
+        visibleFilms = filmsPack.slice(0, MAXIMUM_FILMS_PER_PACK);
       } else {
-        visibleFilms = allFilms.slice(0, allFilms.length);
+        visibleFilms = filmsPack.slice(0, filmsPack.length);
       }
     } else {
-      if (visibleFilms.length + MAXIMUM_FILMS_PER_PACK >= allFilms.length) {
+      if (visibleFilms.length + MAXIMUM_FILMS_PER_PACK >= filmsPack.length) {
         visibleFilms = visibleFilms.concat(
-            allFilms.slice(visibleFilms.length, allFilms.length)
+            filmsPack.slice(visibleFilms.length, filmsPack.length)
         );
       } else {
         visibleFilms = visibleFilms.concat(
-            allFilms.slice(
+            filmsPack.slice(
                 visibleFilms.length,
                 visibleFilms.length + MAXIMUM_FILMS_PER_PACK
             )
@@ -102,13 +113,41 @@ const updateVisibleFilms = (allFilms, currentVisibleFilms) => {
 
 const Operation = {
   loadFilms: () => (dispatch, _getState, api) => {
-    return api.get(`/films`).then((response) => {
-      dispatch(actionLoadFilms(response.data));
-      dispatch(actionFormGenres(response.data));
-      dispatch(actionFormVisibleFilms());
-      dispatch(actionChangeActiveFilm());
-    });
-  }
+    return api
+      .get(`/films`)
+      .then((response) => {
+        dispatch(actionLoadFilms(response.data));
+        dispatch(actionFormGenres(response.data));
+        dispatch(actionFormVisibleFilms());
+        dispatch(actionChangeActiveFilm());
+      })
+      .catch((error) => {
+        throw new Error(`Some trouble: ${error}`);
+      });
+  },
+
+  loadPromo: () => (dispatch, _getState, api) => {
+    return api
+      .get(`/films/promo`)
+      .then((response) => {
+        dispatch(actionLoadPromoFilm([response.data]));
+        dispatch(actionChangeActiveFilm());
+      })
+      .catch((error) => {
+        throw new Error(`Some trouble: ${error}`);
+      });
+  },
+
+  addFilmToFavourite: (filmId, status) => (dispatch, _getState, api) => {
+    return api
+      .post(`/favorite/${filmId}/${status}`, {
+        film_id: filmId,
+        status
+      })
+      .catch((error) => {
+        throw new Error(`Some trouble: ${error}`);
+      });
+  },
 };
 
 const formFilms = (films) => {
@@ -134,10 +173,10 @@ const formFilms = (films) => {
   });
 };
 
-const formGenres = (films) => {
+const formGenres = (loadedFilms) => {
   const newGenres = [];
 
-  films.forEach((film) => {
+  loadedFilms.forEach((film) => {
     if (
       !newGenres.some((genre) => genre === film.genre) &&
       newGenres.length <= MAXIMUM_GENRES_NUMBER
@@ -186,7 +225,8 @@ const reducer = (state = initialState, action) => {
     case ActionType.FORM_VISIBLE_FILMS:
       const newVisibleFilms = updateVisibleFilms(
           state.films,
-          state.visibleFilms
+          state.visibleFilms,
+          action.payload
       );
 
       return Object.assign({}, state, {
@@ -198,14 +238,20 @@ const reducer = (state = initialState, action) => {
         visibleFilms: []
       });
 
+    case ActionType.LOAD_PROMO_FILM:
+      const formedPromo = formFilms(action.payload)[0];
+      return Object.assign({}, state, {
+        promoFilm: formedPromo
+      });
+
     case ActionType.CHANGE_ACTIVE_FILM:
       return Object.assign({}, state, {
         activeFilm: !action.payload
-          ? state.loadedFilms[1]
+          ? state.promoFilm
           : state.loadedFilms[
-            state.loadedFilms.findIndex((film) => {
-              return film.id === parseInt(action.payload, 0);
-            })
+              state.loadedFilms.findIndex((film) => {
+                return film.id === parseInt(action.payload, 0);
+              })
           ]
       });
   }

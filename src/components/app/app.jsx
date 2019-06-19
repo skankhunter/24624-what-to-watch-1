@@ -10,7 +10,9 @@ import {
   actionShowAllFilms,
   actionFormVisibleFilms,
   actionClearVisibleFilms,
-  actionChangeActiveFilm} from "../../reducer/data/data";
+  actionChangeActiveFilm,
+  Operation,
+} from "../../reducer/data/data";
 
 import MainScreen from '../main-screen/main-screen.jsx';
 import SignIn from "../signIn/signIn.jsx";
@@ -27,7 +29,8 @@ const App = (props) => {
     changeGenre,
     onShowMoreClick,
     activeFilm,
-    setActiveFilm
+    setActiveFilm,
+    addFilmToFavorite,
   } = props;
 
   const homeRedirect = () => {
@@ -37,6 +40,7 @@ const App = (props) => {
   };
 
   const mainProps = {
+    authorized,
     films,
     visibleFilms,
     genres,
@@ -45,17 +49,25 @@ const App = (props) => {
     onShowMoreClick,
     activeFilm,
     setActiveFilm,
+    addFilmToFavorite
   };
 
-  const favoritesProps = {authorized, homeRedirect};
+  const favoritesProps = {
+    authorized,
+    homeRedirect,
+    changeGenre,
+    setActiveFilm
+  };
 
   const filmProps = {
+    authorized,
     activeFilm,
     activeGenre,
     setActiveFilm,
     changeGenre,
     visibleFilms,
-    homeRedirect
+    homeRedirect,
+    addFilmToFavorite
   };
 
   return (
@@ -92,7 +104,8 @@ App.propTypes = {
   }),
   changeGenre: PropTypes.func.isRequired,
   onShowMoreClick: PropTypes.func.isRequired,
-  setActiveFilm: PropTypes.func.isRequired
+  setActiveFilm: PropTypes.func.isRequired,
+  addFilmToFavorite: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -125,7 +138,10 @@ const mapDispatchToProps = (dispatch) => ({
   setActiveFilm: (filmId = null) => {
     dispatch(actionChangeActiveFilm(filmId));
     dispatch(actionClearVisibleFilms());
-    dispatch(actionFormVisibleFilms());
+    dispatch(actionFormVisibleFilms(filmId));
+  },
+  addFilmToFavorite: (filmId, filmStatus) => {
+    dispatch(Operation.addFilmToFavourite(filmId, filmStatus));
   }
 });
 
