@@ -71,12 +71,18 @@ const App = (props) => {
     addFilmToFavorite
   };
 
+  const reviewProps = {
+    authorized,
+    activeFilm,
+    homeRedirect
+  };
+
   return (
     <Switch>
       <Route path="/" exact render={() => <MainScreen {...mainProps} />} />
-      <Route path="/login" render={() => <SignIn />} />
+      <Route path="/login" render={() => <SignIn homeRedirect={homeRedirect} />} />
       <Route path="/favorites" render={() => <Favorites {...favoritesProps} />} />
-      <Route path="/film/:id/review" render={() => <ReviewPage />} />
+      <Route path="/film/:id/review" render={() => <ReviewPage {...reviewProps} />} />
       <Route path="/film/:id" render={() => <MoviePage {...filmProps} />} />
     </Switch>
   );
