@@ -97,9 +97,13 @@ const actionAddFilmToFavorite = () => {
   };
 };
 
-const updateVisibleFilms = (films, currentVisibleFilms, filmId) => {
+const updateVisibleFilms = (films, currentVisibleFilms, filmId) => { // TODO: refactor logic for rendering
   let visibleFilms = currentVisibleFilms.slice();
   let filmsPack = films.filter((film) => film.id !== filmId);
+
+  if (filmId === null) {
+    return filmsPack;
+  }
 
   if (visibleFilms.length < filmsPack.length) {
     if (!visibleFilms.length) {
