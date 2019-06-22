@@ -51,10 +51,10 @@ class MovieCard extends PureComponent {
   }
 
   _handelLinkClick() {
-    const {changeGenre, setActiveFilm, genre, id} = this.props;
+    const {changeGenre, setActiveFilm, genre, id, history} = this.props;
     changeGenre(genre);
     setActiveFilm(id);
-    this.props.history.push(`/film/${id}`);
+    history.push(`/film/${id}`);
   }
 
   _handelMouseEnter() {

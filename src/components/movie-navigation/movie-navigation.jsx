@@ -23,13 +23,11 @@ class MovieNavigation extends PureComponent {
     return (
       <nav className="movie-nav movie-card__nav">
         <ul className="movie-nav__list">
-          <li
-            className={`movie-nav__item ${
-              activeItem === `overview` ? `movie-nav__item--active` : ``
-            }`}
-          >
+          <li className={`movie-nav__item ${ activeItem === `overview` ? `movie-nav__item--active` : `` }`}>
             <a
-              onClick={() => {
+              href="#"
+              onClick={(evt) => {
+                evt.preventDefault();
                 this._handelLinkClick(`overview`);
               }}
               className="movie-nav__link"
@@ -37,13 +35,11 @@ class MovieNavigation extends PureComponent {
               Overview
             </a>
           </li>
-          <li
-            className={`movie-nav__item ${
-              activeItem === `details` ? `movie-nav__item--active` : ``
-            }`}
-          >
+          <li className={`movie-nav__item ${ activeItem === `details` ? `movie-nav__item--active` : `` }`}>
             <a
-              onClick={() => {
+              href="#"
+              onClick={(evt) => {
+                evt.preventDefault();
                 this._handelLinkClick(`details`);
               }}
               className="movie-nav__link"
@@ -51,13 +47,11 @@ class MovieNavigation extends PureComponent {
               Details
             </a>
           </li>
-          <li
-            className={`movie-nav__item ${
-              activeItem === `reviews` ? `movie-nav__item--active` : ``
-            }`}
-          >
+          <li className={`movie-nav__item ${ activeItem === `reviews` ? `movie-nav__item--active` : `` }`}>
             <a
-              onClick={() => {
+              href="#"
+              onClick={(evt) => {
+                evt.preventDefault();
                 this._handelLinkClick(`reviews`);
               }}
               className="movie-nav__link"

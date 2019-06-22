@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 import {withRouter} from "react-router";
@@ -9,7 +9,7 @@ import GenreList from "../genre-list/genre-list.jsx";
 import FilmsList from "../films-list/films-list.jsx";
 import withPlayer from "../hocs/with-player/with-player.jsx";
 
-class MainScreen extends PureComponent {
+class MainScreen extends Component {
   constructor(props) {
     super(props);
 

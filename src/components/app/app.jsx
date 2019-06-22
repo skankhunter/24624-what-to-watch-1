@@ -44,7 +44,6 @@ class App extends PureComponent {
       activeGenre,
       changeGenre,
       onShowMoreClick,
-      currentUser,
       activeFilm,
       setActiveFilm,
       addFilmToFavorite
@@ -123,12 +122,6 @@ App.propTypes = {
         preview: PropTypes.string.isRequired
       })
   ).isRequired,
-  currentUser: PropTypes.shape({
-    userId: PropTypes.number.isRequired,
-    userEmail: PropTypes.string.isRequired,
-    userName: PropTypes.string.isRequired,
-    userAvatar: PropTypes.string.isRequired
-  }),
   changeGenre: PropTypes.func.isRequired,
   onShowMoreClick: PropTypes.func.isRequired,
   setActiveFilm: PropTypes.func.isRequired,
@@ -143,7 +136,6 @@ const mapStateToProps = (state) => {
     visibleFilms: state.data.visibleFilms,
     genres: state.data.genres,
     authorized: state.user.authorized,
-    currentUser: state.user.currentUser
   };
 };
 
