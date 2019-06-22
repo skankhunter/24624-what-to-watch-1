@@ -23,7 +23,7 @@ class Rating extends PureComponent {
     for (let i = 1; i < STARS_NUMBER + 1; i++) {
       let checked = parseInt(i, 0) === parseInt(activeStar, 0);
 
-      if (activeStar === null && i === STARS_NUMBER) {
+      if (activeStar === null && i === 1) {
         checked = true;
       }
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PureComponent} from 'react';
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Switch, Route} from "react-router-dom";
@@ -20,73 +20,92 @@ import Favorites from "../favorites/favorites.jsx";
 import ReviewPage from "../review-page/review-page.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
 
-const App = (props) => {
-  const {
-    authorized,
-    films,
-    visibleFilms,
-    genres,
-    activeGenre,
-    changeGenre,
-    onShowMoreClick,
-    activeFilm,
-    setActiveFilm,
-    addFilmToFavorite,
-  } = props;
+class App extends PureComponent {
+  constructor(props) {
+    super(props);
 
-  const homeRedirect = () => {
+    this.homeRedirect = this.homeRedirect.bind(this);
+  }
+
+  homeRedirect() {
+    const {setActiveFilm, changeGenre, history} = this.props;
+
     setActiveFilm();
     changeGenre();
-    props.history.push(`/`);
-  };
+    history.push(`/`);
+  }
 
-  const mainProps = {
-    authorized,
-    films,
-    visibleFilms,
-    genres,
-    activeGenre,
-    changeGenre,
-    onShowMoreClick,
-    activeFilm,
-    setActiveFilm,
-    addFilmToFavorite
-  };
+  render() {
+    const {
+      authorized,
+      films,
+      visibleFilms,
+      genres,
+      activeGenre,
+      changeGenre,
+      onShowMoreClick,
+      currentUser,
+      activeFilm,
+      setActiveFilm,
+      addFilmToFavorite
+    } = this.props;
 
-  const favoritesProps = {
-    authorized,
-    homeRedirect,
-    changeGenre,
-    setActiveFilm
-  };
+    const mainProps = {
+      authorized,
+      films,
+      visibleFilms,
+      genres,
+      activeGenre,
+      changeGenre,
+      onShowMoreClick,
+      activeFilm,
+      setActiveFilm,
+      addFilmToFavorite
+    };
 
-  const filmProps = {
-    authorized,
-    activeFilm,
-    activeGenre,
-    setActiveFilm,
-    changeGenre,
-    visibleFilms,
-    homeRedirect,
-    addFilmToFavorite
-  };
+    const favoritesProps = {
+      authorized,
+      homeRedirect: this.homeRedirect,
+      changeGenre,
+      setActiveFilm
+    };
 
-  const reviewProps = {
-    authorized,
-    activeFilm,
-    homeRedirect
-  };
+    const filmProps = {
+      authorized,
+      visibleFilms,
+      activeFilm,
+      setActiveFilm,
+      changeGenre,
+      homeRedirect: this.homeRedirect,
+      addFilmToFavorite
+    };
 
-  return (
-    <Switch>
-      <Route path="/" exact render={() => <MainScreen {...mainProps} />} />
-      <Route path="/login" render={() => <SignIn homeRedirect={homeRedirect} />} />
-      <Route path="/favorites" render={() => <Favorites {...favoritesProps} />} />
-      <Route path="/film/:id/review" render={() => <ReviewPage {...reviewProps} />} />
-      <Route path="/film/:id" render={() => <MoviePage {...filmProps} />} />
-    </Switch>
-  );
-};
+    const reviewProps = {
+      authorized,
+      activeFilm,
+      homeRedirect: this.homeRedirect
+    };
+
+    return (
+      <Switch>
+        <Route path="/" exact render={() => <MainScreen {...mainProps} />}/>
+        <Route
+          path="/login"
+          render={() => <SignIn homeRedirect={this.homeRedirect}/>}
+        />
+        <Route
+          path="/favorites"
+          render={() => <Favorites {...favoritesProps} />}
+        />
+        <Route
+          path="/film/:id/review"
+          render={() => <ReviewPage {...reviewProps} />}
+        />
+        <Route path="/film/:id" render={() => <MoviePage {...filmProps} />}/>
+      </Switch>
+    );
+  }
+}
 
 App.propTypes = {
   history: PropTypes.object,
