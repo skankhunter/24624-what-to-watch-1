@@ -30,7 +30,9 @@ class MoviePage extends PureComponent {
     togglePlayer();
   }
 
-  _handelHomeLinkClick() {
+  _handelHomeLinkClick(evt) {
+    evt.preventDefault();
+
     const {homeRedirect} = this.props;
 
     homeRedirect();
@@ -179,7 +181,11 @@ class MoviePage extends PureComponent {
 
             <header className="page-header movie-card__head">
               <div className="logo">
-                <a className="logo__link" onClick={this._handelHomeLinkClick}>
+                <a
+                  href="#"
+                  className="logo__link"
+                  onClick={this._handelHomeLinkClick}
+                >
                   <span className="logo__letter logo__letter--1">W</span>
                   <span className="logo__letter logo__letter--2">T</span>
                   <span className="logo__letter logo__letter--3">W</span>
@@ -274,7 +280,10 @@ class MoviePage extends PureComponent {
 
           <footer className="page-footer">
             <div className="logo">
-              <a onClick={this._handelHomeLinkClick} className="logo__link logo__link--light">
+              <a
+                onClick={this._handelHomeLinkClick}
+                href="#"
+                className="logo__link logo__link--light">
                 <span className="logo__letter logo__letter--1">W</span>
                 <span className="logo__letter logo__letter--2">T</span>
                 <span className="logo__letter logo__letter--3">W</span>

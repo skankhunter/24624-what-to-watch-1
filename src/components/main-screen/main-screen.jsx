@@ -127,8 +127,8 @@ class MainScreen extends PureComponent {
           <div
             className = "movie-card__bg" >
             <img
-              src="img/bg-the-grand-budapest-hotel.jpg"
-              alt="The Grand Budapest Hotel" />
+              src={activeFilm.backgroundImage}
+              alt={activeFilm.name} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
