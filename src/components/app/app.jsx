@@ -109,10 +109,45 @@ class App extends PureComponent {
 App.propTypes = {
   history: PropTypes.object,
   authorized: PropTypes.bool.isRequired,
-  films: PropTypes.array.isRequired,
+  films: PropTypes.arrayOf(
+      PropTypes.shape({
+        backgroundImage: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
+        director: PropTypes.string.isRequired,
+        genre: PropTypes.string.isRequired,
+        id: PropTypes.number.isRequired,
+        isFavorite: PropTypes.bool.isRequired,
+        name: PropTypes.string.isRequired,
+        poster: PropTypes.string.isRequired,
+        posterImage: PropTypes.string.isRequired,
+        preview: PropTypes.string.isRequired,
+        rating: PropTypes.number.isRequired,
+        released: PropTypes.number.isRequired,
+        runTime: PropTypes.number.isRequired,
+        scoresCount: PropTypes.number.isRequired,
+        starring: PropTypes.array.isRequired,
+        videoLink: PropTypes.string.isRequired
+      })
+  ).isRequired,
   genres: PropTypes.array.isRequired,
   activeGenre: PropTypes.string.isRequired,
-  activeFilm: PropTypes.object,
+  activeFilm: PropTypes.shape({
+    description: PropTypes.string,
+    director: PropTypes.string,
+    genre: PropTypes.string,
+    id: PropTypes.number,
+    isFavorite: PropTypes.bool,
+    name: PropTypes.string,
+    poster: PropTypes.string,
+    posterImage: PropTypes.string,
+    preview: PropTypes.string,
+    rating: PropTypes.number,
+    released: PropTypes.number,
+    runTime: PropTypes.number,
+    scoresCount: PropTypes.number,
+    starring: PropTypes.arrayOf(PropTypes.string),
+    videoLink: PropTypes.string
+  }).isRequired,
   visibleFilms: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
@@ -148,6 +183,7 @@ const mapDispatchToProps = (dispatch) => ({
     } else {
       dispatch(actionChangeFilms());
     }
+
     dispatch(actionClearVisibleFilms());
     dispatch(actionFormVisibleFilms());
   },

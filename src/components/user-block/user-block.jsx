@@ -53,7 +53,12 @@ const mapStateToProps = (state) => ({
 
 UserBlock.propTypes = {
   authorized: PropTypes.bool.isRequired,
-  user: PropTypes.object.isRequired,
+  user: PropTypes.shape({
+    userId: PropTypes.number,
+    userEmail: PropTypes.string,
+    userName: PropTypes.string,
+    userAvatar: PropTypes.string
+  }).isRequired,
   history: PropTypes.object.isRequired,
 };
 
