@@ -317,6 +317,7 @@ export {
   actionClearVisibleFilms,
   actionChangeActiveFilm,
   actionLoadFilms,
+  updateVisibleFilms,
   ActionType,
   Operation,
   reducer

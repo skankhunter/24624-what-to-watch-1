@@ -71,17 +71,18 @@ class Player extends PureComponent {
   }
 
   componentDidMount() {
-    this.video.current.addEventListener(`canplay`, () => {
-      this._calculateFilmDuration(this.video.current);
-    });
-
-    this.video.current.addEventListener(`timeupdate`, () => {
-      this._changeFilmProgress(
-          this.video.current,
-          this.progressBar.current,
-          this.toggler.current
-      );
-    });
+    if (this.video.current) {
+      this.video.current.addEventListener(`canplay`, () => {
+        this._calculateFilmDuration(this.video.current);
+      });
+      this.video.current.addEventListener(`timeupdate`, () => {
+        this._changeFilmProgress(
+            this.video.current,
+            this.progressBar.current,
+            this.toggler.current
+        );
+      });
+    }
   }
 
   componentWillUnmount() {

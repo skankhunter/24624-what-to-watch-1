@@ -97,7 +97,17 @@ class Reviews extends PureComponent {
 }
 
 Reviews.propTypes = {
-  reviews: PropTypes.array.isRequired,
+  reviews: PropTypes.arrayOf(
+      PropTypes.shape({
+        comment: PropTypes.string,
+        date: PropTypes.string,
+        id: PropTypes.number,
+        rating: PropTypes.number,
+        user: PropTypes.shape({
+          name: PropTypes.string
+        })
+      })
+  ).isRequired,
   loadReviews: PropTypes.func.isRequired,
   activeFilmId: PropTypes.number.isRequired,
   clearReviews: PropTypes.func.isRequired,
@@ -114,6 +124,9 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(actionClearReviews());
   }
 });
+
+export {Reviews};
+
 export default compose(
     connect(
         mapStateToProps,

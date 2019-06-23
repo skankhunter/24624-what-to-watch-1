@@ -4,70 +4,145 @@ import {App} from './app.jsx';
 import {BrowserRouter} from "react-router-dom";
 
 const mocks = {
+  authorized: false,
+  activeGenre: `All genres`,
+  addFilmToFavorite: jest.fn(),
+  changeGenre: jest.fn(),
+  onShowMoreClick: jest.fn(),
+  setActiveFilm: jest.fn(),
+  history: {
+    push: jest.fn()
+  },
+  activeFilm: {
+    description: `description`,
+    director: `Director`,
+    genre: `Action`,
+    id: 1,
+    isFavorite: false,
+    name: `Title`,
+    poster: `string`,
+    posterImage: `string`,
+    preview: `string`,
+    rating: 5,
+    released: 2018,
+    runTime: 88,
+    scoresCount: 2000,
+    starring: [`1`, `2`, `3`],
+    videoLink: `link`
+  },
+  genres: [`All genres`, `Action`, `Drama`, `Comedy`],
   films: [
     {
+      backgroundImage: `image`,
+      description: `description`,
+      director: `Director`,
+      genre: `Action`,
       id: 1,
-      name: `John Wick`,
-      genre: `Crime`,
-      poster: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-      preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
+      isFavorite: false,
+      name: `Title`,
+      poster: `string`,
+      posterImage: `string`,
+      preview: `string`,
+      rating: 5,
+      released: 2018,
+      runTime: 88,
+      scoresCount: 2000,
+      starring: [`1`, `2`, `3`],
+      videoLink: `link`
     },
     {
+      backgroundImage: `image`,
+      description: `description2`,
+      director: `Director2`,
+      genre: `Drama`,
       id: 2,
-      name: `Killers Bodyguard`,
-      genre: `Comedies`,
-      poster: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-      preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
+      isFavorite: true,
+      name: `Title2`,
+      poster: `string`,
+      posterImage: `string`,
+      preview: `string`,
+      rating: 5,
+      released: 2019,
+      runTime: 12345,
+      scoresCount: 2000,
+      starring: [`2`, `3`, `4`],
+      videoLink: `link`
     },
     {
+      backgroundImage: `image`,
+      description: `description3`,
+      director: `Director3`,
+      genre: `Comedy`,
       id: 3,
-      name: `Star Wars`,
-      genre: `Sci-Fi`,
-      poster: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-      preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
-    },
-    {
-      id: 4,
-      name: `The Grand Budapest Hotel`,
-      genre: `Dramas`,
-      poster: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-      preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
-    },
-    {
-      id: 5,
-      name: `The Cabin in the Woods`,
-      genre: `Thrillers`,
-      poster: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-      preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
+      isFavorite: false,
+      name: `Title3`,
+      poster: `string`,
+      posterImage: `string`,
+      preview: `string`,
+      rating: 10,
+      released: 1998,
+      runTime: 123,
+      scoresCount: 1,
+      starring: [`4`, `9`, `10`],
+      videoLink: `link`
     }
   ],
-  genres: [
-    `All genres`,
-    `Comedies`,
-    `Crime`,
-    `Documentary`,
-    `Dramas`,
-    `Horror`,
-    `Kids & Family`,
-    `Romance`,
-    `Sci-Fi`,
-    `Thrillers`
-  ],
-  activeGenre: `All genres`,
-  activeFilm: {
-    id: 5,
-    name: `The Cabin in the Woods`,
-    genre: `Thrillers`,
-    poster: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-    preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
-  },
-  currentUser: {
-    userId: 1,
-    userEmail: `ema@ema.ru`,
-    userName: `name`,
-    userAvatar: `ava`
-  },
-  functionHandler: jest.fn()
+  visibleFilms: [
+    {
+      backgroundImage: `color`,
+      description: `description`,
+      director: `Director`,
+      genre: `Action`,
+      id: 1,
+      isFavorite: false,
+      name: `Title`,
+      poster: `string`,
+      posterImage: `string`,
+      preview: `string`,
+      rating: 5,
+      released: 2018,
+      runTime: 88,
+      scoresCount: 2000,
+      starring: [`1`, `2`, `3`],
+      videoLink: `link`
+    },
+    {
+      backgroundImage: `color`,
+      description: `description2`,
+      director: `Director2`,
+      genre: `Drama`,
+      id: 2,
+      isFavorite: true,
+      name: `Title2`,
+      poster: `string`,
+      posterImage: `string`,
+      preview: `string`,
+      rating: 5,
+      released: 2019,
+      runTime: 12345,
+      scoresCount: 2000,
+      starring: [`2`, `3`, `4`],
+      videoLink: `link`
+    },
+    {
+      backgroundImage: `color`,
+      description: `description3`,
+      director: `Director3`,
+      genre: `Comedy`,
+      id: 3,
+      isFavorite: false,
+      name: `Title3`,
+      poster: `string`,
+      posterImage: `string`,
+      preview: `string`,
+      rating: 10,
+      released: 1998,
+      runTime: 123,
+      scoresCount: 1,
+      starring: [`4`, `9`, `10`],
+      videoLink: `link`
+    }
+  ]
 };
 
 describe(`App:`, () => {
@@ -75,19 +150,7 @@ describe(`App:`, () => {
     const tree = renderer
       .create(
           <BrowserRouter>
-            <App
-              authorized={false}
-              films={mocks.films}
-              genres={mocks.genres}
-              currentUser={mocks.currentUser}
-              activeFilm={mocks.activeFilm}
-              setActiveFilm={mocks.functionHandler}
-              changeGenre={mocks.functionHandler}
-              onShowMoreClick={mocks.functionHandler}
-              visibleFilms={mocks.films}
-              activeGenre={mocks.activeGenre}
-              onGenreClick={mocks.functionHandler}
-            />
+            <App {...mocks} />
           </BrowserRouter>,
           {
             createNodeMock: () => {

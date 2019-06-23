@@ -8,6 +8,9 @@ import {
   actionShowAllFilms,
   actionLoadFilms,
   actionFormGenres,
+  actionFormVisibleFilms,
+  actionClearVisibleFilms,
+  actionChangeActiveFilm,
   ActionType,
   Operation,
   reducer
@@ -205,17 +208,52 @@ describe(`Action creators work correctly`, () => {
       payload: mocks.loadedFilms
     });
   });
+
+  it(`Action creator for forming visible films retuns correct action`, () => {
+    expect(actionFormVisibleFilms(2)).toEqual({
+      type: ActionType.FORM_VISIBLE_FILMS,
+      payload: 2
+    });
+  });
+
+  it(`Action creator for forming visible films retuns payload with given value`, () => {
+    expect(actionFormVisibleFilms(2)).toEqual({
+      type: ActionType.FORM_VISIBLE_FILMS,
+      payload: 2
+    });
+  });
+
+  it(`Action creator for clearing visible films retuns correct action`, () => {
+    expect(actionClearVisibleFilms()).toEqual({
+      type: ActionType.CLEAR_VISIBLE_FILMS
+    });
+  });
+
+  it(`Action creator for changing active films retuns correct action`, () => {
+    expect(actionChangeActiveFilm(1)).toEqual({
+      type: ActionType.CHANGE_ACTIVE_FILM,
+      payload: 1
+    });
+  });
+
+  it(`Action creator for changing active films retuns payload with given value`, () => {
+    expect(actionChangeActiveFilm(3)).toEqual({
+      type: ActionType.CHANGE_ACTIVE_FILM,
+      payload: 3
+    });
+  });
 });
 
 describe(`Reducer works correctly`, () => {
   it(`Reducer without additional parameters should return initial state`, () => {
     expect(reducer(undefined, {})).toEqual({
       activeGenre: `All genres`,
-      activeFilm: {},
-      visibleFilms: [],
       films: [],
       loadedFilms: [],
-      genres: []
+      visibleFilms: [],
+      genres: [],
+      activeFilm: {},
+      favoriteFilms: []
     });
   });
 
@@ -226,7 +264,10 @@ describe(`Reducer works correctly`, () => {
               activeGenre: `All genres`,
               films: [],
               loadedFilms: [],
-              genres: []
+              visibleFilms: [],
+              genres: [],
+              activeFilm: {},
+              favoriteFilms: []
             },
             {
               type: ActionType.CHANGE_GENRE,
@@ -237,7 +278,10 @@ describe(`Reducer works correctly`, () => {
       activeGenre: `Test Genre`,
       films: [],
       loadedFilms: [],
-      genres: []
+      visibleFilms: [],
+      genres: [],
+      activeFilm: {},
+      favoriteFilms: []
     });
   });
 
@@ -248,7 +292,10 @@ describe(`Reducer works correctly`, () => {
               activeGenre: `Action`,
               films: mocks.films,
               loadedFilms: mocks.films,
-              genres: []
+              visibleFilms: [],
+              genres: [],
+              activeFilm: {},
+              favoriteFilms: []
             },
             {
               type: ActionType.CHANGE_FILMS
@@ -256,8 +303,6 @@ describe(`Reducer works correctly`, () => {
         )
     ).toEqual({
       activeGenre: `Action`,
-      loadedFilms: mocks.films,
-      genres: [],
       films: [
         {
           backgroundColor: `#92918B`,
@@ -278,7 +323,12 @@ describe(`Reducer works correctly`, () => {
           starring: [(`Leonardo DiCaprio`, `Tom Hardy`, `Will Poulter`)],
           videoLink: `http://media.xiph.org/mango/tears_of_steel_1080p.webm`
         }
-      ]
+      ],
+      loadedFilms: mocks.films,
+      visibleFilms: [],
+      genres: [],
+      activeFilm: {},
+      favoriteFilms: []
     });
   });
 
@@ -287,8 +337,6 @@ describe(`Reducer works correctly`, () => {
         reducer(
             {
               activeGenre: `Action`,
-              loadedFilms: mocks.films,
-              genres: [],
               films: [
                 {
                   backgroundColor: `#92918B`,
@@ -309,7 +357,12 @@ describe(`Reducer works correctly`, () => {
                   starring: [(`Leonardo DiCaprio`, `Tom Hardy`, `Will Poulter`)],
                   videoLink: `http://media.xiph.org/mango/tears_of_steel_1080p.webm`
                 }
-              ]
+              ],
+              loadedFilms: mocks.films,
+              visibleFilms: [],
+              genres: [],
+              activeFilm: {},
+              favoriteFilms: []
             },
             {
               type: `SHOW_ALL`
@@ -319,7 +372,150 @@ describe(`Reducer works correctly`, () => {
       activeGenre: `Action`,
       films: mocks.films,
       loadedFilms: mocks.films,
-      genres: []
+      visibleFilms: [],
+      genres: [],
+      activeFilm: {},
+      favoriteFilms: []
+    });
+  });
+
+  it(`Reducer should should form visible films`, () => {
+    expect(
+        reducer(
+            {
+              activeGenre: `Action`,
+              films: mocks.films,
+              loadedFilms: mocks.films,
+              visibleFilms: [],
+              genres: [],
+              activeFilm: {},
+              favoriteFilms: []
+            },
+            {
+              type: `FORM_VISIBLE_FILMS`,
+              payload: 1
+            }
+        )
+    ).toEqual({
+      activeGenre: `Action`,
+      films: mocks.films,
+      loadedFilms: mocks.films,
+      visibleFilms: [
+        {
+          backgroundColor: `#92918B`,
+          backgroundImage: `https://es31-server.appspot.com/wtw/static/film/background/Revenant.jpg`,
+          description: `A frontiersman on a fur trading expedition in the 1820s fights for survival after being mauled by a bear and left for dead by members of his own hunting team.`,
+          director: `Alejandro G. Iñárritu`,
+          genre: `Drama`,
+          id: 2,
+          isFavorite: true,
+          name: `The Revenant`,
+          posterImage: `https://es31-server.appspot.com/wtw/static/film/poster/Revenant.jpg`,
+          poster: `https://es31-server.appspot.com/wtw/static/film/preview/revenant.jpg`,
+          preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+          rating: 8,
+          released: 202115,
+          runTime: 156,
+          scoresCount: 618498,
+          starring: [(`Leonardo DiCaprio`, `Tom Hardy`, `Will Poulter`)],
+          videoLink: `http://media.xiph.org/mango/tears_of_steel_1080p.webm`
+        },
+        {
+          backgroundColor: `#92918B`,
+          backgroundImage: `https://es31-server.appspot.com/wtw/static/film/background/Revenant.jpg`,
+          description: `A frontiersman on a fur trading expedition in the 1820s fights for survival after being mauled by a bear and left for dead by members of his own hunting team.`,
+          director: `Alejandro G. Iñárritu`,
+          genre: `Comedy`,
+          id: 3,
+          isFavorite: false,
+          name: `The Revenasdasant`,
+          posterImage: `https://es31-server.appspot.com/wtw/static/film/poster/Revenant.jpg`,
+          poster: `https://es31-server.apasdapspot.com/wtw/static/film/preview/revenant.jpg`,
+          preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+          rating: 8,
+          released: 2015,
+          runTime: 156,
+          scoresCount: 618498,
+          starring: [(`Leonardo DiasdCaprio`, `Tomasdas Hardy`)],
+          videoLink: `http://media.xiph.org/mango/tears_of_steel_1080p.webm`
+        }
+      ],
+      genres: [],
+      activeFilm: {},
+      favoriteFilms: []
+    });
+  });
+
+  it(`Reducer should should clear visible films`, () => {
+    expect(
+        reducer(
+            {
+              activeGenre: `Action`,
+              films: mocks.films,
+              loadedFilms: mocks.films,
+              visibleFilms: mocks.films,
+              genres: [],
+              activeFilm: {},
+              favoriteFilms: []
+            },
+            {
+              type: `CLEAR_VISIBLE_FILMS`
+            }
+        )
+    ).toEqual({
+      activeGenre: `Action`,
+      films: mocks.films,
+      loadedFilms: mocks.films,
+      visibleFilms: [],
+      genres: [],
+      activeFilm: {},
+      favoriteFilms: []
+    });
+  });
+
+  it(`Reducer should should change active film`, () => {
+    expect(
+        reducer(
+            {
+              activeGenre: `Action`,
+              films: mocks.films,
+              loadedFilms: mocks.films,
+              visibleFilms: [],
+              genres: [],
+              activeFilm: {},
+              favoriteFilms: []
+            },
+            {
+              type: `CHANGE_ACTIVE_FILM`,
+              payload: 2
+            }
+        )
+    ).toEqual({
+      activeGenre: `Action`,
+      films: mocks.films,
+      loadedFilms: mocks.films,
+      visibleFilms: [],
+      genres: [],
+      activeFilm: {
+        backgroundColor: `#92918B`,
+        backgroundImage: `https://es31-server.appspot.com/wtw/static/film/background/Revenant.jpg`,
+        description: `A frontiersman on a fur trading expedition in the 1820s fights for survival after being mauled by a bear and left for dead by members of his own hunting team.`,
+        director: `Alejandro G. Iñárritu`,
+        genre: `Drama`,
+        id: 2,
+        isFavorite: true,
+        name: `The Revenant`,
+        posterImage: `https://es31-server.appspot.com/wtw/static/film/poster/Revenant.jpg`,
+        poster: `https://es31-server.appspot.com/wtw/static/film/preview/revenant.jpg`,
+        preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+        rating: 8,
+        released: 202115,
+        runTime: 156,
+        scoresCount: 618498,
+        starring: [(`Leonardo DiCaprio`, `Tom Hardy`, `Will Poulter`)],
+        videoLink: `http://media.xiph.org/mango/tears_of_steel_1080p.webm`
+      },
+      favoriteFilms: []
     });
   });
 
@@ -332,7 +528,33 @@ describe(`Reducer works correctly`, () => {
     apiMock.onGet(`/films`).reply(200, [{fake: true}]);
 
     return filmsLoader(dispatch, jest.fn(), api).then(() => {
-      expect(dispatch).toHaveBeenCalledTimes(4);
+      expect(dispatch).toHaveBeenCalledTimes(3);
+    });
+  });
+
+  it(`Should make a correct API call to /favorite`, function () {
+    const dispatch = jest.fn();
+    const api = createAPI(dispatch);
+    const apiMock = new MockAdapter(api);
+    const filmsLoader = Operation.loadFavoriteFilms();
+
+    apiMock.onGet(`/favorite`).reply(200, [{fake: true}]);
+
+    return filmsLoader(dispatch, jest.fn(), api).then(() => {
+      expect(dispatch).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  it(`Should make a correct API call to /films/promo`, function () {
+    const dispatch = jest.fn();
+    const api = createAPI(dispatch);
+    const apiMock = new MockAdapter(api);
+    const filmsLoader = Operation.loadPromo();
+
+    apiMock.onGet(`/films/promo`).reply(200, [{fake: true}]);
+
+    return filmsLoader(dispatch, jest.fn(), api).then(() => {
+      expect(dispatch).toHaveBeenCalledTimes(2);
     });
   });
 });

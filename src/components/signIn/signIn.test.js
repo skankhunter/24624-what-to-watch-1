@@ -1,30 +1,25 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {BrowserRouter} from "react-router-dom";
+
 import {SignIn} from "./signIn.jsx";
 
 const mocks = {
-  functionHandler: jest.fn()
+  homeRedirect: jest.fn(),
+  changeAuthorizationStatus: jest.fn(),
+  validateMail: jest.fn(),
+  validatePassword: jest.fn(),
+  emailError: false,
+  passwordError: false,
+  authorizationFailed: false,
+  authorized: true,
+  history: {
+    push: jest.fn()
+  }
 };
 
 describe(`SignIn:`, () => {
   it(`Correctly renders after relaunch`, () => {
-    const tree = renderer
-      .create(
-          <BrowserRouter>
-            <SignIn
-              authorized={false}
-              history={{push: mocks.functionHandler}}
-              changeAuthorizationStatus={mocks.functionHandler}
-              validateMail={mocks.functionHandler}
-              validatePassword={mocks.functionHandler}
-              emailError={false}
-              passwordError={false}
-              authorizationFailed={false}
-            />
-          </BrowserRouter>
-      )
-      .toJSON();
+    const tree = renderer.create(<SignIn {...mocks} />).toJSON();
 
     expect(tree).toMatchSnapshot();
   });
