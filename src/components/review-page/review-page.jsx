@@ -298,7 +298,7 @@ ReviewPage.propTypes = {
   match: PropTypes.object.isRequired,
   activeFilm: PropTypes.object.isRequired,
   changeActiveItem: PropTypes.func.isRequired,
-  activeItem: PropTypes.string.isRequired
+  activeItem: PropTypes.string
 };
 
 const mapStateToProps = (state) => ({

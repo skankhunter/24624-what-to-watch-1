@@ -13,6 +13,11 @@ import MovieNavigation from "../movie-navigation/movie-navigation.jsx";
 import withPlayer from "../hocs/with-player/with-player.jsx";
 
 const MAXIMUM_RECOMMENDED_FILMS_NUMBER = 4;
+const Tab = {
+  OVERVIEW: `overview`,
+  DETAILS: `details`,
+  REVIEWS: `reviews`
+};
 
 class MoviePage extends PureComponent {
   constructor(props) {
@@ -247,7 +252,7 @@ class MoviePage extends PureComponent {
               </div>
 
               <div className="movie-card__desc">
-                <MovieNavigation activeItem={`overview`} />
+                <MovieNavigation />
 
                 <Route
                   path={match.url}
@@ -255,17 +260,15 @@ class MoviePage extends PureComponent {
                   render={() => <Overview activeFilm={activeFilm} />}
                 />
                 <Route
-                  path={match.url + `/overview`}
+                  path={match.url + `/${Tab.OVERVIEW}`}
                   render={() => <Overview activeFilm={activeFilm} />}
                 />
-
                 <Route
-                  path={match.url + `/details`}
+                  path={match.url + `/${Tab.DETAILS}`}
                   render={() => <Details activeFilm={activeFilm} />}
                 />
-
                 <Route
-                  path={`${match.url}/reviews`}
+                  path={`${match.url}/${Tab.REVIEWS}`}
                   exact
                   render={() => <Reviews activeFilmId={activeFilm.id} />}
                 />

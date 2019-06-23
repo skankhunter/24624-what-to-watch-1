@@ -5,8 +5,6 @@ import {BrowserRouter} from "react-router-dom";
 import MovieNavigation from "./movie-navigation.jsx";
 
 const mocks = {
-  activeItem: `overview`,
-  changeActiveItem: jest.fn(),
   history: {
     push: jest.fn()
   }
