@@ -68,7 +68,7 @@ class Rating extends PureComponent {
 
 Rating.propTypes = {
   onStarClick: PropTypes.func.isRequired,
-  activeStar: PropTypes.object.isRequired,
+  activeStar: PropTypes.string,
 };
 
 export default Rating;

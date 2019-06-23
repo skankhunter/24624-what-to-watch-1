@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
+import React, {Component} from "react";
+import PropTypes from "prop-types";
 
 import {withRouter} from "react-router";
 import {compose} from "redux";
@@ -263,6 +263,8 @@ MainScreen.propTypes = {
   togglePlayer: PropTypes.func.isRequired,
   addFilmToFavorite: PropTypes.func.isRequired,
 };
+
+export {MainScreen};
 
 export default compose(
     withPlayer,

@@ -1,5 +1,4 @@
 import React, {PureComponent} from "react";
-import {string, func} from "prop-types";
 
 const withFilmDuration = (WrappedComponent) => {
   class WithFilmDuration extends PureComponent {

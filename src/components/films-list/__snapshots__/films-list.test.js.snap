@@ -1,11 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`The application is displayed correctly. FilmsList screen correctly renders after launch 1`] = `
+exports[`MoviesList: Correctly renders after relaunch 1`] = `
 <div
   className="catalog__movies-list"
 >
   <article
     className="small-movie-card catalog__movies-card"
+    onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
   >
@@ -15,8 +16,8 @@ exports[`The application is displayed correctly. FilmsList screen correctly rend
       <video
         height="175"
         muted={true}
-        poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-        src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
+        poster="string"
+        src="string"
         width="280"
       />
     </div>
@@ -25,6 +26,7 @@ exports[`The application is displayed correctly. FilmsList screen correctly rend
     >
       <a
         className="small-movie-card__link"
+        href="#"
         onClick={[Function]}
         params={
           Object {
@@ -32,12 +34,13 @@ exports[`The application is displayed correctly. FilmsList screen correctly rend
           }
         }
       >
-        John Wick
+        Title
       </a>
     </h3>
   </article>
   <article
     className="small-movie-card catalog__movies-card"
+    onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
   >
@@ -47,8 +50,8 @@ exports[`The application is displayed correctly. FilmsList screen correctly rend
       <video
         height="175"
         muted={true}
-        poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-        src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
+        poster="string"
+        src="string"
         width="280"
       />
     </div>
@@ -57,6 +60,7 @@ exports[`The application is displayed correctly. FilmsList screen correctly rend
     >
       <a
         className="small-movie-card__link"
+        href="#"
         onClick={[Function]}
         params={
           Object {
@@ -64,12 +68,13 @@ exports[`The application is displayed correctly. FilmsList screen correctly rend
           }
         }
       >
-        Killers Bodyguard
+        Title2
       </a>
     </h3>
   </article>
   <article
     className="small-movie-card catalog__movies-card"
+    onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
   >
@@ -79,8 +84,8 @@ exports[`The application is displayed correctly. FilmsList screen correctly rend
       <video
         height="175"
         muted={true}
-        poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-        src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
+        poster="string"
+        src="string"
         width="280"
       />
     </div>
@@ -89,6 +94,7 @@ exports[`The application is displayed correctly. FilmsList screen correctly rend
     >
       <a
         className="small-movie-card__link"
+        href="#"
         onClick={[Function]}
         params={
           Object {
@@ -96,71 +102,7 @@ exports[`The application is displayed correctly. FilmsList screen correctly rend
           }
         }
       >
-        Star Wars
-      </a>
-    </h3>
-  </article>
-  <article
-    className="small-movie-card catalog__movies-card"
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-  >
-    <div
-      className="small-movie-card__image"
-    >
-      <video
-        height="175"
-        muted={true}
-        poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-        src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
-        width="280"
-      />
-    </div>
-    <h3
-      className="small-movie-card__title"
-    >
-      <a
-        className="small-movie-card__link"
-        onClick={[Function]}
-        params={
-          Object {
-            "id": 4,
-          }
-        }
-      >
-        The Grand Budapest Hotel
-      </a>
-    </h3>
-  </article>
-  <article
-    className="small-movie-card catalog__movies-card"
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-  >
-    <div
-      className="small-movie-card__image"
-    >
-      <video
-        height="175"
-        muted={true}
-        poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-        src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
-        width="280"
-      />
-    </div>
-    <h3
-      className="small-movie-card__title"
-    >
-      <a
-        className="small-movie-card__link"
-        onClick={[Function]}
-        params={
-          Object {
-            "id": 5,
-          }
-        }
-      >
-        The Cabin in the Woods
+        Title3
       </a>
     </h3>
   </article>

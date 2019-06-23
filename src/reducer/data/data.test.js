@@ -225,7 +225,8 @@ describe(`Action creators work correctly`, () => {
 
   it(`Action creator for clearing visible films retuns correct action`, () => {
     expect(actionClearVisibleFilms()).toEqual({
-      type: ActionType.CLEAR_VISIBLE_FILMS
+      type: ActionType.CLEAR_VISIBLE_FILMS,
+      payload: null
     });
   });
 
@@ -528,7 +529,7 @@ describe(`Reducer works correctly`, () => {
     apiMock.onGet(`/films`).reply(200, [{fake: true}]);
 
     return filmsLoader(dispatch, jest.fn(), api).then(() => {
-      expect(dispatch).toHaveBeenCalledTimes(3);
+      expect(dispatch).toHaveBeenCalledTimes(4);
     });
   });
 

@@ -64,15 +64,16 @@ const actionFormGenres = (loadedFilms) => {
   };
 };
 
-const actionFormVisibleFilms = () => {
+const actionFormVisibleFilms = (filmId = null) => {
   return {
-    type: ActionType.FORM_VISIBLE_FILMS
+    type: ActionType.FORM_VISIBLE_FILMS,
+    payload: filmId
   };
 };
 
 const actionClearVisibleFilms = (filmId = null) => {
   return {
-    type: ActionType.FORM_VISIBLE_FILMS,
+    type: ActionType.CLEAR_VISIBLE_FILMS,
     payload: filmId
   };
 };

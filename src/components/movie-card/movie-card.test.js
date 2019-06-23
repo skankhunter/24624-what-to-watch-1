@@ -1,8 +1,10 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import MovieCard from './movie-card.jsx';
+
+import {MovieCard} from './movie-card.jsx';
 
 const mocks = {
+  id: 1,
   title: `title`,
   poster: `poster`,
   preview: `prev`,
@@ -14,7 +16,7 @@ const mocks = {
   }
 };
 
-describe(`SmallMovieCard:`, () => {
+describe(`MovieCard:`, () => {
   it(`Correctly renders after relaunch`, () => {
     const tree = renderer.create(<MovieCard {...mocks} />).toJSON();
 
