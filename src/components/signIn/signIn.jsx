@@ -13,11 +13,6 @@ class SignIn extends PureComponent {
     this._emailRef = React.createRef();
     this._passwordRef = React.createRef();
 
-    this.state = {
-      emailError: false,
-      passwordError: false
-    };
-
     this._handelFormSubmit = this._handelFormSubmit.bind(this);
     this._setMessage = this._setMessage.bind(this);
     this._handelHomeLinkClick = this._handelHomeLinkClick.bind(this);
