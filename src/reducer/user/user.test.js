@@ -1,11 +1,11 @@
 import MockAdapter from "axios-mock-adapter";
 import {createAPI} from "../../api";
 import {
-  actionChangeAuthorizationProcessStatus,
-  actionChangeAuthorizationStatus,
-  actionSetUserInfo,
   ActionType,
-  Operation,
+  actionChangeAuthorizationStatus,
+  actionChangeAuthorizationProcessStatus,
+  actionSetUserInfo,
+  operationAuthorizeUser,
   reducer
 } from "./user.js";
 /* eslint camelcase: 0*/
@@ -140,12 +140,12 @@ describe(`Reducer works correctly`, () => {
     const dispatch = jest.fn();
     const api = createAPI(dispatch);
     const apiMock = new MockAdapter(api);
-    const filmsLoader = Operation.authorizeUser();
+    const filmsLoader = operationAuthorizeUser();
 
     apiMock.onPost(`/login`).reply(200, [{fake: true}]);
 
     return filmsLoader(dispatch, jest.fn(), api).then(() => {
-      expect(dispatch).toHaveBeenCalledTimes(3);
+      expect(dispatch).toHaveBeenCalledTimes(2);
     });
   });
 });

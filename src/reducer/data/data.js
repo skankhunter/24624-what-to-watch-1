@@ -2,6 +2,16 @@
 const MAXIMUM_GENRES_NUMBER = 9;
 const MAXIMUM_FILMS_PER_PACK = 20;
 
+const initialState = {
+  activeGenre: `All genres`,
+  films: [],
+  loadedFilms: [],
+  visibleFilms: [],
+  genres: [],
+  activeFilm: {},
+  favoriteFilms: []
+};
+
 const ActionType = {
   CHANGE_GENRE: `CHANGE_GENRE`,
   CHANGE_FILMS: `CHANGE_FILMS`,
@@ -14,16 +24,6 @@ const ActionType = {
   LOAD_PROMO_FILM: `LOAD_PROMO_FILM`,
   ADD_FILM_TO_FAVORITE: `ADD_FILM_TO_FAVORITE`,
   LOAD_FAVORITE_FILMS: `LOAD_FAVORITE_FILMS`
-};
-
-const initialState = {
-  activeGenre: `All genres`,
-  films: [],
-  loadedFilms: [],
-  visibleFilms: [],
-  genres: [],
-  activeFilm: {},
-  favoriteFilms: []
 };
 
 const actionChangeGenre = (newGenre = `All genres`) => ({
@@ -57,6 +57,13 @@ const actionLoadPromoFilm = (promoFilm) => {
   };
 };
 
+const actionLoadFavoriteFilms = (loadedFilms) => {
+  return {
+    type: ActionType.LOAD_FAVORITE_FILMS,
+    payload: loadedFilms
+  };
+};
+
 const actionFormGenres = (loadedFilms) => {
   return {
     type: ActionType.FORM_GENRES,
@@ -64,16 +71,16 @@ const actionFormGenres = (loadedFilms) => {
   };
 };
 
-const actionFormVisibleFilms = () => {
-  return {
-    type: ActionType.FORM_VISIBLE_FILMS
-  };
-};
-
-const actionClearVisibleFilms = (filmId = null) => {
+const actionFormVisibleFilms = (filmId = null) => {
   return {
     type: ActionType.FORM_VISIBLE_FILMS,
     payload: filmId
+  };
+};
+
+const actionClearVisibleFilms = () => {
+  return {
+    type: ActionType.CLEAR_VISIBLE_FILMS
   };
 };
 
@@ -81,13 +88,6 @@ const actionChangeActiveFilm = (filmId) => {
   return {
     type: ActionType.CHANGE_ACTIVE_FILM,
     payload: filmId
-  };
-};
-
-const actionLoadFavoriteFilms = (loadedFilms) => {
-  return {
-    type: ActionType.LOAD_FAVORITE_FILMS,
-    payload: loadedFilms
   };
 };
 
@@ -127,59 +127,6 @@ const updateVisibleFilms = (films, currentVisibleFilms, filmId) => {
   return visibleFilms;
 };
 
-const Operation = {
-  loadFilms: () => (dispatch, _getState, api) => {
-    return api
-      .get(`/films`)
-      .then((response) => {
-        dispatch(actionLoadFilms(response.data));
-        dispatch(actionFormGenres(response.data));
-        dispatch(actionFormVisibleFilms());
-        dispatch(actionChangeActiveFilm());
-      })
-      .catch((error) => {
-        throw new Error(`Some trouble: ${error}`);
-      });
-  },
-
-  loadPromo: () => (dispatch, _getState, api) => {
-    return api
-      .get(`/films/promo`)
-      .then((response) => {
-        dispatch(actionLoadPromoFilm([response.data]));
-        dispatch(actionChangeActiveFilm());
-      })
-      .catch((error) => {
-        throw new Error(`Some trouble: ${error}`);
-      });
-  },
-
-  addFilmToFavourite: (filmId, status) => (dispatch, _getState, api) => {
-    return api
-      .post(`/favorite/${filmId}/${status ? 0 : 1}`, {
-        film_id: filmId,
-        status
-      })
-      .then(() => {
-        dispatch(actionAddFilmToFavorite());
-      })
-      .catch((error) => {
-        throw new Error(`Some trouble: ${error}`);
-      });
-  },
-
-  loadFavoriteFilms: () => (dispatch, _getState, api) => {
-    return api
-      .get(`/favorite`)
-      .then((response) => {
-        dispatch(actionLoadFavoriteFilms(response.data));
-      })
-      .catch((error) => {
-        throw new Error(`Some trouble: ${error}`);
-      });
-  },
-};
-
 const formFilms = (films) => {
   return films.map((film) => {
     return {
@@ -189,8 +136,8 @@ const formFilms = (films) => {
       director: film.director,
       genre: film.genre,
       id: film.id,
-      name: film.name,
       isFavorite: film.is_favorite,
+      name: film.name,
       poster: film.preview_image,
       posterImage: film.poster_image,
       preview: film.preview_video_link,
@@ -199,7 +146,8 @@ const formFilms = (films) => {
       runTime: film.run_time,
       scoresCount: film.scores_count,
       starring: film.starring,
-      videoLink: film.video_link};
+      videoLink: film.video_link
+    };
   });
 };
 
@@ -221,6 +169,60 @@ const formGenres = (loadedFilms) => {
   return newGenres;
 };
 
+const operationLoadFilms = () => (dispatch, _getState, api) => {
+  return api
+    .get(`/films`)
+    .then((response) => {
+      dispatch(actionLoadFilms(response.data));
+      dispatch(actionFormGenres(response.data));
+      dispatch(actionFormVisibleFilms());
+    })
+    .catch((error) => {
+      throw new Error(`Can't load films: ${error}`);
+    });
+};
+
+const operationLoadFavoriteFilms = () => (dispatch, _getState, api) => {
+  return api
+    .get(`/favorite`)
+    .then((response) => {
+      dispatch(actionLoadFavoriteFilms(response.data));
+    })
+    .catch((error) => {
+      throw new Error(`Can't load favorites films: ${error}`);
+    });
+};
+
+const operationLoadPromo = () => (dispatch, _getState, api) => {
+  return api
+    .get(`/films/promo`)
+    .then((response) => {
+      dispatch(actionLoadPromoFilm([response.data]));
+      dispatch(actionChangeActiveFilm());
+    })
+    .catch((error) => {
+      throw new Error(`Can't load promo film: ${error}`);
+    });
+};
+
+const operationAddFilmToFavorite = (filmId, status) => (
+    dispatch,
+    _getState,
+    api
+) => {
+  return api
+    .post(`/favorite/${filmId}/${status ? 0 : 1}`, {
+      film_id: filmId,
+      status
+    })
+    .then(() => {
+      dispatch(actionAddFilmToFavorite());
+    })
+    .catch((error) => {
+      throw new Error(`Can't add film to favorite: ${error}`);
+    });
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.CHANGE_GENRE:
@@ -240,24 +242,15 @@ const reducer = (state = initialState, action) => {
         films: state.loadedFilms
       });
 
-    case ActionType.LOAD_FILMS:
-      const formedFilms = formFilms(action.payload);
-      return Object.assign({}, state, {
-        films: formedFilms,
-        loadedFilms: formedFilms
-      });
-
     case ActionType.LOAD_FAVORITE_FILMS:
       return Object.assign({}, state, {
         favoriteFilms: formFilms(action.payload)
       });
 
-    case ActionType.ADD_FILM_TO_FAVORITE:
-      const updatedActiveFilm = Object.assign({}, state.activeFilm);
-      updatedActiveFilm.isFavorite = !updatedActiveFilm.isFavorite;
-
+    case ActionType.LOAD_FILMS:
       return Object.assign({}, state, {
-        activeFilm: updatedActiveFilm
+        films: formFilms(action.payload),
+        loadedFilms: formFilms(action.payload)
       });
 
     case ActionType.FORM_GENRES:
@@ -292,10 +285,18 @@ const reducer = (state = initialState, action) => {
         activeFilm: !action.payload
           ? state.promoFilm
           : state.loadedFilms[
-              state.loadedFilms.findIndex((film) => {
-                return film.id === parseInt(action.payload, 0);
-              })
+            state.loadedFilms.findIndex((film) => {
+              return film.id === parseInt(action.payload, 10);
+            })
           ]
+      });
+
+    case ActionType.ADD_FILM_TO_FAVORITE:
+      const updatedActiveFilm = Object.assign({}, state.activeFilm);
+      updatedActiveFilm.isFavorite = !updatedActiveFilm.isFavorite;
+
+      return Object.assign({}, state, {
+        activeFilm: updatedActiveFilm
       });
   }
 
@@ -305,15 +306,22 @@ const reducer = (state = initialState, action) => {
 export {
   formFilms,
   formGenres,
+  updateVisibleFilms,
+  ActionType,
   actionChangeGenre,
   actionChangeFilms,
   actionShowAllFilms,
+  actionLoadFilms,
+  actionLoadPromoFilm,
+  actionLoadFavoriteFilms,
   actionFormGenres,
   actionFormVisibleFilms,
   actionClearVisibleFilms,
   actionChangeActiveFilm,
-  actionLoadFilms,
-  ActionType,
-  Operation,
+  actionAddFilmToFavorite,
+  operationLoadFilms,
+  operationLoadFavoriteFilms,
+  operationLoadPromo,
+  operationAddFilmToFavorite,
   reducer
 };

@@ -1,10 +1,12 @@
-const ActionType = {
-  LOAD_REVIEWS: `LOAD_REVIEWS`,
-  CLEAR_REVIEWS: `CLEAR_REVIEWS`
+const initialState = {
+  reviews: [],
+  reviewPostedStatus: false
 };
 
-const initialState = {
-  reviews: []
+const ActionType = {
+  LOAD_REVIEWS: `LOAD_REVIEWS`,
+  CLEAR_REVIEWS: `CLEAR_REVIEWS`,
+  POST_REVIEW: `POST_REVIEW`
 };
 
 const actionLoadReviews = (loadedReviews) => {
@@ -20,12 +22,28 @@ const actionClearReviews = () => {
   };
 };
 
-const Operation = {
-  loadReviews: (filmId) => (dispatch, _getState, api) => {
-    return api.get(`/comments/${filmId}`).then((response) => {
-      dispatch(actionLoadReviews(response.data));
+const actionPostReview = (status) => {
+  return {
+    type: ActionType.POST_REVIEW,
+    payload: status
+  };
+};
+
+const operationLoadReviews = (filmId) => (dispatch, _getState, api) => {
+  return api.get(`/comments/${filmId}`).then((response) => {
+    dispatch(actionLoadReviews(response.data));
+  });
+};
+
+const operationPostReview = (filmId, reviewInfo) => (dispatch, _getState, api) => {
+  return api
+    .post(`/comments/${filmId}`, reviewInfo)
+    .then(() => {
+      dispatch(actionPostReview(true));
+    })
+    .catch(() => {
+      dispatch(actionPostReview(false));
     });
-  }
 };
 
 const reducer = (state = initialState, action) => {
@@ -39,9 +57,22 @@ const reducer = (state = initialState, action) => {
 
     case ActionType.CLEAR_REVIEWS:
       return Object.assign({}, state, initialState);
+
+    case ActionType.POST_REVIEW:
+      return Object.assign({}, state, {
+        reviewPostedStatus: action.payload
+      });
   }
 
   return state;
 };
 
-export {actionClearReviews, Operation, reducer};
+export {
+  ActionType,
+  actionLoadReviews,
+  actionClearReviews,
+  actionPostReview,
+  operationLoadReviews,
+  operationPostReview,
+  reducer
+};

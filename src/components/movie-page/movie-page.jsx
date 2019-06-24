@@ -13,6 +13,11 @@ import MovieNavigation from "../movie-navigation/movie-navigation.jsx";
 import withPlayer from "../hocs/with-player/with-player.jsx";
 
 const MAXIMUM_RECOMMENDED_FILMS_NUMBER = 4;
+const Tab = {
+  OVERVIEW: `overview`,
+  DETAILS: `details`,
+  REVIEWS: `reviews`
+};
 
 class MoviePage extends PureComponent {
   constructor(props) {
@@ -25,29 +30,31 @@ class MoviePage extends PureComponent {
   }
 
   _handlePlayClick() {
-    const {togglePlayer} = this.props;
+    const {onPlayerToggle} = this.props;
 
-    togglePlayer();
+    onPlayerToggle();
   }
 
-  _handelHomeLinkClick() {
-    const {homeRedirect} = this.props;
+  _handelHomeLinkClick(evt) {
+    evt.preventDefault();
 
-    homeRedirect();
+    const {onHomeRedirect} = this.props;
+
+    onHomeRedirect();
   }
 
   _handelFavoriteClick() {
-    const {addFilmToFavorite, activeFilm, authorized, history} = this.props;
+    const {onAddFilmToFavorite, activeFilm, authorized, history} = this.props;
 
     if (authorized) {
-      addFilmToFavorite(activeFilm.id, activeFilm.favorite ? 0 : 1);
+      onAddFilmToFavorite(activeFilm.id, activeFilm.favorite ? 0 : 1);
     } else {
       history.push(`/login`);
     }
   }
 
   _formRecommendedBlock(recommendedFilms) {
-    const {setActiveFilm, changeGenre} = this.props;
+    const {onActiveFilmSet, onGenreChange} = this.props;
     if (recommendedFilms.length) {
       return (
         <section className="catalog catalog--like-this">
@@ -55,8 +62,8 @@ class MoviePage extends PureComponent {
 
           <FilmsList
             films={recommendedFilms}
-            changeGenre={changeGenre}
-            setActiveFilm={setActiveFilm}
+            onGenreChange={onGenreChange}
+            onActiveFilmSet={onActiveFilmSet}
           />
         </section>
       );
@@ -179,7 +186,11 @@ class MoviePage extends PureComponent {
 
             <header className="page-header movie-card__head">
               <div className="logo">
-                <a className="logo__link" onClick={this._handelHomeLinkClick}>
+                <a
+                  href="#"
+                  className="logo__link"
+                  onClick={this._handelHomeLinkClick}
+                >
                   <span className="logo__letter logo__letter--1">W</span>
                   <span className="logo__letter logo__letter--2">T</span>
                   <span className="logo__letter logo__letter--3">W</span>
@@ -219,7 +230,7 @@ class MoviePage extends PureComponent {
                     <span>My list</span>
                   </button>
                   <Link
-                    to={`${match.url}/review`}
+                    to={`/films/${activeFilm.id}/review`}
                     className="btn movie-card__button"
                   >
                     Add review
@@ -241,7 +252,7 @@ class MoviePage extends PureComponent {
               </div>
 
               <div className="movie-card__desc">
-                <MovieNavigation activeItem={`overview`} />
+                <MovieNavigation />
 
                 <Route
                   path={match.url}
@@ -249,17 +260,15 @@ class MoviePage extends PureComponent {
                   render={() => <Overview activeFilm={activeFilm} />}
                 />
                 <Route
-                  path={match.url + `/overview`}
+                  path={match.url + `/${Tab.OVERVIEW}`}
                   render={() => <Overview activeFilm={activeFilm} />}
                 />
-
                 <Route
-                  path={match.url + `/details`}
+                  path={match.url + `/${Tab.DETAILS}`}
                   render={() => <Details activeFilm={activeFilm} />}
                 />
-
                 <Route
-                  path={`${match.url}/reviews`}
+                  path={`${match.url}/${Tab.REVIEWS}`}
                   exact
                   render={() => <Reviews activeFilmId={activeFilm.id} />}
                 />
@@ -274,7 +283,10 @@ class MoviePage extends PureComponent {
 
           <footer className="page-footer">
             <div className="logo">
-              <a onClick={this._handelHomeLinkClick} className="logo__link logo__link--light">
+              <a
+                onClick={this._handelHomeLinkClick}
+                href="#"
+                className="logo__link logo__link--light">
                 <span className="logo__letter logo__letter--1">W</span>
                 <span className="logo__letter logo__letter--2">T</span>
                 <span className="logo__letter logo__letter--3">W</span>
@@ -293,10 +305,10 @@ class MoviePage extends PureComponent {
 
 MoviePage.propTypes = {
   visibleFilms: PropTypes.array.isRequired,
-  homeRedirect: PropTypes.func.isRequired,
-  togglePlayer: PropTypes.func.isRequired,
-  setActiveFilm: PropTypes.func.isRequired,
-  changeGenre: PropTypes.func.isRequired,
+  onHomeRedirect: PropTypes.func.isRequired,
+  onPlayerToggle: PropTypes.func.isRequired,
+  onActiveFilmSet: PropTypes.func.isRequired,
+  onGenreChange: PropTypes.func.isRequired,
   match: PropTypes.object.isRequired,
   film: PropTypes.shape({
     posterImage: PropTypes.string.isRequired,
@@ -306,7 +318,7 @@ MoviePage.propTypes = {
     scoresCount: PropTypes.number.isRequired,
     starring: PropTypes.array
   }),
-  addFilmToFavorite: PropTypes.func.isRequired,
+  onAddFilmToFavorite: PropTypes.func.isRequired,
   activeFilm: PropTypes.object.isRequired,
   authorized: PropTypes.bool.isRequired,
   history: PropTypes.object.isRequired,

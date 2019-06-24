@@ -128,8 +128,7 @@ Array [
       className="movie-card__bg"
     >
       <img
-        alt="The Grand Budapest Hotel"
-        src="img/bg-the-grand-budapest-hotel.jpg"
+        alt="Title"
       />
     </div>
     <h1
@@ -185,9 +184,9 @@ Array [
           className="movie-card__poster"
         >
           <img
-            alt="The Grand Budapest Hotel poster"
+            alt="Title"
             height="327"
-            src="img/the-grand-budapest-hotel-poster.jpg"
+            src="string"
             width="218"
           />
         </div>
@@ -197,7 +196,7 @@ Array [
           <h2
             className="movie-card__title"
           >
-            The Grand Budapest Hotel
+            Title
           </h2>
           <p
             className="movie-card__meta"
@@ -205,12 +204,12 @@ Array [
             <span
               className="movie-card__genre"
             >
-              Drama
+              Action
             </span>
             <span
               className="movie-card__year"
             >
-              2014
+              2018
             </span>
           </p>
           <div
@@ -218,6 +217,7 @@ Array [
           >
             <button
               className="btn btn--play movie-card__button"
+              onClick={[Function]}
               type="button"
             >
               <svg
@@ -235,6 +235,7 @@ Array [
             </button>
             <button
               className="btn btn--list movie-card__button"
+              onClick={[Function]}
               type="button"
             >
               <svg
@@ -288,7 +289,7 @@ Array [
             href="#"
             onClick={[Function]}
           >
-            Comedies
+            Action
           </a>
         </li>
         <li
@@ -299,7 +300,7 @@ Array [
             href="#"
             onClick={[Function]}
           >
-            Crime
+            Drama
           </a>
         </li>
         <li
@@ -310,73 +311,7 @@ Array [
             href="#"
             onClick={[Function]}
           >
-            Documentary
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item "
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-            onClick={[Function]}
-          >
-            Dramas
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item "
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-            onClick={[Function]}
-          >
-            Horror
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item "
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-            onClick={[Function]}
-          >
-            Kids & Family
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item "
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-            onClick={[Function]}
-          >
-            Romance
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item "
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-            onClick={[Function]}
-          >
-            Sci-Fi
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item "
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-            onClick={[Function]}
-          >
-            Thrillers
+            Comedy
           </a>
         </li>
       </ul>
@@ -385,6 +320,7 @@ Array [
       >
         <article
           className="small-movie-card catalog__movies-card"
+          onClick={[Function]}
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
         >
@@ -394,8 +330,8 @@ Array [
             <video
               height="175"
               muted={true}
-              poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-              src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
+              poster="string"
+              src="string"
               width="280"
             />
           </div>
@@ -404,6 +340,7 @@ Array [
           >
             <a
               className="small-movie-card__link"
+              href="#"
               onClick={[Function]}
               params={
                 Object {
@@ -411,12 +348,13 @@ Array [
                 }
               }
             >
-              John Wick
+              Title
             </a>
           </h3>
         </article>
         <article
           className="small-movie-card catalog__movies-card"
+          onClick={[Function]}
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
         >
@@ -426,8 +364,8 @@ Array [
             <video
               height="175"
               muted={true}
-              poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-              src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
+              poster="string"
+              src="string"
               width="280"
             />
           </div>
@@ -436,6 +374,7 @@ Array [
           >
             <a
               className="small-movie-card__link"
+              href="#"
               onClick={[Function]}
               params={
                 Object {
@@ -443,12 +382,13 @@ Array [
                 }
               }
             >
-              Killers Bodyguard
+              Title2
             </a>
           </h3>
         </article>
         <article
           className="small-movie-card catalog__movies-card"
+          onClick={[Function]}
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
         >
@@ -458,8 +398,8 @@ Array [
             <video
               height="175"
               muted={true}
-              poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-              src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
+              poster="string"
+              src="string"
               width="280"
             />
           </div>
@@ -468,6 +408,7 @@ Array [
           >
             <a
               className="small-movie-card__link"
+              href="#"
               onClick={[Function]}
               params={
                 Object {
@@ -475,71 +416,7 @@ Array [
                 }
               }
             >
-              Star Wars
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-        >
-          <div
-            className="small-movie-card__image"
-          >
-            <video
-              height="175"
-              muted={true}
-              poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-              src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              onClick={[Function]}
-              params={
-                Object {
-                  "id": 4,
-                }
-              }
-            >
-              The Grand Budapest Hotel
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-        >
-          <div
-            className="small-movie-card__image"
-          >
-            <video
-              height="175"
-              muted={true}
-              poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-              src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              onClick={[Function]}
-              params={
-                Object {
-                  "id": 5,
-                }
-              }
-            >
-              The Cabin in the Woods
+              Title3
             </a>
           </h3>
         </article>

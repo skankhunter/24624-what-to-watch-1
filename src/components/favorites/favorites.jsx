@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {compose} from "redux";
 
-import {Operation} from "../../reducer/data/data";
+import {operationLoadFavoriteFilms} from "../../reducer/data/data";
 import withPrivatePath from "../hocs/with-private-path/with-private-path.jsx";
 import UserBlock from "../user-block/user-block.jsx";
 import FilmsList from "../films-list/films-list.jsx";
@@ -11,21 +11,26 @@ import FilmsList from "../films-list/films-list.jsx";
 class Favorites extends PureComponent {
   constructor(props) {
     super(props);
+
+    this._handelHomeLinkClick = this._handelHomeLinkClick.bind(this);
+  }
+
+  _handelHomeLinkClick(evt) {
+    evt.preventDefault();
+
+    const {onHomeRedirect} = this.props;
+
+    onHomeRedirect();
   }
 
   componentDidMount() {
-    const {getFavoriteFilms} = this.props;
+    const {onFavoriteFilmsLoad} = this.props;
 
-    getFavoriteFilms();
+    onFavoriteFilmsLoad();
   }
 
   render() {
-    const {
-      homeRedirect: _handelHomeLinkClick,
-      favoriteFilms,
-      changeGenre,
-      setActiveFilm
-    } = this.props;
+    const {favoriteFilms, onGenreChange, onActiveFilmSet} = this.props;
 
     return (
       <>
@@ -123,7 +128,11 @@ class Favorites extends PureComponent {
         <div className="user-page">
           <header className="page-header user-page__head">
             <div className="logo">
-              <a onClick={_handelHomeLinkClick} className="logo__link">
+              <a
+                onClick={this._handelHomeLinkClick}
+                href="#"
+                className="logo__link"
+              >
                 <span className="logo__letter logo__letter--1">W</span>
                 <span className="logo__letter logo__letter--2">T</span>
                 <span className="logo__letter logo__letter--3">W</span>
@@ -140,15 +149,15 @@ class Favorites extends PureComponent {
 
             <FilmsList
               films={favoriteFilms}
-              changeGenre={changeGenre}
-              setActiveFilm={setActiveFilm}
+              onGenreChange={onGenreChange}
+              onActiveFilmSet={onActiveFilmSet}
             />
           </section>
 
           <footer className="page-footer">
             <div className="logo">
               <a
-                onClick={_handelHomeLinkClick}
+                onClick={this._handelHomeLinkClick}
                 className="logo__link logo__link--light"
               >
                 <span className="logo__letter logo__letter--1">W</span>
@@ -168,19 +177,19 @@ class Favorites extends PureComponent {
 }
 
 Favorites.propTypes = {
-  homeRedirect: PropTypes.func.isRequired,
-  getFavoriteFilms: PropTypes.func.isRequired,
+  onHomeRedirect: PropTypes.func.isRequired,
+  onFavoriteFilmsLoad: PropTypes.func.isRequired,
   favoriteFilms: PropTypes.array.isRequired,
-  changeGenre: PropTypes.func.isRequired,
-  setActiveFilm: PropTypes.func.isRequired,
+  onGenreChange: PropTypes.func.isRequired,
+  onActiveFilmSet: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   favoriteFilms: state.data.favoriteFilms
 });
 const mapDispatchToProps = (dispatch) => ({
-  getFavoriteFilms: () => {
-    dispatch(Operation.loadFavoriteFilms());
+  onFavoriteFilmsLoad: () => {
+    dispatch(operationLoadFavoriteFilms());
   }
 });
 

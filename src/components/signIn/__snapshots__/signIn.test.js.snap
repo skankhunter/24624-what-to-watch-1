@@ -131,7 +131,7 @@ Array [
       >
         <a
           className="logo__link"
-          href="/"
+          href="#"
           onClick={[Function]}
         >
           <span
@@ -223,7 +223,7 @@ Array [
       >
         <a
           className="logo__link logo__link--light"
-          href="/"
+          href="#"
           onClick={[Function]}
         >
           <span
