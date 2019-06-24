@@ -10,17 +10,17 @@ const MockComponent = () => <div />;
 const MockComponentWrapped = withDisabledElements(MockComponent);
 
 describe(`withDisabledElements hoc:`, () => {
-  it(`Should change submitButtonDisabled state when call changeSubmitButtonState to given value`, () => {
+  it(`Should change submitButtonDisabled state when call onSubmitButtonStateChange to given value`, () => {
     const wrapper = shallow(<MockComponentWrapped />);
 
-    wrapper.instance().changeSubmitButtonState(false);
+    wrapper.instance().onSubmitButtonStateChange(false);
     expect(wrapper.state().submitButtonDisabled).toEqual(false);
   });
 
   it(`Should change textareaDisabled state when call changeTextareaState to given value`, () => {
     const wrapper = shallow(<MockComponentWrapped />);
 
-    wrapper.instance().changeTextareaState(false);
+    wrapper.instance().onTextareaStateChange(false);
     expect(wrapper.state().textareaDisabled).toEqual(false);
   });
 });

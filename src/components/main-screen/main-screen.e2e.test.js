@@ -16,7 +16,7 @@ const mocks = {
   changeGenre: jest.fn(),
   onShowMoreClick: jest.fn(),
   setActiveFilm: jest.fn(),
-  togglePlayer: jest.fn(),
+  onPlayerToggle: jest.fn(),
   addFilmToFavorite: jest.fn(),
   history: {
     push: jest.fn()
@@ -171,7 +171,7 @@ describe(`Main:`, () => {
     expect(mocks.addFilmToFavorite).toHaveBeenCalledTimes(1);
   });
 
-  it(`Should run callback togglePlayer on add to play button click`, () => {
+  it(`Should run callback onPlayerToggle on add to play button click`, () => {
     const main = mount(
         <Provider store={store}>
           <BrowserRouter>
@@ -182,7 +182,7 @@ describe(`Main:`, () => {
 
     const playButton = main.find(`.btn--play`);
     playButton.simulate(`click`, {preventDefault() {}});
-    expect(mocks.togglePlayer).toHaveBeenCalledTimes(1);
+    expect(mocks.onPlayerToggle).toHaveBeenCalledTimes(1);
   });
 
   it(`Shouldn't display showmore button if all films are shown`, () => {

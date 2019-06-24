@@ -30,9 +30,9 @@ class MainScreen extends Component {
   }
 
   _handlePlayClick() {
-    const {togglePlayer} = this.props;
+    const {onPlayerToggle} = this.props;
 
-    togglePlayer();
+    onPlayerToggle();
   }
 
   _displayShowMore() {
@@ -260,7 +260,7 @@ MainScreen.propTypes = {
     push: PropTypes.func.isRequired
   }).isRequired,
   activeGenre: PropTypes.string.isRequired,
-  togglePlayer: PropTypes.func.isRequired,
+  onPlayerToggle: PropTypes.func.isRequired,
   addFilmToFavorite: PropTypes.func.isRequired,
 };
 

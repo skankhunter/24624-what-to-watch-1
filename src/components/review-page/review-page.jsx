@@ -34,9 +34,9 @@ class ReviewPage extends PureComponent {
   }
 
   componentDidMount() {
-    const {prepareToPost, changeTextareaState} = this.props;
+    const {prepareToPost, onTextareaStateChange} = this.props;
 
-    changeTextareaState(false);
+    onTextareaStateChange(false);
     prepareToPost();
   }
 
@@ -45,13 +45,13 @@ class ReviewPage extends PureComponent {
       reviewPostedStatus: reviewWasAdded,
       history,
       match,
-      changeTextareaState
+      onTextareaStateChange
     } = this.props;
 
     if (reviewWasAdded) {
       history.push(`/film/${match.params.id}`);
     } else {
-      changeTextareaState(false);
+      onTextareaStateChange(false);
     }
   }
 
@@ -62,32 +62,32 @@ class ReviewPage extends PureComponent {
       postReview,
       activeFilm,
       activeItem: starsNumber,
-      changeSubmitButtonState,
-      changeTextareaState
+      onSubmitButtonStateChange,
+      onTextareaStateChange
     } = this.props;
 
     const rating = starsNumber ? starsNumber : 1;
 
     const comment = this.message.current.value;
 
-    changeSubmitButtonState(true);
-    changeTextareaState(true);
+    onSubmitButtonStateChange(true);
+    onTextareaStateChange(true);
 
     postReview(activeFilm.id, {rating, comment});
   }
 
   _handelMessageInput(evt) {
-    const {changeSubmitButtonState} = this.props;
+    const {onSubmitButtonStateChange} = this.props;
 
-    changeSubmitButtonState(this._checkMessageLength(evt.target.value));
+    onSubmitButtonStateChange(this._checkMessageLength(evt.target.value));
   }
 
   _handelHomeLinkClick(evt) {
     evt.preventDefault();
 
-    const {homeRedirect} = this.props;
+    const {onHomeRedirect} = this.props;
 
-    homeRedirect();
+    onHomeRedirect();
   }
 
   _handelMovieTitleClick(evt) {
@@ -111,7 +111,7 @@ class ReviewPage extends PureComponent {
   render() {
     const {
       activeFilm,
-      changeActiveItem,
+      onActiveItemChange,
       activeItem: starsNumber,
       submitButtonDisabled,
     } = this.props;
@@ -263,7 +263,7 @@ class ReviewPage extends PureComponent {
 
           <div className="add-review">
             <form action="#" className="add-review__form">
-              <Rating activeStar={starsNumber} onStarClick={changeActiveItem} />
+              <Rating activeStar={starsNumber} onStarClick={onActiveItemChange} />
 
               <div className="add-review__text">
                 <textarea
@@ -293,9 +293,9 @@ class ReviewPage extends PureComponent {
 }
 
 ReviewPage.propTypes = {
-  homeRedirect: PropTypes.func.isRequired,
-  changeSubmitButtonState: PropTypes.func.isRequired,
-  changeTextareaState: PropTypes.func.isRequired,
+  onHomeRedirect: PropTypes.func.isRequired,
+  onSubmitButtonStateChange: PropTypes.func.isRequired,
+  onTextareaStateChange: PropTypes.func.isRequired,
   submitButtonDisabled: PropTypes.bool.isRequired,
   prepareToPost: PropTypes.func.isRequired,
   postReview: PropTypes.func.isRequired,
@@ -303,7 +303,7 @@ ReviewPage.propTypes = {
   history: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
   activeFilm: PropTypes.object.isRequired,
-  changeActiveItem: PropTypes.func.isRequired,
+  onActiveItemChange: PropTypes.func.isRequired,
   activeItem: PropTypes.string
 };
 

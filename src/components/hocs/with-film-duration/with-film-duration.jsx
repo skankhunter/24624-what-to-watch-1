@@ -13,10 +13,10 @@ const withFilmDuration = (WrappedComponent) => {
         }
       };
 
-      this.updateFilmDuration = this.updateFilmDuration.bind(this);
+      this.onFilmDurationUpdate = this.onFilmDurationUpdate.bind(this);
     }
 
-    updateFilmDuration(hours, minutes, seconds) {
+    onFilmDurationUpdate(hours, minutes, seconds) {
       this.setState({
         filmDuration: {hours, minutes, seconds}
       });
@@ -29,7 +29,7 @@ const withFilmDuration = (WrappedComponent) => {
         <WrappedComponent
           {...this.props}
           filmDuration={filmDuration}
-          updateFilmDuration={this.updateFilmDuration}
+          onFilmDurationUpdate={this.onFilmDurationUpdate}
         />
       );
     }

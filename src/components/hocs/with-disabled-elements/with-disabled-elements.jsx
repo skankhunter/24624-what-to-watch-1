@@ -10,17 +10,17 @@ const withDisabledElements = (WrappedComponent) => {
         textareaDisabled: true
       };
 
-      this.changeSubmitButtonState = this.changeSubmitButtonState.bind(this);
-      this.changeTextareaState = this.changeTextareaState.bind(this);
+      this.onSubmitButtonStateChange = this.onSubmitButtonStateChange.bind(this);
+      this.onTextareaStateChange = this.onTextareaStateChange.bind(this);
     }
 
-    changeSubmitButtonState(state) {
+    onSubmitButtonStateChange(state) {
       this.setState({
         submitButtonDisabled: state
       });
     }
 
-    changeTextareaState(state) {
+    onTextareaStateChange(state) {
       this.setState({
         textareaDisabled: state
       });
@@ -34,8 +34,8 @@ const withDisabledElements = (WrappedComponent) => {
           {...this.props}
           submitButtonDisabled={submitButtonDisabled}
           textareaDisabled={textareaDisabled}
-          changeSubmitButtonState={this.changeSubmitButtonState}
-          changeTextareaState={this.changeTextareaState}
+          onSubmitButtonStateChange={this.onSubmitButtonStateChange}
+          onTextareaStateChange={this.onTextareaStateChange}
         />
       );
     }

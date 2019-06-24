@@ -4,10 +4,10 @@ import renderer from "react-test-renderer";
 import {SignIn} from "./signIn.jsx";
 
 const mocks = {
-  homeRedirect: jest.fn(),
+  onHomeRedirect: jest.fn(),
   changeAuthorizationStatus: jest.fn(),
-  validateMail: jest.fn(),
-  validatePassword: jest.fn(),
+  onEmailValidate: jest.fn(),
+  onPasswordValidate: jest.fn(),
   emailError: false,
   passwordError: false,
   authorizationFailed: false,

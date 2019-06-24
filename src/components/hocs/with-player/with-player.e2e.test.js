@@ -10,10 +10,10 @@ const MockComponent = () => <div />;
 const MockComponentWrapped = withPlayer(MockComponent);
 
 describe(`withPlayer hoc:`, () => {
-  it(`Should revert playerActive state when call togglePlayer`, () => {
+  it(`Should revert playerActive state when call onPlayerToggle`, () => {
     const wrapper = shallow(<MockComponentWrapped />);
 
-    wrapper.instance().togglePlayer();
+    wrapper.instance().onPlayerToggle();
     expect(wrapper.state().playerActive).toEqual(true);
   });
 });

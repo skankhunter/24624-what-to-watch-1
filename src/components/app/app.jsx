@@ -16,10 +16,10 @@ class App extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.homeRedirect = this.homeRedirect.bind(this);
+    this.onHomeRedirect = this.onHomeRedirect.bind(this);
   }
 
-  homeRedirect() {
+  onHomeRedirect() {
     const {setActiveFilm, changeGenre, history} = this.props;
 
     setActiveFilm();
@@ -56,7 +56,7 @@ class App extends PureComponent {
 
     const favoritesProps = {
       authorized,
-      homeRedirect: this.homeRedirect,
+      onHomeRedirect: this.onHomeRedirect,
       changeGenre,
       setActiveFilm
     };
@@ -67,14 +67,14 @@ class App extends PureComponent {
       activeFilm,
       setActiveFilm,
       changeGenre,
-      homeRedirect: this.homeRedirect,
+      onHomeRedirect: this.onHomeRedirect,
       addFilmToFavorite
     };
 
     const reviewProps = {
       authorized,
       activeFilm,
-      homeRedirect: this.homeRedirect
+      onHomeRedirect: this.onHomeRedirect
     };
 
     return (
@@ -82,7 +82,7 @@ class App extends PureComponent {
         <Route path="/" exact render={() => <MainScreen {...mainProps} />}/>
         <Route
           path="/login"
-          render={() => <SignIn homeRedirect={this.homeRedirect}/>}
+          render={() => <SignIn onHomeRedirect={this.onHomeRedirect}/>}
         />
         <Route
           path="/favorites"

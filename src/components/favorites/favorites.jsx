@@ -18,9 +18,9 @@ class Favorites extends PureComponent {
   _handelHomeLinkClick(evt) {
     evt.preventDefault();
 
-    const {homeRedirect} = this.props;
+    const {onHomeRedirect} = this.props;
 
-    homeRedirect();
+    onHomeRedirect();
   }
 
   componentDidMount() {
@@ -177,7 +177,7 @@ class Favorites extends PureComponent {
 }
 
 Favorites.propTypes = {
-  homeRedirect: PropTypes.func.isRequired,
+  onHomeRedirect: PropTypes.func.isRequired,
   getFavoriteFilms: PropTypes.func.isRequired,
   favoriteFilms: PropTypes.array.isRequired,
   changeGenre: PropTypes.func.isRequired,

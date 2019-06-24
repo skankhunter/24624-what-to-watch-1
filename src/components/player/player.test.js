@@ -4,8 +4,8 @@ import renderer from "react-test-renderer";
 import Player from "./player.jsx";
 
 const mocks = {
-  togglePlayer: jest.fn(),
-  updateFilmDuration: jest.fn(),
+  onPlayerToggle: jest.fn(),
+  onFilmDurationUpdate: jest.fn(),
   activeFilm: {
     backgroundImage: `back`,
     description: `description`,

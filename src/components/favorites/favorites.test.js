@@ -10,7 +10,7 @@ import {Favorites} from "./favorites.jsx";
 
 const mocks = {
   changeGenre: jest.fn(),
-  homeRedirect: jest.fn(),
+  onHomeRedirect: jest.fn(),
   getFavoriteFilms: jest.fn(),
   setActiveFilm: jest.fn(),
   favoriteFilms: [

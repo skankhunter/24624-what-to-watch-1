@@ -7,10 +7,10 @@ import {SignIn} from "./signIn.jsx";
 Enzyme.configure({adapter: new Adapter()});
 
 const mocks = {
-  homeRedirect: jest.fn(),
+  onHomeRedirect: jest.fn(),
   changeAuthorizationStatus: jest.fn(),
-  validateMail: jest.fn(),
-  validatePassword: jest.fn(),
+  onEmailValidate: jest.fn(),
+  onPasswordValidate: jest.fn(),
   emailError: false,
   passwordError: false,
   authorizationFailed: false,
@@ -21,13 +21,13 @@ const mocks = {
 };
 
 describe(`SignIn:`, () => {
-  it(`Should run callback validateMail, validatePassword on submit button click`, () => {
+  it(`Should run callback onEmailValidate, onPasswordValidate on submit button click`, () => {
     const signIn = mount(<SignIn {...mocks} />);
 
     const submitButton = signIn.find(`.sign-in__btn`);
 
     submitButton.simulate(`click`, {preventDefault() {}});
-    expect(mocks.validateMail).toHaveBeenCalledTimes(1);
-    expect(mocks.validatePassword).toHaveBeenCalledTimes(1);
+    expect(mocks.onEmailValidate).toHaveBeenCalledTimes(1);
+    expect(mocks.onPasswordValidate).toHaveBeenCalledTimes(1);
   });
 });

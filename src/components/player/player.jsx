@@ -28,9 +28,9 @@ class Player extends PureComponent {
   }
 
   _handleExitClick() {
-    const {togglePlayer} = this.props;
+    const {onPlayerToggle} = this.props;
 
-    togglePlayer();
+    onPlayerToggle();
   }
 
   _handelPlayClick() {
@@ -43,19 +43,19 @@ class Player extends PureComponent {
 
   _calculateFilmDuration(video) {
     if (video) {
-      const {updateFilmDuration} = this.props;
+      const {onFilmDurationUpdate} = this.props;
       let time = video.duration;
       const hours = Math.floor(time / 3600);
       time = time - hours * 3600;
       const minutes = Math.floor(time / 60);
       const seconds = Math.floor(time - minutes * 60);
-      updateFilmDuration(hours, minutes, seconds);
+      onFilmDurationUpdate(hours, minutes, seconds);
     }
   }
 
   _changeFilmProgress(video, progressBar, toggler) {
     if (video) {
-      const {updateFilmDuration} = this.props;
+      const {onFilmDurationUpdate} = this.props;
       const videoProgress = (video.currentTime / video.duration) * 100;
 
       progressBar.value = videoProgress;
@@ -69,7 +69,7 @@ class Player extends PureComponent {
       const minutes = Math.floor(timeLeft / 60);
       const seconds = Math.floor(timeLeft - minutes * 60);
 
-      updateFilmDuration(hours, minutes, seconds);
+      onFilmDurationUpdate(hours, minutes, seconds);
     }
   }
 
@@ -262,8 +262,8 @@ class Player extends PureComponent {
 }
 
 Player.propTypes = {
-  updateFilmDuration: PropTypes.func.isRequired,
-  togglePlayer: PropTypes.func.isRequired,
+  onFilmDurationUpdate: PropTypes.func.isRequired,
+  onPlayerToggle: PropTypes.func.isRequired,
   activeFilm: PropTypes.object.isRequired,
   filmDuration: PropTypes.object.isRequired,
 };

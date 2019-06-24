@@ -12,11 +12,11 @@ const mocks = {
   reviewPostedStatus: false,
   activeItem: `2`,
   prepareToPost: jest.fn(),
-  changeSubmitButtonState: jest.fn(),
-  changeTextareaState: jest.fn(),
-  changeActiveItem: jest.fn(),
+  onSubmitButtonStateChange: jest.fn(),
+  onTextareaStateChange: jest.fn(),
+  onActiveItemChange: jest.fn(),
   postReview: jest.fn(),
-  homeRedirect: jest.fn(),
+  onHomeRedirect: jest.fn(),
   history: {
     push: jest.fn()
   },
@@ -108,7 +108,7 @@ describe(`ReviewPage:`, () => {
     const textarea = reviewPage.find(`.add-review__textarea`);
 
     textarea.simulate(`change`, {target: {value: `Some message`}});
-    expect(mocks.changeSubmitButtonState).toHaveBeenCalledTimes(1);
+    expect(mocks.onSubmitButtonStateChange).toHaveBeenCalledTimes(1);
   });
 
   it(`Should check input length for activating submit button`, () => {

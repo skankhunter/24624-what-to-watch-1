@@ -9,8 +9,8 @@ import {MoviePage} from "./movie-page.jsx";
 
 const mocks = {
   authorized: false,
-  togglePlayer: jest.fn(),
-  homeRedirect: jest.fn(),
+  onPlayerToggle: jest.fn(),
+  onHomeRedirect: jest.fn(),
   addFilmToFavorite: jest.fn(),
   setActiveFilm: jest.fn(),
   changeGenre: jest.fn(),

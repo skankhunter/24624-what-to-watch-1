@@ -30,17 +30,17 @@ class MoviePage extends PureComponent {
   }
 
   _handlePlayClick() {
-    const {togglePlayer} = this.props;
+    const {onPlayerToggle} = this.props;
 
-    togglePlayer();
+    onPlayerToggle();
   }
 
   _handelHomeLinkClick(evt) {
     evt.preventDefault();
 
-    const {homeRedirect} = this.props;
+    const {onHomeRedirect} = this.props;
 
-    homeRedirect();
+    onHomeRedirect();
   }
 
   _handelFavoriteClick() {
@@ -305,8 +305,8 @@ class MoviePage extends PureComponent {
 
 MoviePage.propTypes = {
   visibleFilms: PropTypes.array.isRequired,
-  homeRedirect: PropTypes.func.isRequired,
-  togglePlayer: PropTypes.func.isRequired,
+  onHomeRedirect: PropTypes.func.isRequired,
+  onPlayerToggle: PropTypes.func.isRequired,
   setActiveFilm: PropTypes.func.isRequired,
   changeGenre: PropTypes.func.isRequired,
   match: PropTypes.object.isRequired,

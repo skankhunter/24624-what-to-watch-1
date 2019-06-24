@@ -10,10 +10,10 @@ const MockComponent = () => <div />;
 const MockComponentWrapped = withFilmDuration(MockComponent);
 
 describe(`withFilmDuration hoc:`, () => {
-  it(`Should change filmDuration state when call updateFilmDuration to given value`, () => {
+  it(`Should change filmDuration state when call onFilmDurationUpdate to given value`, () => {
     const wrapper = shallow(<MockComponentWrapped />);
 
-    wrapper.instance().updateFilmDuration(3, 10, 59);
+    wrapper.instance().onFilmDurationUpdate(3, 10, 59);
     expect(wrapper.state().filmDuration).toEqual({
       hours: 3,
       minutes: 10,

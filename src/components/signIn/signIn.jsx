@@ -20,9 +20,9 @@ class SignIn extends PureComponent {
 
   _handelHomeLinkClick(evt) {
     evt.preventDefault();
-    const {homeRedirect} = this.props;
+    const {onHomeRedirect} = this.props;
 
-    homeRedirect();
+    onHomeRedirect();
   }
 
   componentDidUpdate() {
@@ -229,11 +229,11 @@ class SignIn extends PureComponent {
     evt.preventDefault();
     const {
       changeAuthorizationStatus,
-      validateMail,
-      validatePassword
+      onEmailValidate,
+      onPasswordValidate
     } = this.props;
-    const mailIsValid = validateMail(this._emailRef.current.value);
-    const passwordIsValid = validatePassword(this._passwordRef.current.value);
+    const mailIsValid = onEmailValidate(this._emailRef.current.value);
+    const passwordIsValid = onPasswordValidate(this._passwordRef.current.value);
     if (passwordIsValid && mailIsValid) {
       const userInfo = {
         email: this._emailRef.current.value,
@@ -269,8 +269,8 @@ class SignIn extends PureComponent {
 
 SignIn.propTypes = {
   changeAuthorizationStatus: PropTypes.func.isRequired,
-  validateMail: PropTypes.func.isRequired,
-  validatePassword: PropTypes.func.isRequired,
+  onEmailValidate: PropTypes.func.isRequired,
+  onPasswordValidate: PropTypes.func.isRequired,
   emailError: PropTypes.bool.isRequired,
   passwordError: PropTypes.bool.isRequired,
   authorizationFailed: PropTypes.bool.isRequired,
@@ -278,7 +278,7 @@ SignIn.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   }).isRequired,
-  homeRedirect: PropTypes.func.isRequired,
+  onHomeRedirect: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) =>
