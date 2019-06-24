@@ -4,7 +4,7 @@ import {compose} from "redux";
 import {connect} from "react-redux";
 import {withRouter} from "react-router";
 
-import {actionPostReview, Operation} from "../../reducer/reviews/reviews";
+import {ActionCreator, Operation} from "../../reducer/reviews/reviews.js";
 
 import UserBlock from "../user-block/user-block.jsx";
 import Rating from "../rating/rating.jsx";
@@ -12,7 +12,6 @@ import withPrivatePath from "../hocs/with-private-path/with-private-path.jsx";
 import withActiveItem from "../hocs/with-active-item/with-active-item.jsx";
 import withDisabledElements from "../hocs/with-disabled-elements/with-disabled-elements.jsx";
 
-const RATING_MULTIPLER = 2;
 const MINIMUM_MESSAGE_LENGTH = 50;
 const MAXIMUM_MESSAGE_LENGTH = 200;
 
@@ -316,7 +315,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(Operation.postReview(filmId, reviewInfo));
   },
   prepareToPost: () => {
-    dispatch(actionPostReview(false));
+    dispatch(ActionCreator.postReview(false));
   }
 });
 

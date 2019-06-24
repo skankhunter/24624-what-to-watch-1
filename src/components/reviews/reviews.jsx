@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {compose} from "redux";
 
-import {Operation, actionClearReviews} from "../../reducer/reviews/reviews.js";
+import {ActionCreator, Operation} from "../../reducer/reviews/reviews";
 
 class Reviews extends PureComponent {
   constructor(props) {
@@ -121,7 +121,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(Operation.loadReviews(filmId));
   },
   clearReviews: () => {
-    dispatch(actionClearReviews());
+    dispatch(ActionCreator.clearReviews());
   }
 });
 

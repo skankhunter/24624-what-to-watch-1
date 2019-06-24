@@ -4,15 +4,7 @@ import {connect} from "react-redux";
 import {Switch, Route} from "react-router-dom";
 import {withRouter} from "react-router";
 import {compose} from "redux";
-import {
-  actionChangeGenre,
-  actionChangeFilms,
-  actionShowAllFilms,
-  actionFormVisibleFilms,
-  actionClearVisibleFilms,
-  actionChangeActiveFilm,
-  Operation,
-} from "../../reducer/data/data";
+import {ActionCreator, Operation} from "../../reducer/data/data";
 
 import MainScreen from '../main-screen/main-screen.jsx';
 import SignIn from "../signIn/signIn.jsx";
@@ -176,24 +168,22 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   changeGenre: (newGenre = `All genres`) => {
-    dispatch(actionChangeGenre(newGenre));
-
+    dispatch(ActionCreator.changeGenre(newGenre));
     if (newGenre === `All genres`) {
-      dispatch(actionShowAllFilms());
+      dispatch(ActionCreator.showAllFilms());
     } else {
-      dispatch(actionChangeFilms());
+      dispatch(ActionCreator.changeFilms());
     }
-
-    dispatch(actionClearVisibleFilms());
-    dispatch(actionFormVisibleFilms());
+    dispatch(ActionCreator.clearVisibleFilms());
+    dispatch(ActionCreator.formVisibleFilms());
   },
   onShowMoreClick: () => {
-    dispatch(actionFormVisibleFilms());
+    dispatch(ActionCreator.formVisibleFilms());
   },
   setActiveFilm: (filmId = null) => {
-    dispatch(actionChangeActiveFilm(filmId));
-    dispatch(actionClearVisibleFilms());
-    dispatch(actionFormVisibleFilms(filmId));
+    dispatch(ActionCreator.changeActiveFilm(filmId));
+    dispatch(ActionCreator.clearVisibleFilms());
+    dispatch(ActionCreator.formVisibleFilms(filmId));
   },
   addFilmToFavorite: (filmId, filmStatus) => {
     dispatch(Operation.addFilmToFavourite(filmId, filmStatus));

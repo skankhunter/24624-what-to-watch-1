@@ -1,13 +1,6 @@
 import MockAdapter from "axios-mock-adapter";
 import {createAPI} from "../../api";
-import {
-  actionLoadReviews,
-  actionPostReview,
-  actionClearReviews,
-  ActionType,
-  Operation,
-  reducer
-} from "./reviews.js";
+import {ActionType, ActionCreator, Operation, reducer} from "./reviews.js";
 
 const mocks = {
   loadedReviews: [
@@ -30,35 +23,35 @@ const mocks = {
 
 describe(`Action creators work correctly`, () => {
   it(`Action creator for loading reviews return correct action`, () => {
-    expect(actionLoadReviews(mocks.loadedReviews)).toEqual({
+    expect(ActionCreator.loadReviews(mocks.loadedReviews)).toEqual({
       type: ActionType.LOAD_REVIEWS,
       payload: mocks.loadedReviews
     });
   });
 
   it(`Action creator for loading reviews return correct payload`, () => {
-    expect(actionLoadReviews(mocks.loadedReviews)).toEqual({
+    expect(ActionCreator.loadReviews(mocks.loadedReviews)).toEqual({
       type: ActionType.LOAD_REVIEWS,
       payload: mocks.loadedReviews
     });
   });
 
   it(`Action creator for posting review return correct action`, () => {
-    expect(actionPostReview(true)).toEqual({
+    expect(ActionCreator.postReview(true)).toEqual({
       type: ActionType.POST_REVIEW,
       payload: true
     });
   });
 
   it(`Action creator for posting review return correct payload`, () => {
-    expect(actionPostReview(true)).toEqual({
+    expect(ActionCreator.postReview(true)).toEqual({
       type: ActionType.POST_REVIEW,
       payload: true
     });
   });
 
   it(`Action creator for clearing reviews return correct action`, () => {
-    expect(actionClearReviews()).toEqual({
+    expect(ActionCreator.clearReviews()).toEqual({
       type: ActionType.CLEAR_REVIEWS
     });
   });
@@ -112,6 +105,7 @@ describe(`Reducer works correctly`, () => {
     expect(
         reducer(
             {
+
               reviews: mocks.loadedReviews,
               reviewPostedStatus: true
             },

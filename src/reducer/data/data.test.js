@@ -3,14 +3,7 @@ import {createAPI} from "../../api";
 import {
   formFilms,
   formGenres,
-  actionChangeGenre,
-  actionChangeFilms,
-  actionShowAllFilms,
-  actionLoadFilms,
-  actionFormGenres,
-  actionFormVisibleFilms,
-  actionClearVisibleFilms,
-  actionChangeActiveFilm,
+  ActionCreator,
   ActionType,
   Operation,
   reducer
@@ -156,89 +149,88 @@ describe(`Business logic is correct`, () => {
 
 describe(`Action creators work correctly`, () => {
   it(`Action creator for changing genre returns correct action`, () => {
-    expect(actionChangeGenre()).toEqual({
+    expect(ActionCreator.changeGenre()).toEqual({
       type: `CHANGE_GENRE`,
       payload: `All genres`
     });
   });
 
   it(`Action creator for changing genre returns payload with new genre`, () => {
-    expect(actionChangeGenre(`Some genre`)).toEqual({
+    expect(ActionCreator.changeGenre(`Some genre`)).toEqual({
       type: `CHANGE_GENRE`,
       payload: `Some genre`
     });
   });
 
   it(`Action creator for changing films returns correct action`, () => {
-    expect(actionChangeFilms()).toEqual({
+    expect(ActionCreator.changeFilms()).toEqual({
       type: `CHANGE_FILMS`
     });
   });
 
   it(`Action creator for showing all films returns correct action`, () => {
-    expect(actionShowAllFilms()).toEqual({
+    expect(ActionCreator.showAllFilms()).toEqual({
       type: `SHOW_ALL`
     });
   });
 
   it(`Action creator for loading films returns correct action`, () => {
-    expect(actionLoadFilms([])).toEqual({
+    expect(ActionCreator.loadFilms([])).toEqual({
       type: ActionType.LOAD_FILMS,
       payload: []
     });
   });
 
   it(`Action creator for loading films returns payload with new films`, () => {
-    expect(actionLoadFilms(mocks.loadedFilms)).toEqual({
+    expect(ActionCreator.loadFilms(mocks.loadedFilms)).toEqual({
       type: ActionType.LOAD_FILMS,
       payload: mocks.loadedFilms
     });
   });
 
   it(`Action creator for forming genres array returns correct action`, () => {
-    expect(actionFormGenres([])).toEqual({
+    expect(ActionCreator.formGenres([])).toEqual({
       type: ActionType.FORM_GENRES,
       payload: []
     });
   });
 
   it(`Action creator for forming genres array returns  payload with films`, () => {
-    expect(actionFormGenres(mocks.loadedFilms)).toEqual({
+    expect(ActionCreator.formGenres(mocks.loadedFilms)).toEqual({
       type: ActionType.FORM_GENRES,
       payload: mocks.loadedFilms
     });
   });
 
-  it(`Action creator for forming visible films retuns correct action`, () => {
-    expect(actionFormVisibleFilms(2)).toEqual({
+  it(`Action creator for forming visible films returns correct action`, () => {
+    expect(ActionCreator.formVisibleFilms(2)).toEqual({
       type: ActionType.FORM_VISIBLE_FILMS,
       payload: 2
     });
   });
 
-  it(`Action creator for forming visible films retuns payload with given value`, () => {
-    expect(actionFormVisibleFilms(2)).toEqual({
+  it(`Action creator for forming visible films returns payload with given value`, () => {
+    expect(ActionCreator.formVisibleFilms(2)).toEqual({
       type: ActionType.FORM_VISIBLE_FILMS,
       payload: 2
     });
   });
 
   it(`Action creator for clearing visible films retuns correct action`, () => {
-    expect(actionClearVisibleFilms()).toEqual({
-      type: ActionType.CLEAR_VISIBLE_FILMS,
-      payload: null
+    expect(ActionCreator.clearVisibleFilms()).toEqual({
+      type: ActionType.CLEAR_VISIBLE_FILMS
     });
   });
 
-  it(`Action creator for changing active films retuns correct action`, () => {
-    expect(actionChangeActiveFilm(1)).toEqual({
+  it(`Action creator for changing active films returns correct action`, () => {
+    expect(ActionCreator.changeActiveFilm(1)).toEqual({
       type: ActionType.CHANGE_ACTIVE_FILM,
       payload: 1
     });
   });
 
-  it(`Action creator for changing active films retuns payload with given value`, () => {
-    expect(actionChangeActiveFilm(3)).toEqual({
+  it(`Action creator for changing active films returns payload with given value`, () => {
+    expect(ActionCreator.changeActiveFilm(3)).toEqual({
       type: ActionType.CHANGE_ACTIVE_FILM,
       payload: 3
     });
@@ -529,7 +521,7 @@ describe(`Reducer works correctly`, () => {
     apiMock.onGet(`/films`).reply(200, [{fake: true}]);
 
     return filmsLoader(dispatch, jest.fn(), api).then(() => {
-      expect(dispatch).toHaveBeenCalledTimes(4);
+      expect(dispatch).toHaveBeenCalledTimes(3);
     });
   });
 

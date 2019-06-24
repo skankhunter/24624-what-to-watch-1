@@ -1,38 +1,40 @@
+const initialState = {
+  reviews: [],
+  reviewPostedStatus: false
+};
+
 const ActionType = {
   LOAD_REVIEWS: `LOAD_REVIEWS`,
   CLEAR_REVIEWS: `CLEAR_REVIEWS`,
   POST_REVIEW: `POST_REVIEW`
 };
 
-const initialState = {
-  reviews: [],
-  reviewPostedStatus: false
-};
+const ActionCreator = {
+  loadReviews: (loadedReviews) => {
+    return {
+      type: ActionType.LOAD_REVIEWS,
+      payload: loadedReviews
+    };
+  },
 
-const actionLoadReviews = (loadedReviews) => {
-  return {
-    type: ActionType.LOAD_REVIEWS,
-    payload: loadedReviews
-  };
-};
+  clearReviews: () => {
+    return {
+      type: ActionType.CLEAR_REVIEWS
+    };
+  },
 
-const actionClearReviews = () => {
-  return {
-    type: ActionType.CLEAR_REVIEWS
-  };
-};
-
-const actionPostReview = (status) => {
-  return {
-    type: ActionType.POST_REVIEW,
-    payload: status
-  };
+  postReview: (status) => {
+    return {
+      type: ActionType.POST_REVIEW,
+      payload: status
+    };
+  }
 };
 
 const Operation = {
   loadReviews: (filmId) => (dispatch, _getState, api) => {
     return api.get(`/comments/${filmId}`).then((response) => {
-      dispatch(actionLoadReviews(response.data));
+      dispatch(ActionCreator.loadReviews(response.data));
     });
   },
 
@@ -40,11 +42,10 @@ const Operation = {
     return api
       .post(`/comments/${filmId}`, reviewInfo)
       .then(() => {
-        dispatch(actionPostReview(true));
+        dispatch(ActionCreator.postReview(true));
       })
-      .catch((error) => {
-        dispatch(actionPostReview(false));
-        throw new Error(`Some trouble: ${error}`);
+      .catch(() => {
+        dispatch(ActionCreator.postReview(false));
       });
   }
 };
@@ -70,11 +71,4 @@ const reducer = (state = initialState, action) => {
   return state;
 };
 
-export {
-  actionLoadReviews,
-  actionPostReview,
-  actionClearReviews,
-  Operation,
-  ActionType,
-  reducer
-};
+export {ActionType, ActionCreator, Operation, reducer};

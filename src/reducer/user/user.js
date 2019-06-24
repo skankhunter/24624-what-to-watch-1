@@ -15,32 +15,33 @@ const ActionType = {
   SET_USER_INFO: `SET_USER_INFO`
 };
 
-const actionChangeAuthorizationStatus = (status) => ({
-  type: ActionType.CHANGE_AUTHORIZATION_STATUS,
-  payload: status
-});
+const ActionCreator = {
+  changeAuthorizationStatus: (status) => ({
+    type: ActionType.CHANGE_AUTHORIZATION_STATUS,
+    payload: status
+  }),
 
-const actionChangeAuthorizationProcessStatus = (status) => ({
-  type: ActionType.CHANGE_AUTHORIZATION_PROCESS_STATUS,
-  payload: status
-});
+  changeAuthorizationProcessStatus: (status) => ({
+    type: ActionType.CHANGE_AUTHORIZATION_PROCESS_STATUS,
+    payload: status
+  }),
 
-const actionSetUserInfo = (currentUser) => ({
-  type: ActionType.SET_USER_INFO,
-  payload: currentUser
-});
+  setUserInfo: (currentUser) => ({
+    type: ActionType.SET_USER_INFO,
+    payload: currentUser
+  })
+};
 
 const Operation = {
   authorizeUser: (loginInfo) => (dispatch, _getState, api) => {
     return api
       .post(`/login`, loginInfo)
       .then((response) => {
-        dispatch(actionSetUserInfo(response.data));
-        dispatch(actionChangeAuthorizationStatus(true));
-        history.push(`/`);
+        dispatch(ActionCreator.setUserInfo(response.data));
+        dispatch(ActionCreator.changeAuthorizationStatus(true));
       })
       .catch(() => {
-        dispatch(actionChangeAuthorizationProcessStatus(true));
+        dispatch(ActionCreator.changeAuthorizationProcessStatus(true));
       });
   }
 };
@@ -71,11 +72,4 @@ const reducer = (state = initialState, action) => {
   return state;
 };
 
-export {
-  reducer,
-  ActionType,
-  Operation,
-  actionChangeAuthorizationProcessStatus,
-  actionChangeAuthorizationStatus,
-  actionSetUserInfo
-};
+export {reducer, ActionType, ActionCreator, Operation};
