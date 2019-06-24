@@ -42,32 +42,35 @@ class Player extends PureComponent {
   }
 
   _calculateFilmDuration(video) {
-    const {updateFilmDuration} = this.props;
-    let time = video.duration;
-    const hours = Math.floor(time / 3600);
-    time = time - hours * 3600;
-    const minutes = Math.floor(time / 60);
-    const seconds = Math.floor(time - minutes * 60);
-
-    updateFilmDuration(hours, minutes, seconds);
+    if (video) {
+      const {updateFilmDuration} = this.props;
+      let time = video.duration;
+      const hours = Math.floor(time / 3600);
+      time = time - hours * 3600;
+      const minutes = Math.floor(time / 60);
+      const seconds = Math.floor(time - minutes * 60);
+      updateFilmDuration(hours, minutes, seconds);
+    }
   }
 
   _changeFilmProgress(video, progressBar, toggler) {
-    const {updateFilmDuration} = this.props;
-    const videoProgress = (video.currentTime / video.duration) * 100;
+    if (video) {
+      const {updateFilmDuration} = this.props;
+      const videoProgress = (video.currentTime / video.duration) * 100;
 
-    progressBar.value = videoProgress;
-    toggler.style.left = `${videoProgress}%`;
+      progressBar.value = videoProgress;
+      toggler.style.left = `${videoProgress}%`;
 
-    let timeLeft = video.duration - video.currentTime;
-    const hours = Math.floor(timeLeft / 3600);
+      let timeLeft = video.duration - video.currentTime;
+      const hours = Math.floor(timeLeft / 3600);
 
-    timeLeft = timeLeft - hours * 3600;
+      timeLeft = timeLeft - hours * 3600;
 
-    const minutes = Math.floor(timeLeft / 60);
-    const seconds = Math.floor(timeLeft - minutes * 60);
+      const minutes = Math.floor(timeLeft / 60);
+      const seconds = Math.floor(timeLeft - minutes * 60);
 
-    updateFilmDuration(hours, minutes, seconds);
+      updateFilmDuration(hours, minutes, seconds);
+    }
   }
 
   componentDidMount() {
@@ -199,6 +202,7 @@ class Player extends PureComponent {
             src={activeFilm.videoLink}
             className="player__video"
             poster={activeFilm.poster}
+            autoPlay
           />
 
           <button

@@ -230,7 +230,7 @@ class MoviePage extends PureComponent {
                     <span>My list</span>
                   </button>
                   <Link
-                    to={`${match.url}/review`}
+                    to={`/films/${activeFilm.id}/review`}
                     className="btn movie-card__button"
                   >
                     Add review

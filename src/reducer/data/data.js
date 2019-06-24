@@ -102,10 +102,6 @@ const updateVisibleFilms = (films, currentVisibleFilms, filmId) => { // TODO: re
   let visibleFilms = currentVisibleFilms.slice();
   let filmsPack = films.filter((film) => film.id !== filmId);
 
-  if (filmId === null) {
-    return filmsPack;
-  }
-
   if (visibleFilms.length < filmsPack.length) {
     if (!visibleFilms.length) {
       if (filmsPack.length > MAXIMUM_FILMS_PER_PACK) {
