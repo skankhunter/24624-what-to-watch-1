@@ -7,7 +7,10 @@ import {compose} from "recompose";
 import {Router} from "react-router-dom";
 import history from "./history";
 import reducer from "./reducer/index.js";
-import {Operation} from "./reducer/data/data";
+import {
+  operationLoadFilms,
+  operationLoadPromo
+} from "./reducer/data/data";
 import {createAPI} from "./api";
 import App from './components/app/app.jsx';
 
@@ -22,8 +25,8 @@ const init = () => {
       )
   );
 
-  store.dispatch(Operation.loadFilms());
-  store.dispatch(Operation.loadPromo());
+  store.dispatch(operationLoadFilms());
+  store.dispatch(operationLoadPromo());
 
   ReactDOM.render(
       <Provider store={store}>

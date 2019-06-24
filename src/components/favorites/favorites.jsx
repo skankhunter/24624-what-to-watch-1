@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {compose} from "redux";
 
-import {Operation} from "../../reducer/data/data";
+import {operationLoadFavoriteFilms} from "../../reducer/data/data";
 import withPrivatePath from "../hocs/with-private-path/with-private-path.jsx";
 import UserBlock from "../user-block/user-block.jsx";
 import FilmsList from "../films-list/films-list.jsx";
@@ -24,13 +24,13 @@ class Favorites extends PureComponent {
   }
 
   componentDidMount() {
-    const {getFavoriteFilms} = this.props;
+    const {onFavoriteFilmsLoad} = this.props;
 
-    getFavoriteFilms();
+    onFavoriteFilmsLoad();
   }
 
   render() {
-    const {favoriteFilms, changeGenre, setActiveFilm} = this.props;
+    const {favoriteFilms, onGenreChange, onActiveFilmSet} = this.props;
 
     return (
       <>
@@ -149,8 +149,8 @@ class Favorites extends PureComponent {
 
             <FilmsList
               films={favoriteFilms}
-              changeGenre={changeGenre}
-              setActiveFilm={setActiveFilm}
+              onGenreChange={onGenreChange}
+              onActiveFilmSet={onActiveFilmSet}
             />
           </section>
 
@@ -178,18 +178,18 @@ class Favorites extends PureComponent {
 
 Favorites.propTypes = {
   onHomeRedirect: PropTypes.func.isRequired,
-  getFavoriteFilms: PropTypes.func.isRequired,
+  onFavoriteFilmsLoad: PropTypes.func.isRequired,
   favoriteFilms: PropTypes.array.isRequired,
-  changeGenre: PropTypes.func.isRequired,
-  setActiveFilm: PropTypes.func.isRequired,
+  onGenreChange: PropTypes.func.isRequired,
+  onActiveFilmSet: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   favoriteFilms: state.data.favoriteFilms
 });
 const mapDispatchToProps = (dispatch) => ({
-  getFavoriteFilms: () => {
-    dispatch(Operation.loadFavoriteFilms());
+  onFavoriteFilmsLoad: () => {
+    dispatch(operationLoadFavoriteFilms());
   }
 });
 

@@ -44,17 +44,17 @@ class MoviePage extends PureComponent {
   }
 
   _handelFavoriteClick() {
-    const {addFilmToFavorite, activeFilm, authorized, history} = this.props;
+    const {onAddFilmToFavorite, activeFilm, authorized, history} = this.props;
 
     if (authorized) {
-      addFilmToFavorite(activeFilm.id, activeFilm.favorite ? 0 : 1);
+      onAddFilmToFavorite(activeFilm.id, activeFilm.favorite ? 0 : 1);
     } else {
       history.push(`/login`);
     }
   }
 
   _formRecommendedBlock(recommendedFilms) {
-    const {setActiveFilm, changeGenre} = this.props;
+    const {onActiveFilmSet, onGenreChange} = this.props;
     if (recommendedFilms.length) {
       return (
         <section className="catalog catalog--like-this">
@@ -62,8 +62,8 @@ class MoviePage extends PureComponent {
 
           <FilmsList
             films={recommendedFilms}
-            changeGenre={changeGenre}
-            setActiveFilm={setActiveFilm}
+            onGenreChange={onGenreChange}
+            onActiveFilmSet={onActiveFilmSet}
           />
         </section>
       );
@@ -307,8 +307,8 @@ MoviePage.propTypes = {
   visibleFilms: PropTypes.array.isRequired,
   onHomeRedirect: PropTypes.func.isRequired,
   onPlayerToggle: PropTypes.func.isRequired,
-  setActiveFilm: PropTypes.func.isRequired,
-  changeGenre: PropTypes.func.isRequired,
+  onActiveFilmSet: PropTypes.func.isRequired,
+  onGenreChange: PropTypes.func.isRequired,
   match: PropTypes.object.isRequired,
   film: PropTypes.shape({
     posterImage: PropTypes.string.isRequired,
@@ -318,7 +318,7 @@ MoviePage.propTypes = {
     scoresCount: PropTypes.number.isRequired,
     starring: PropTypes.array
   }),
-  addFilmToFavorite: PropTypes.func.isRequired,
+  onAddFilmToFavorite: PropTypes.func.isRequired,
   activeFilm: PropTypes.object.isRequired,
   authorized: PropTypes.bool.isRequired,
   history: PropTypes.object.isRequired,

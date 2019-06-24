@@ -1,7 +1,13 @@
 import MockAdapter from "axios-mock-adapter";
 import {createAPI} from "../../api";
-import {ActionType, ActionCreator, Operation, reducer} from "./reviews.js";
-
+import {
+  ActionType,
+  actionLoadReviews,
+  actionClearReviews,
+  actionPostReview,
+  operationLoadReviews,
+  reducer
+} from "./reviews.js";
 const mocks = {
   loadedReviews: [
     {
@@ -23,35 +29,35 @@ const mocks = {
 
 describe(`Action creators work correctly`, () => {
   it(`Action creator for loading reviews return correct action`, () => {
-    expect(ActionCreator.loadReviews(mocks.loadedReviews)).toEqual({
+    expect(actionLoadReviews(mocks.loadedReviews)).toEqual({
       type: ActionType.LOAD_REVIEWS,
       payload: mocks.loadedReviews
     });
   });
 
   it(`Action creator for loading reviews return correct payload`, () => {
-    expect(ActionCreator.loadReviews(mocks.loadedReviews)).toEqual({
+    expect(actionLoadReviews(mocks.loadedReviews)).toEqual({
       type: ActionType.LOAD_REVIEWS,
       payload: mocks.loadedReviews
     });
   });
 
   it(`Action creator for posting review return correct action`, () => {
-    expect(ActionCreator.postReview(true)).toEqual({
+    expect(actionPostReview(true)).toEqual({
       type: ActionType.POST_REVIEW,
       payload: true
     });
   });
 
   it(`Action creator for posting review return correct payload`, () => {
-    expect(ActionCreator.postReview(true)).toEqual({
+    expect(actionPostReview(true)).toEqual({
       type: ActionType.POST_REVIEW,
       payload: true
     });
   });
 
   it(`Action creator for clearing reviews return correct action`, () => {
-    expect(ActionCreator.clearReviews()).toEqual({
+    expect(actionClearReviews()).toEqual({
       type: ActionType.CLEAR_REVIEWS
     });
   });
@@ -123,7 +129,7 @@ describe(`Reducer works correctly`, () => {
     const dispatch = jest.fn();
     const api = createAPI(dispatch);
     const apiMock = new MockAdapter(api);
-    const reviewsLoader = Operation.loadReviews(1);
+    const reviewsLoader = operationLoadReviews(1);
 
     apiMock.onGet(`/comments/1`).reply(200, [{fake: true}]);
 

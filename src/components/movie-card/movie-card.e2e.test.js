@@ -21,7 +21,7 @@ const mocks = {
 };
 
 describe(`MovieCard:`, () => {
-  it(`Should run callback changeGenre and setActiveFilm on component click`, () => {
+  it(`Should run callback onGenreChange and onActiveFilmSet on component click`, () => {
     const movieCard = mount(<MovieCard {...mocks} />);
     const link = movieCard.find(`a`);
 

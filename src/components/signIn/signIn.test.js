@@ -5,7 +5,7 @@ import {SignIn} from "./signIn.jsx";
 
 const mocks = {
   onHomeRedirect: jest.fn(),
-  changeAuthorizationStatus: jest.fn(),
+  onChangeAuthorizationStatus: jest.fn(),
   onEmailValidate: jest.fn(),
   onPasswordValidate: jest.fn(),
   emailError: false,

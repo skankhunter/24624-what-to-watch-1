@@ -4,7 +4,15 @@ import {connect} from "react-redux";
 import {Switch, Route} from "react-router-dom";
 import {withRouter} from "react-router";
 import {compose} from "redux";
-import {ActionCreator, Operation} from "../../reducer/data/data";
+import {
+  actionChangeGenre,
+  actionChangeFilms,
+  actionShowAllFilms,
+  actionFormVisibleFilms,
+  actionClearVisibleFilms,
+  actionChangeActiveFilm,
+  operationAddFilmToFavorite
+} from "../../reducer/data/data";
 
 import MainScreen from '../main-screen/main-screen.jsx';
 import SignIn from "../signIn/signIn.jsx";
@@ -20,10 +28,10 @@ class App extends PureComponent {
   }
 
   onHomeRedirect() {
-    const {setActiveFilm, changeGenre, history} = this.props;
+    const {onActiveFilmSet, onGenreChange, history} = this.props;
 
-    setActiveFilm();
-    changeGenre();
+    onActiveFilmSet();
+    onGenreChange();
     history.push(`/`);
   }
 
@@ -34,11 +42,11 @@ class App extends PureComponent {
       visibleFilms,
       genres,
       activeGenre,
-      changeGenre,
+      onGenreChange,
       onShowMoreClick,
       activeFilm,
-      setActiveFilm,
-      addFilmToFavorite
+      onActiveFilmSet,
+      onAddFilmToFavorite
     } = this.props;
 
     const mainProps = {
@@ -47,28 +55,28 @@ class App extends PureComponent {
       visibleFilms,
       genres,
       activeGenre,
-      changeGenre,
+      onGenreChange,
       onShowMoreClick,
       activeFilm,
-      setActiveFilm,
-      addFilmToFavorite
+      onActiveFilmSet,
+      onAddFilmToFavorite
     };
 
     const favoritesProps = {
       authorized,
       onHomeRedirect: this.onHomeRedirect,
-      changeGenre,
-      setActiveFilm
+      onGenreChange,
+      onActiveFilmSet
     };
 
     const filmProps = {
       authorized,
       visibleFilms,
       activeFilm,
-      setActiveFilm,
-      changeGenre,
+      onActiveFilmSet,
+      onGenreChange,
       onHomeRedirect: this.onHomeRedirect,
-      addFilmToFavorite
+      onAddFilmToFavorite
     };
 
     const reviewProps = {
@@ -149,10 +157,10 @@ App.propTypes = {
         preview: PropTypes.string.isRequired
       })
   ).isRequired,
-  changeGenre: PropTypes.func.isRequired,
+  onGenreChange: PropTypes.func.isRequired,
   onShowMoreClick: PropTypes.func.isRequired,
-  setActiveFilm: PropTypes.func.isRequired,
-  addFilmToFavorite: PropTypes.func.isRequired,
+  onActiveFilmSet: PropTypes.func.isRequired,
+  onAddFilmToFavorite: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -167,28 +175,29 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  changeGenre: (newGenre = `All genres`) => {
-    dispatch(ActionCreator.changeGenre(newGenre));
+  onGenreChange: (newGenre = `All genres`) => {
+    dispatch(actionChangeGenre(newGenre));
     if (newGenre === `All genres`) {
-      dispatch(ActionCreator.showAllFilms());
+      dispatch(actionShowAllFilms());
     } else {
-      dispatch(ActionCreator.changeFilms());
+      dispatch(actionChangeFilms());
     }
-    dispatch(ActionCreator.clearVisibleFilms());
-    dispatch(ActionCreator.formVisibleFilms());
+    dispatch(actionClearVisibleFilms());
+    dispatch(actionFormVisibleFilms());
   },
   onShowMoreClick: () => {
-    dispatch(ActionCreator.formVisibleFilms());
+    dispatch(actionFormVisibleFilms());
   },
-  setActiveFilm: (filmId = null) => {
-    dispatch(ActionCreator.changeActiveFilm(filmId));
-    dispatch(ActionCreator.clearVisibleFilms());
-    dispatch(ActionCreator.formVisibleFilms(filmId));
+  onActiveFilmSet: (filmId = null) => {
+    dispatch(actionChangeActiveFilm(filmId));
+    dispatch(actionClearVisibleFilms());
+    dispatch(actionFormVisibleFilms(filmId));
   },
-  addFilmToFavorite: (filmId, filmStatus) => {
-    dispatch(Operation.addFilmToFavourite(filmId, filmStatus));
+  onAddFilmToFavorite: (filmId, filmStatus) => {
+    dispatch(operationAddFilmToFavorite(filmId, filmStatus));
   }
 });
+
 
 export {App};
 

@@ -13,11 +13,11 @@ Enzyme.configure({adapter: new Adapter()});
 const mocks = {
   authorized: true,
   activeGenre: `All genres`,
-  changeGenre: jest.fn(),
+  onGenreChange: jest.fn(),
   onShowMoreClick: jest.fn(),
-  setActiveFilm: jest.fn(),
+  onActiveFilmSet: jest.fn(),
   onPlayerToggle: jest.fn(),
-  addFilmToFavorite: jest.fn(),
+  onAddFilmToFavorite: jest.fn(),
   history: {
     push: jest.fn()
   },
@@ -157,7 +157,7 @@ const mocks = {
 describe(`Main:`, () => {
   const store = createStore(reducer);
 
-  it(`Should run callback addFilmToFavorite on add to favorite button click`, () => {
+  it(`Should run callback onAddFilmToFavorite on add to favorite button click`, () => {
     const main = mount(
         <Provider store={store}>
           <BrowserRouter>
@@ -168,7 +168,7 @@ describe(`Main:`, () => {
 
     const addToFavoriteButton = main.find(`.btn--list`);
     addToFavoriteButton.simulate(`click`, {preventDefault() {}});
-    expect(mocks.addFilmToFavorite).toHaveBeenCalledTimes(1);
+    expect(mocks.onAddFilmToFavorite).toHaveBeenCalledTimes(1);
   });
 
   it(`Should run callback onPlayerToggle on add to play button click`, () => {

@@ -10,11 +10,11 @@ import {MainScreen} from "./main-screen";
 const mocks = {
   authorized: false,
   activeGenre: `All genres`,
-  changeGenre: jest.fn(),
+  onGenreChange: jest.fn(),
   onShowMoreClick: jest.fn(),
-  setActiveFilm: jest.fn(),
+  onActiveFilmSet: jest.fn(),
   onPlayerToggle: jest.fn(),
-  addFilmToFavorite: jest.fn(),
+  onAddFilmToFavorite: jest.fn(),
   history: {
     push: jest.fn()
   },

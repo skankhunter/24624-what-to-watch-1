@@ -7,6 +7,9 @@ import MovieNavigation from "./movie-navigation.jsx";
 const mocks = {
   history: {
     push: jest.fn()
+  },
+  match: {
+    url: `url`
   }
 };
 

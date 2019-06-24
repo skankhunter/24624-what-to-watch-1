@@ -11,9 +11,9 @@ const mocks = {
   authorized: false,
   onPlayerToggle: jest.fn(),
   onHomeRedirect: jest.fn(),
-  addFilmToFavorite: jest.fn(),
-  setActiveFilm: jest.fn(),
-  changeGenre: jest.fn(),
+  onAddFilmToFavorite: jest.fn(),
+  onActiveFilmSet: jest.fn(),
+  onGenreChange: jest.fn(),
   history: {
     push: jest.fn()
   },

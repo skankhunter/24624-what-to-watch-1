@@ -9,8 +9,8 @@ const mocks = {
   poster: `poster`,
   preview: `prev`,
   genre: `Action`,
-  changeGenre: jest.fn(),
-  setActiveFilm: jest.fn(),
+  onGenreChange: jest.fn(),
+  onActiveFilmSet: jest.fn(),
   history: {
     push: jest.fn()
   }

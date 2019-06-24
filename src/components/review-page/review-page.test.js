@@ -12,12 +12,12 @@ const mocks = {
   textareaDisabled: false,
   reviewPostedStatus: false,
   activeItem: `2`,
-  prepareToPost: jest.fn(),
-  changeSubmitButtonState: jest.fn(),
+  onPrepareToPost: jest.fn(),
+  onPostReview: jest.fn(),
   onSubmitButtonStateChange: jest.fn(),
   onTextareaStateChange: jest.fn(),
   onActiveItemChange: jest.fn(),
-  postReview: jest.fn(),
+  actionPostReview: jest.fn(),
   onHomeRedirect: jest.fn(),
   history: {
     push: jest.fn()

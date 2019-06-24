@@ -11,10 +11,10 @@ import {App} from './app.jsx';
 const mocks = {
   authorized: false,
   activeGenre: `All genres`,
-  addFilmToFavorite: jest.fn(),
-  changeGenre: jest.fn(),
+  onAddFilmToFavorite: jest.fn(),
+  onGenreChange: jest.fn(),
   onShowMoreClick: jest.fn(),
-  setActiveFilm: jest.fn(),
+  onActiveFilmSet: jest.fn(),
   history: {
     push: jest.fn()
   },

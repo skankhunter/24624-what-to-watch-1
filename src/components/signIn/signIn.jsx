@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
-import {Operation} from "../../reducer/user/user";
+import {operationAuthorizeUser} from "../../reducer/user/user";
 import withErrors from "../hocs/with-errors/with-errors.jsx";
 import {withRouter} from "react-router";
 import {compose} from "redux";
@@ -228,7 +228,7 @@ class SignIn extends PureComponent {
   _handelFormSubmit(evt) {
     evt.preventDefault();
     const {
-      changeAuthorizationStatus,
+      onChangeAuthorizationStatus,
       onEmailValidate,
       onPasswordValidate
     } = this.props;
@@ -239,7 +239,7 @@ class SignIn extends PureComponent {
         email: this._emailRef.current.value,
         password: this._passwordRef.current.value
       };
-      changeAuthorizationStatus(userInfo);
+      onChangeAuthorizationStatus(userInfo);
     }
   }
 
@@ -268,7 +268,7 @@ class SignIn extends PureComponent {
 }
 
 SignIn.propTypes = {
-  changeAuthorizationStatus: PropTypes.func.isRequired,
+  onChangeAuthorizationStatus: PropTypes.func.isRequired,
   onEmailValidate: PropTypes.func.isRequired,
   onPasswordValidate: PropTypes.func.isRequired,
   emailError: PropTypes.bool.isRequired,
@@ -288,8 +288,8 @@ const mapStateToProps = (state, ownProps) =>
   });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeAuthorizationStatus: (user) => {
-    dispatch(Operation.authorizeUser(user));
+  onChangeAuthorizationStatus: (user) => {
+    dispatch(operationAuthorizeUser(user));
   }
 });
 

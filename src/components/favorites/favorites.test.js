@@ -9,10 +9,10 @@ import {createStore} from "redux";
 import {Favorites} from "./favorites.jsx";
 
 const mocks = {
-  changeGenre: jest.fn(),
+  onGenreChange: jest.fn(),
   onHomeRedirect: jest.fn(),
-  getFavoriteFilms: jest.fn(),
-  setActiveFilm: jest.fn(),
+  onFavoriteFilmsLoad: jest.fn(),
+  onActiveFilmSet: jest.fn(),
   favoriteFilms: [
     {
       backgroundImage: `image`,

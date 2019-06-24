@@ -50,9 +50,9 @@ class MovieCard extends PureComponent {
   }
 
   _handelLinkClick() {
-    const {changeGenre, setActiveFilm, genre, id, history} = this.props;
-    changeGenre(genre);
-    setActiveFilm(id);
+    const {onGenreChange, onActiveFilmSet, genre, id, history} = this.props;
+    onGenreChange(genre);
+    onActiveFilmSet(id);
     history.push(`/film/${id}`);
   }
 
@@ -78,8 +78,8 @@ MovieCard.propTypes = {
   title: PropTypes.string.isRequired,
   poster: PropTypes.string.isRequired,
   preview: PropTypes.string.isRequired,
-  changeGenre: PropTypes.func,
-  setActiveFilm: PropTypes.func,
+  onGenreChange: PropTypes.func,
+  onActiveFilmSet: PropTypes.func,
   genre: PropTypes.string.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired

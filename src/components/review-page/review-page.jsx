@@ -4,7 +4,10 @@ import {compose} from "redux";
 import {connect} from "react-redux";
 import {withRouter} from "react-router";
 
-import {ActionCreator, Operation} from "../../reducer/reviews/reviews.js";
+import {
+  actionPostReview,
+  operationPostReview
+} from "../../reducer/reviews/reviews";
 
 import UserBlock from "../user-block/user-block.jsx";
 import Rating from "../rating/rating.jsx";
@@ -34,10 +37,10 @@ class ReviewPage extends PureComponent {
   }
 
   componentDidMount() {
-    const {prepareToPost, onTextareaStateChange} = this.props;
+    const {onPrepareToPost, onTextareaStateChange} = this.props;
 
     onTextareaStateChange(false);
-    prepareToPost();
+    onPrepareToPost();
   }
 
   componentDidUpdate() {
@@ -59,7 +62,7 @@ class ReviewPage extends PureComponent {
     evt.preventDefault();
 
     const {
-      postReview,
+      onPostReview,
       activeFilm,
       activeItem: starsNumber,
       onSubmitButtonStateChange,
@@ -73,7 +76,7 @@ class ReviewPage extends PureComponent {
     onSubmitButtonStateChange(true);
     onTextareaStateChange(true);
 
-    postReview(activeFilm.id, {rating, comment});
+    onPostReview(activeFilm.id, {rating, comment});
   }
 
   _handelMessageInput(evt) {
@@ -297,8 +300,8 @@ ReviewPage.propTypes = {
   onSubmitButtonStateChange: PropTypes.func.isRequired,
   onTextareaStateChange: PropTypes.func.isRequired,
   submitButtonDisabled: PropTypes.bool.isRequired,
-  prepareToPost: PropTypes.func.isRequired,
-  postReview: PropTypes.func.isRequired,
+  onPrepareToPost: PropTypes.func.isRequired,
+  onPostReview: PropTypes.func.isRequired,
   reviewPostedStatus: PropTypes.bool.isRequired,
   history: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
@@ -311,11 +314,11 @@ const mapStateToProps = (state) => ({
   reviewPostedStatus: state.reviews.reviewPostedStatus
 });
 const mapDispatchToProps = (dispatch) => ({
-  postReview: (filmId, reviewInfo) => {
-    dispatch(Operation.postReview(filmId, reviewInfo));
+  onPostReview: (filmId, reviewInfo) => {
+    dispatch(operationPostReview(filmId, reviewInfo));
   },
-  prepareToPost: () => {
-    dispatch(ActionCreator.postReview(false));
+  onPrepareToPost: () => {
+    dispatch(actionPostReview(false));
   }
 });
 

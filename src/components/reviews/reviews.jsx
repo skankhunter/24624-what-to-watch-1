@@ -3,7 +3,10 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {compose} from "redux";
 
-import {ActionCreator, Operation} from "../../reducer/reviews/reviews";
+import {
+  actionClearReviews,
+  operationLoadReviews
+} from "../../reducer/reviews/reviews";
 
 class Reviews extends PureComponent {
   constructor(props) {
@@ -13,15 +16,15 @@ class Reviews extends PureComponent {
   }
 
   componentDidMount() {
-    const {loadReviews, activeFilmId} = this.props;
+    const {onLoadReviews, activeFilmId} = this.props;
 
-    loadReviews(activeFilmId);
+    onLoadReviews(activeFilmId);
   }
 
   componentWillUnmount() {
-    const {clearReviews} = this.props;
+    const {onClearReviews} = this.props;
 
-    clearReviews();
+    onClearReviews();
   }
 
   _formDate(dateStamp) {
@@ -108,20 +111,20 @@ Reviews.propTypes = {
         })
       })
   ).isRequired,
-  loadReviews: PropTypes.func.isRequired,
+  onLoadReviews: PropTypes.func.isRequired,
   activeFilmId: PropTypes.number.isRequired,
-  clearReviews: PropTypes.func.isRequired,
+  onClearReviews: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   reviews: state.reviews.reviews
 });
 const mapDispatchToProps = (dispatch) => ({
-  loadReviews: (filmId) => {
-    dispatch(Operation.loadReviews(filmId));
+  onLoadReviews: (filmId) => {
+    dispatch(operationLoadReviews(filmId));
   },
-  clearReviews: () => {
-    dispatch(ActionCreator.clearReviews());
+  onClearReviews: () => {
+    dispatch(actionClearReviews());
   }
 });
 

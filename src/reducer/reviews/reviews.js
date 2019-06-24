@@ -9,45 +9,41 @@ const ActionType = {
   POST_REVIEW: `POST_REVIEW`
 };
 
-const ActionCreator = {
-  loadReviews: (loadedReviews) => {
-    return {
-      type: ActionType.LOAD_REVIEWS,
-      payload: loadedReviews
-    };
-  },
-
-  clearReviews: () => {
-    return {
-      type: ActionType.CLEAR_REVIEWS
-    };
-  },
-
-  postReview: (status) => {
-    return {
-      type: ActionType.POST_REVIEW,
-      payload: status
-    };
-  }
+const actionLoadReviews = (loadedReviews) => {
+  return {
+    type: ActionType.LOAD_REVIEWS,
+    payload: loadedReviews
+  };
 };
 
-const Operation = {
-  loadReviews: (filmId) => (dispatch, _getState, api) => {
-    return api.get(`/comments/${filmId}`).then((response) => {
-      dispatch(ActionCreator.loadReviews(response.data));
-    });
-  },
+const actionClearReviews = () => {
+  return {
+    type: ActionType.CLEAR_REVIEWS
+  };
+};
 
-  postReview: (filmId, reviewInfo) => (dispatch, _getState, api) => {
-    return api
-      .post(`/comments/${filmId}`, reviewInfo)
-      .then(() => {
-        dispatch(ActionCreator.postReview(true));
-      })
-      .catch(() => {
-        dispatch(ActionCreator.postReview(false));
-      });
-  }
+const actionPostReview = (status) => {
+  return {
+    type: ActionType.POST_REVIEW,
+    payload: status
+  };
+};
+
+const operationLoadReviews = (filmId) => (dispatch, _getState, api) => {
+  return api.get(`/comments/${filmId}`).then((response) => {
+    dispatch(actionLoadReviews(response.data));
+  });
+};
+
+const operationPostReview = (filmId, reviewInfo) => (dispatch, _getState, api) => {
+  return api
+    .post(`/comments/${filmId}`, reviewInfo)
+    .then(() => {
+      dispatch(actionPostReview(true));
+    })
+    .catch(() => {
+      dispatch(actionPostReview(false));
+    });
 };
 
 const reducer = (state = initialState, action) => {
@@ -71,4 +67,12 @@ const reducer = (state = initialState, action) => {
   return state;
 };
 
-export {ActionType, ActionCreator, Operation, reducer};
+export {
+  ActionType,
+  actionLoadReviews,
+  actionClearReviews,
+  actionPostReview,
+  operationLoadReviews,
+  operationPostReview,
+  reducer
+};

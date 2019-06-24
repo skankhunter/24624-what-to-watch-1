@@ -60,10 +60,10 @@ class MainScreen extends Component {
   }
 
   _handelFavoriteClick() {
-    const {addFilmToFavorite, activeFilm, authorized, history} = this.props;
+    const {onAddFilmToFavorite, activeFilm, authorized, history} = this.props;
 
     if (authorized) {
-      addFilmToFavorite(activeFilm.id, activeFilm.isFavorite);
+      onAddFilmToFavorite(activeFilm.id, activeFilm.isFavorite);
     } else {
       history.push(`/login`);
     }
@@ -74,8 +74,8 @@ class MainScreen extends Component {
       visibleFilms,
       genres,
       activeGenre,
-      changeGenre,
-      setActiveFilm,
+      onGenreChange,
+      onActiveFilmSet,
       activeFilm
     } = this.props;
 
@@ -202,12 +202,12 @@ class MainScreen extends Component {
             <GenreList
               genres={genres}
               activeItem={activeGenre}
-              onGenreClick={changeGenre} />
+              onGenreClick={onGenreChange} />
 
             <FilmsList
               films={visibleFilms}
-              changeGenre={changeGenre}
-              setActiveFilm={setActiveFilm}
+              onGenreChange={onGenreChange}
+              onActiveFilmSet={onActiveFilmSet}
             />
 
             {this._displayShowMore()}
@@ -244,9 +244,9 @@ MainScreen.propTypes = {
     preview: PropTypes.string.isRequired
   })).isRequired,
   genres: PropTypes.array.isRequired,
-  changeGenre: PropTypes.func.isRequired,
+  onGenreChange: PropTypes.func.isRequired,
   onShowMoreClick: PropTypes.func.isRequired,
-  setActiveFilm: PropTypes.func.isRequired,
+  onActiveFilmSet: PropTypes.func.isRequired,
   visibleFilms: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
@@ -261,7 +261,7 @@ MainScreen.propTypes = {
   }).isRequired,
   activeGenre: PropTypes.string.isRequired,
   onPlayerToggle: PropTypes.func.isRequired,
-  addFilmToFavorite: PropTypes.func.isRequired,
+  onAddFilmToFavorite: PropTypes.func.isRequired,
 };
 
 export {MainScreen};
