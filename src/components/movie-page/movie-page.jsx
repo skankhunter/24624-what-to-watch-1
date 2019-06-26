@@ -10,7 +10,7 @@ import Overview from "../overview/overview.jsx";
 import Details from "../details/details.jsx";
 import Reviews from "../reviews/reviews.jsx";
 import MovieNavigation from "../movie-navigation/movie-navigation.jsx";
-import withPlayer from "../hocs/with-player/with-player.jsx";
+import withPlayer from "../../hocs/with-player/with-player.jsx";
 
 const MAXIMUM_RECOMMENDED_FILMS_NUMBER = 4;
 const Tab = {
