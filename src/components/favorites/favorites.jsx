@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {compose} from "redux";
 
 import {operationLoadFavoriteFilms} from "../../reducer/data/data";
-import withPrivatePath from "../hocs/with-private-path/with-private-path.jsx";
+import withPrivatePath from "../../hocs/with-private-path/with-private-path.jsx";
 import UserBlock from "../user-block/user-block.jsx";
 import FilmsList from "../films-list/films-list.jsx";
 
