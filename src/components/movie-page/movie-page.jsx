@@ -47,7 +47,7 @@ class MoviePage extends PureComponent {
     const {onAddFilmToFavorite, activeFilm, authorized, history} = this.props;
 
     if (authorized) {
-      onAddFilmToFavorite(activeFilm.id, activeFilm.favorite ? 0 : 1);
+      onAddFilmToFavorite(activeFilm.id, activeFilm.isFavorite);
     } else {
       history.push(`/login`);
     }

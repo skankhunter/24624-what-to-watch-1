@@ -275,6 +275,7 @@ class ReviewPage extends PureComponent {
                   id="review-text"
                   placeholder="Review text"
                   onChange={this._handelMessageInput}
+                  ref={this.message}
                 />
                 <div className="add-review__submit">
                   <button

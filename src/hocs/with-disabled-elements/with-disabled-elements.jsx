@@ -16,7 +16,7 @@ const withDisabledElements = (WrappedComponent) => {
 
     onSubmitButtonStateChange(state) {
       this.setState({
-        submitButtonDisabled: state
+        submitButtonDisabled: !state
       });
     }
 
